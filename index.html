@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Hastshilp Sangam • Karigra - National Indigenous Artisan Platform</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23873413%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z%22/></svg>">
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/screens.css">
+  <link rel="stylesheet" href="css/screens_extended.css">
+</head>
+<body>
+
+  <!-- Main Viewport -->
+  <div id="app-viewport">
+    
+    <!-- Top Header Bar -->
+    <header class="app-header" id="app-header">
+      <div class="header-left">
+        <button class="header-btn" id="header-back-btn" title="Go Back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="header-title" id="header-title-text">
+          Hastshilp Sangam
+        </div>
+      </div>
+
+      <div class="header-right">
+        <!-- Quick Screen Jumper Menu Button -->
+        <button class="header-btn" id="btn-steps-menu" title="Jump to Screen" style="font-size:0.75rem; font-weight:800; color:var(--color-terracotta); background:#FFFDF8; border:1px solid var(--border-subtle); border-radius:var(--radius-pill); padding:4px 10px;">
+          Screens ▾
+        </button>
+
+        <!-- Audio Assistance Speaker -->
+        <button class="header-btn" id="btn-global-audio" title="Audio Assistance (Aawaz Sahayata)" style="background:#FFF9F5; border:1px solid var(--color-terracotta-border); border-radius:50%; width:34px; height:34px; color:var(--color-terracotta); padding:0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+        </button>
+
+        <!-- Language Button -->
+        <button class="header-btn" id="btn-language" title="Change Language" style="padding:4px 8px; font-size:0.7rem; font-weight:700;">
+          HI / EN
+        </button>
+
+        <!-- Artisan Avatar -->
+        <div style="width:30px; height:30px; border-radius:50%; overflow:hidden; border:1.5px solid var(--color-terracotta); cursor:pointer;" onclick="window.navigateToScreen('studio')" title="Artisan Profile">
+          <img src="/assets/artisan_ramulu.jpg" alt="Artisan Avatar" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+      </div>
+    </header>
+
+    <!-- Screen Switcher Dropdown Modal (Complete Directory of All 12 Live Screens) -->
+    <div class="modal-overlay" id="modal-screens-menu">
+      <div class="bottom-sheet" style="padding-bottom:20px; max-height:86vh;">
+        <div class="sheet-header">
+          <div class="sheet-title-group">
+            <span style="font-size:1.2rem;">🧭</span>
+            <div>
+              <div style="font-size:0.95rem; font-weight:800;">Navigation / All 12 Live Screens</div>
+              <div style="font-size:0.7rem; color:var(--text-muted);">Exact match to reference UI designs &amp; workflows</div>
+            </div>
+          </div>
+          <button type="button" class="sheet-close-btn" id="btn-close-screens-menu">✕</button>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          
+          <div style="font-size:0.68rem; font-weight:800; color:var(--color-terracotta); text-transform:uppercase; margin-top:4px;">
+            BATCH 3: NEW SCREENS
+          </div>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('languages')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border);">
+            🗣️ <strong>10 Regional Languages Available</strong> (Voice &amp; Dialect Select)
+          </button>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('returns_policy')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border);">
+            🛡️ <strong>Craft Piece Detail: Returns &amp; Protection</strong> (Insurance Fund)
+          </button>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('account_recovery')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border);">
+            🔄 <strong>Trouble Logging In / OTP?</strong> (Rural CSC &amp; Voice Help)
+          </button>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('wholesale')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border);">
+            🏛️ <strong>Direct-from-Cluster Wholesale B2B</strong> (Bulk &amp; Corporate)
+          </button>
+
+          <div style="font-size:0.68rem; font-weight:800; color:var(--color-terracotta); text-transform:uppercase; margin-top:8px;">
+            BATCH 2: AI CRAFT STUDIO &amp; COMMERCE
+          </div>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('craft_studio')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
+            ✨ <strong>AI Smart Craft Studio</strong> (1-Photo Auto Polish &amp; Fair Price)
+          </button>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('explore')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
+            🛍️ <strong>Explore Market</strong> (Buyer Home &amp; 4 Sacred Guilds)
+          </button>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('product_details')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
+            🏺 <strong>Craft Product Details</strong> (Terracotta Pitcher &amp; 12-Day Journey)
+          </button>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('cart_review')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
+            🧺 <strong>Cart Review</strong> (Craft Direct Order 2 Parcels)
+          </button>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('checkout')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
+            💳 <strong>Checkout &amp; Direct Patronage</strong> (Impact Receipt &amp; Blessing)
+          </button>
+
+          <div style="font-size:0.68rem; font-weight:800; color:var(--color-terracotta); text-transform:uppercase; margin-top:8px;">
+            BATCH 1: ONBOARDING &amp; VERIFICATION
+          </div>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('welcome')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
+            <strong>Step 1: Welcome &amp; Identity</strong> (Phone Auth &amp; Role)
+          </button>
+          
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('pehchan')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
+            <strong>Step 2: Pehchan Verification</strong> (OCR Frame &amp; Match)
+          </button>
+          
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('bank')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
+            <strong>Step 3: Bank Khata Jodna</strong> (Direct DBT &amp; IFSC)
+          </button>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('studio')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
+            <strong>Step 4: Artisan Studio &amp; Trust Score</strong> (98/100 Sheet)
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Screen Dynamic Outlet -->
+    <main id="main-outlet">
+      <!-- Injected by Router -->
+    </main>
+
+    <!-- Bottom Navigation Bar (Stitch App Style) -->
+    <nav class="bottom-nav" id="bottom-navigation">
+      <button class="nav-tab" data-screen="explore" id="tab-explore">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Explore</span>
+      </button>
+
+      <button class="nav-tab" data-screen="wholesale" id="tab-wholesale">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <span>Wholesale</span>
+      </button>
+
+      <button class="nav-tab" data-screen="orders" id="tab-orders">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="16" height="13" x="1" y="3" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <span>Orders</span>
+      </button>
+
+      <button class="nav-tab active" data-screen="studio" id="tab-studio">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Studio</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- Toast Notification Outlet -->
+  <div id="toast-container"></div>
+
+  <!-- JavaScript Entry Point -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
