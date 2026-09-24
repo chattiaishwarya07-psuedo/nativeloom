@@ -505,6 +505,85 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Mode Switcher Bar in Header */
+.role-mode-bar {
+  display: flex;
+  background: #EFE8DE;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  margin: 4px 16px 8px 16px;
+  border: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.role-mode-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 6px 10px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.role-mode-btn.active {
+  background: var(--color-terracotta);
+  color: #FFFDF9;
+  box-shadow: 0 2px 8px rgba(135, 52, 19, 0.28);
+}
+
+.role-mode-btn.buyer-mode.active {
+  background: var(--color-forest);
+  color: #FFFDF9;
+  box-shadow: 0 2px 8px rgba(23, 67, 50, 0.28);
+}
+
+/* Cart Header Button & Badge */
+.header-cart-btn {
+  position: relative;
+  background: #FFFDF8;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-terracotta);
+}
+
+.cart-count-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--color-terracotta);
+  color: #FFFDF9;
+  font-size: 0.65rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #FFFDF9;
+  animation: pulseBadge 0.3s ease;
+}
+
+@keyframes pulseBadge {
+  0% { transform: scale(0.6); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
 /* Animations */
 .animate-fade-in {
   animation: fadeIn 0.25s ease-out;
@@ -514,3 +593,4 @@ body {
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
+

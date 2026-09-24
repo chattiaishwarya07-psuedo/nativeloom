@@ -1,6 +1,7 @@
 /**
  * Hastshilp Sangam / Karigra - Main Application Controller
- * Handles all 12 Live Screens, Global Routing, Audio Assistance, and Micro-interactions
+ * Handles Seller (Artisan) vs Buyer (Patron) personas, dynamic bottom navigation,
+ * global routing, reactive cart management, voice assistance, and interactive modals.
  */
 
 import { State } from './state.js';
@@ -21,7 +22,7 @@ import { renderAccountRecoveryScreen } from './screens/account_recovery.js';
 import { renderWholesaleScreen } from './screens/wholesale_b2b.js';
 import { AudioAssistance } from './speech.js';
 
-// Complete 12-Screen Dictionary
+// Complete Screen Registry
 const Screens = {
   welcome: renderWelcomeScreen,
   pehchan: renderPehchanScreen,
@@ -44,6 +45,7 @@ const outlet = document.getElementById('main-outlet');
 const backBtn = document.getElementById('header-back-btn');
 const headerTitle = document.getElementById('header-title-text');
 const screensModal = document.getElementById('modal-screens-menu');
+const bottomNav = document.getElementById('bottom-navigation');
 
 // Global navigation helper
 export function navigateTo(screenName) {
@@ -53,6 +55,99 @@ export function navigateTo(screenName) {
 }
 window.navigateToScreen = navigateTo;
 window.AudioAssistance = AudioAssistance;
+
+// Switch App Mode (Seller vs Buyer)
+export function switchAppMode(mode) {
+  State.setMode(mode);
+  updateRoleBarUI();
+  updateBottomNavUI();
+  
+  if (mode === 'seller') {
+    window.showToast?.("👨‍🎨 Switched to Karigar Studio (Artisan Seller Mode)");
+  } else {
+    window.showToast?.("🛍️ Switched to Patron Market (Craft Buyer Mode)");
+  }
+}
+window.switchAppMode = switchAppMode;
+
+// Update Role Toggle Bar in Header
+function updateRoleBarUI() {
+  const sellerBtn = document.getElementById('btn-mode-seller');
+  const buyerBtn = document.getElementById('btn-mode-buyer');
+  if (!sellerBtn || !buyerBtn) return;
+
+  if (State.mode === 'seller') {
+    sellerBtn.classList.add('active');
+    buyerBtn.classList.remove('active');
+  } else {
+    buyerBtn.classList.add('active');
+    sellerBtn.classList.remove('active');
+  }
+}
+
+// Update Bottom Navigation Bar based on Role
+function updateBottomNavUI() {
+  if (!bottomNav) return;
+  const current = State.currentScreen;
+
+  if (State.mode === 'seller') {
+    // Seller Tabs: Studio, AI Studio, Orders, DBT Bank
+    bottomNav.innerHTML = `
+      <button class="nav-tab ${current === 'studio' ? 'active' : ''}" data-screen="studio" id="tab-studio">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Studio</span>
+      </button>
+
+      <button class="nav-tab ${current === 'craft_studio' ? 'active' : ''}" data-screen="craft_studio" id="tab-ai-studio">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+        <span>AI Studio</span>
+      </button>
+
+      <button class="nav-tab ${current === 'orders' ? 'active' : ''}" data-screen="orders" id="tab-orders">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="16" height="13" x="1" y="3" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <span>Dispatches</span>
+      </button>
+
+      <button class="nav-tab ${['pehchan', 'bank'].includes(current) ? 'active' : ''}" data-screen="bank" id="tab-bank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        <span>DBT Bank</span>
+      </button>
+    `;
+  } else {
+    // Buyer Tabs: Explore, Wholesale, Cart, Policy & Protection
+    const cartCount = State.getCartCount();
+    bottomNav.innerHTML = `
+      <button class="nav-tab ${['explore', 'product_details'].includes(current) ? 'active' : ''}" data-screen="explore" id="tab-explore">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Explore</span>
+      </button>
+
+      <button class="nav-tab ${current === 'wholesale' ? 'active' : ''}" data-screen="wholesale" id="tab-wholesale">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><line x1="10" x2="14" y1="12" y2="12"/></svg>
+        <span>Wholesale</span>
+      </button>
+
+      <button class="nav-tab ${['cart_review', 'checkout'].includes(current) ? 'active' : ''}" data-screen="cart_review" id="tab-cart" style="position:relative;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <span>Cart (${cartCount})</span>
+      </button>
+
+      <button class="nav-tab ${current === 'returns_policy' ? 'active' : ''}" data-screen="returns_policy" id="tab-protection">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Protection</span>
+      </button>
+    `;
+  }
+
+  // Rebind navigation tab click events
+  bottomNav.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const screen = tab.getAttribute('data-screen');
+      AudioAssistance.stop();
+      State.setScreen(screen);
+    });
+  });
+}
 
 // Render current screen from state
 function renderCurrentScreen() {
@@ -108,23 +203,24 @@ function renderCurrentScreen() {
     headerTitle.textContent = 'Wholesale Procurement';
   }
 
-  // Update bottom nav active state
-  document.querySelectorAll('.nav-tab').forEach(tab => {
-    const tabScreen = tab.getAttribute('data-screen');
-    if (tabScreen === current || (current === 'craft_studio' && tabScreen === 'studio') || (current === 'product_details' && tabScreen === 'explore')) {
-      tab.classList.add('active');
-    } else {
-      tab.classList.remove('active');
-    }
-  });
+  // Update live cart badge in header
+  const cartBadge = document.getElementById('header-cart-count');
+  if (cartBadge) {
+    cartBadge.textContent = State.getCartCount();
+  }
+
+  // Update Bottom Nav active state
+  updateBottomNavUI();
+  updateRoleBarUI();
 
   // Close screen menu modal if open
-  screensModal.classList.remove('active');
+  screensModal?.classList.remove('active');
 }
 
 // Global Toast Notification Helper
 window.showToast = function(msg) {
   const container = document.getElementById('toast-container');
+  if (!container) return;
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.innerHTML = `
@@ -138,7 +234,321 @@ window.showToast = function(msg) {
   }, 2800);
 };
 
-// Event Listeners Setup
+// ==========================================
+// INTERACTIVE MODALS
+// ==========================================
+
+// 1. File Return Request Modal
+window.openReturnModal = function() {
+  const existing = document.getElementById('interactive-return-modal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'interactive-return-modal';
+  modal.className = 'modal-overlay active';
+  modal.innerHTML = `
+    <div class="bottom-sheet" style="max-height:88vh; padding-bottom:24px;">
+      <div class="sheet-header">
+        <div class="sheet-title-group">
+          <span style="font-size:1.3rem;">🛡️</span>
+          <div>
+            <div style="font-size:1rem; font-weight:800;">File New Return &amp; Replacement</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);">Protected by Craft Transit Insurance Fund</div>
+          </div>
+        </div>
+        <button type="button" class="sheet-close-btn" onclick="document.getElementById('interactive-return-modal').remove()">✕</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <!-- Step 1: Select Item -->
+        <div>
+          <label style="font-size:0.75rem; font-weight:800; display:block; margin-bottom:4px;">1. Select Received Craft Piece</label>
+          <select id="return-select-item" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-subtle); background:#FAF7F2; font-size:0.8rem; font-weight:700;">
+            <option>Hand-Etched Terracotta Pitcher (ORD-2026-8812)</option>
+            <option>Dhokra Brass Tribal Nandi (ORD-2026-9041)</option>
+          </select>
+        </div>
+
+        <!-- Step 2: Reason -->
+        <div>
+          <label style="font-size:0.75rem; font-weight:800; display:block; margin-bottom:4px;">2. Reason for Claim</label>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.75rem; background:#FFF; border:1px solid var(--border-subtle); padding:8px 10px; border-radius:6px; cursor:pointer;">
+              <input type="radio" name="claim-reason" value="broken" checked>
+              <span>💥 <strong>Broken in Transit:</strong> Damaged clay, fractured wood, torn weave</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.75rem; background:#FFF; border:1px solid var(--border-subtle); padding:8px 10px; border-radius:6px; cursor:pointer;">
+              <input type="radio" name="claim-reason" value="wrong">
+              <span>📦 <strong>Incorrect Item Dispatched:</strong> Completely different craft piece received</span>
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.75rem; background:#FFF; border:1px solid var(--border-subtle); padding:8px 10px; border-radius:6px; cursor:pointer;">
+              <input type="radio" name="claim-reason" value="size">
+              <span>📏 <strong>Severe Size Discrepancy:</strong> Measurement exceeds 20% from specs</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Step 3: Photo Preview -->
+        <div>
+          <label style="font-size:0.75rem; font-weight:800; display:block; margin-bottom:4px;">3. Unboxing Evidence Photo</label>
+          <div style="display:flex; gap:10px; align-items:center; background:#FAF7F2; border:1px dashed var(--color-terracotta-border); border-radius:8px; padding:10px;">
+            <img src="/assets/raw_pottery_snap.jpg" alt="Unboxing Photo" style="width:52px; height:52px; border-radius:6px; object-fit:cover; filter:sepia(0.2);">
+            <div style="flex:1;">
+              <div style="font-size:0.75rem; font-weight:800;">IMG_20260924_Unbox.jpg</div>
+              <div style="font-size:0.65rem; color:var(--color-green); font-weight:700;">✓ Hairline transit crack detected by AI</div>
+            </div>
+            <button type="button" class="btn-secondary" style="padding:4px 8px; font-size:0.65rem;" onclick="window.showToast('Select photo from gallery or camera')">Change</button>
+          </div>
+        </div>
+
+        <!-- Payout Guarantee Badge -->
+        <div style="background:#FFF9F5; border:1px solid var(--color-terracotta-border); border-radius:8px; padding:10px; font-size:0.72rem; line-height:1.35; color:#7A2E0E;">
+          🛡️ <strong>Artisan Livelihood Shield:</strong> Your refund of ₹750 is paid by the Craft Transit Insurance Fund. Master Potter Ramdev Kumhar keeps 100% of his making fee.
+        </div>
+
+        <!-- Submit Button -->
+        <button type="button" class="btn-primary" id="btn-submit-return-claim" style="padding:12px; font-size:0.85rem;">
+          Generate India Post Reverse Pickup Slip →
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.querySelector('#btn-submit-return-claim').addEventListener('click', () => {
+    const itemTitle = modal.querySelector('#return-select-item').value;
+    State.fileReturnRequest({
+      itemTitle,
+      reason: 'Broken in Transit',
+      pickupDate: 'Tomorrow (India Post Speed Post)',
+      refundAmount: 750
+    });
+
+    modal.querySelector('.bottom-sheet').innerHTML = `
+      <div class="sheet-header">
+        <div class="sheet-title-group">
+          <span style="font-size:1.3rem;">✅</span>
+          <div>
+            <div style="font-size:1rem; font-weight:800; color:var(--color-green);">Return Claim Approved!</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);">Consignment #IP-REV-849102</div>
+          </div>
+        </div>
+        <button type="button" class="sheet-close-btn" onclick="document.getElementById('interactive-return-modal').remove()">✕</button>
+      </div>
+
+      <div style="text-align:center; padding:10px 0;">
+        <div style="background:#FFFFFF; border:1.5px solid var(--border-subtle); border-radius:12px; padding:16px; margin-bottom:14px;">
+          <div style="font-size:0.75rem; font-weight:800; color:var(--color-terracotta); margin-bottom:6px;">INDIA POST REVERSE PICKUP PASS</div>
+          <div style="font-family:monospace; font-size:1.1rem; font-weight:900; letter-spacing:2px; margin-bottom:6px;">||||| | |||||| || |||||||| ||||</div>
+          <div style="font-size:0.75rem; font-family:monospace; color:var(--text-muted);">IP-REV-849102-UP</div>
+          <div style="font-size:0.7rem; color:var(--text-secondary); margin-top:8px;">
+            Postal agent will collect parcel from your doorstep tomorrow. Keep packed with original straw cushion.
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary" onclick="document.getElementById('interactive-return-modal').remove(); window.showToast('Return pickup ticket saved!')">
+          Done (View Policy)
+        </button>
+      </div>
+    `;
+  });
+};
+
+// 2. Wholesale RFQ Modal
+window.openRfqModal = function(defaultItem = 'Gorakhpur Terracotta Planters', defaultCluster = 'Gorakhpur Terracotta Guild') {
+  const existing = document.getElementById('interactive-rfq-modal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'interactive-rfq-modal';
+  modal.className = 'modal-overlay active';
+  modal.innerHTML = `
+    <div class="bottom-sheet" style="max-height:88vh; padding-bottom:24px;">
+      <div class="sheet-header">
+        <div class="sheet-title-group">
+          <span style="font-size:1.3rem;">🏛️</span>
+          <div>
+            <div style="font-size:1rem; font-weight:800;">Request Corporate Quote / Bulk RFQ</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);">${defaultCluster}</div>
+          </div>
+        </div>
+        <button type="button" class="sheet-close-btn" onclick="document.getElementById('interactive-rfq-modal').remove()">✕</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div>
+          <label style="font-size:0.72rem; font-weight:800; display:block; margin-bottom:4px;">Target Craft Item</label>
+          <input type="text" id="rfq-item" value="${defaultItem}" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid var(--border-subtle); background:#FAF7F2; font-size:0.8rem; font-weight:700;">
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div>
+            <label style="font-size:0.72rem; font-weight:800; display:block; margin-bottom:4px;">Desired Quantity</label>
+            <input type="number" id="rfq-qty" value="100" min="25" max="5000" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid var(--border-subtle); font-size:0.85rem; font-weight:800;">
+          </div>
+          <div>
+            <label style="font-size:0.72rem; font-weight:800; display:block; margin-bottom:4px;">Delivery Pincode</label>
+            <input type="text" id="rfq-pincode" value="560001" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid var(--border-subtle); font-size:0.85rem;">
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size:0.72rem; font-weight:800; display:block; margin-bottom:4px;">Company / Organisation Name</label>
+          <input type="text" id="rfq-company" placeholder="e.g. Tata Consultancy Services / Taj Hotels" value="Heritage India Corp" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid var(--border-subtle); font-size:0.8rem;">
+        </div>
+
+        <!-- Live Tiered Calculation -->
+        <div id="rfq-calc-box" style="background:#FFF9F5; border:1px solid var(--color-terracotta-border); border-radius:8px; padding:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:0.75rem; font-weight:800; color:var(--color-terracotta);">Wholesale Tier 2 (100–499 pcs)</span>
+            <span class="badge-green" style="font-size:0.6rem;">Save 19%</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.75rem;">
+            <span>Unit Rate: <strong>₹340 / piece</strong> (Retail: ₹420)</span>
+            <span style="font-size:0.95rem; font-weight:900; color:var(--color-terracotta);">₹34,000</span>
+          </div>
+          <div style="font-size:0.65rem; color:var(--text-muted); margin-top:4px;">
+            Includes Ministry GI Tag certificate and official GST tax invoice (ITC compliant).
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary" id="btn-submit-rfq-form" style="padding:12px; font-size:0.85rem; margin-top:6px;">
+          Submit Formal RFQ &amp; Dispatch 48-hr Sample →
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // Dynamic recalculation on quantity change
+  const qtyInput = modal.querySelector('#rfq-qty');
+  qtyInput.addEventListener('input', () => {
+    const qty = parseInt(qtyInput.value) || 25;
+    let rate = 420;
+    let discount = 'Standard Bulk';
+    if (qty >= 500) { rate = 290; discount = 'Save 31%'; }
+    else if (qty >= 100) { rate = 340; discount = 'Save 19%'; }
+
+    modal.querySelector('#rfq-calc-box').innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:0.75rem; font-weight:800; color:var(--color-terracotta);">Calculated Tier for ${qty} Units</span>
+        <span class="badge-green" style="font-size:0.6rem;">${discount}</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.75rem;">
+        <span>Unit Rate: <strong>₹${rate} / piece</strong></span>
+        <span style="font-size:0.95rem; font-weight:900; color:var(--color-terracotta);">₹${(rate * qty).toLocaleString('en-IN')}</span>
+      </div>
+      <div style="font-size:0.65rem; color:var(--text-muted); margin-top:4px;">
+        Includes Ministry GI Tag certificate and official GST tax invoice.
+      </div>
+    `;
+  });
+
+  modal.querySelector('#btn-submit-rfq-form').addEventListener('click', () => {
+    const item = modal.querySelector('#rfq-item').value;
+    const qty = parseInt(qtyInput.value) || 100;
+    const company = modal.querySelector('#rfq-company').value || 'Corporate Buyer';
+    const rate = qty >= 500 ? 290 : (qty >= 100 ? 340 : 420);
+
+    const rfq = State.submitRfq({
+      item,
+      quantity: qty,
+      ratePerPiece: rate,
+      totalAmount: rate * qty,
+      company,
+      cluster: defaultCluster
+    });
+
+    modal.querySelector('.bottom-sheet').innerHTML = `
+      <div class="sheet-header">
+        <div class="sheet-title-group">
+          <span style="font-size:1.3rem;">🎉</span>
+          <div>
+            <div style="font-size:1rem; font-weight:800; color:var(--color-green);">RFQ Transmitted to Cluster!</div>
+            <div style="font-size:0.68rem; color:var(--text-muted); font-family:monospace;">${rfq.id}</div>
+          </div>
+        </div>
+        <button type="button" class="sheet-close-btn" onclick="document.getElementById('interactive-rfq-modal').remove()">✕</button>
+      </div>
+
+      <div style="text-align:center; padding:10px 0;">
+        <p style="font-size:0.78rem; color:var(--text-secondary); line-height:1.4; margin-bottom:14px;">
+          Your institutional procurement tender for <strong>${qty} units of ${item}</strong> has been transmitted to <strong>${defaultCluster}</strong>. An artisan master sample is dispatched via India Post Priority Courier.
+        </p>
+
+        <button type="button" class="btn-primary" onclick="document.getElementById('interactive-rfq-modal').remove(); window.showToast('RFQ saved in institutional records!')">
+          View Procurement Dashboard
+        </button>
+      </div>
+    `;
+  });
+};
+
+// 3. CSC Center Locator Modal
+window.openCscLocatorModal = function() {
+  const existing = document.getElementById('interactive-csc-modal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'interactive-csc-modal';
+  modal.className = 'modal-overlay active';
+  modal.innerHTML = `
+    <div class="bottom-sheet" style="max-height:88vh; padding-bottom:24px;">
+      <div class="sheet-header">
+        <div class="sheet-title-group">
+          <span style="font-size:1.3rem;">📍</span>
+          <div>
+            <div style="font-size:1rem; font-weight:800;">Nearest Common Service Centres (CSC)</div>
+            <div style="font-size:0.68rem; color:var(--text-muted);">Assisted in-person artisan verification</div>
+          </div>
+        </div>
+        <button type="button" class="sheet-close-btn" onclick="document.getElementById('interactive-csc-modal').remove()">✕</button>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="background:#FAF7F2; border:1px solid var(--border-subtle); border-radius:8px; padding:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-size:0.82rem; font-weight:800;">CSC Village Center #104 (Panchayat Bhawan)</div>
+            <span class="badge-green" style="font-size:0.6rem;">1.8 km</span>
+          </div>
+          <div style="font-size:0.7rem; color:var(--text-secondary); margin:2px 0;">Operator: Rajesh Prajapati • Open 8 AM to 7 PM</div>
+          <div style="font-size:0.68rem; color:var(--color-terracotta); font-weight:700;">Services: Pehchan Biometric Update, DBT Link, Voice Help</div>
+        </div>
+
+        <div style="background:#FAF7F2; border:1px solid var(--border-subtle); border-radius:8px; padding:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-size:0.82rem; font-weight:800;">India Post Gramin Dak Seva CSC #028</div>
+            <span class="badge-green" style="font-size:0.6rem;">3.2 km</span>
+          </div>
+          <div style="font-size:0.7rem; color:var(--text-secondary); margin:2px 0;">Operator: Sunita Devi • Post Office Compound</div>
+          <div style="font-size:0.68rem; color:var(--color-terracotta); font-weight:700;">Services: IPPB Account Link, Aadhaar Mobile Update</div>
+        </div>
+
+        <button type="button" class="btn-primary" style="margin-top:6px; padding:12px;" onclick="window.showToast('Connecting call to nearest CSC Operator (+91 94150 28910)...')">
+          📞 Call Village Operator for Free Assistance
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+};
+
+// 4. Voice OTP Simulator Modal
+window.triggerVoiceOtpModal = function() {
+  AudioAssistance.speak("नमस्ते। हस्तशिल्प संगम में आपका सत्यापन कोड है: आठ, तीन, एक, चार। Your verification code is 8, 3, 1, 4.", "hi-IN");
+  window.showToast?.("Incoming Voice Call: 'Ministry of Textiles OTP Bot'");
+  State.otp = ['8', '3', '1', '4'];
+  setTimeout(() => {
+    State.setScreen('welcome');
+  }, 1200);
+};
+
+// ==========================================
+// INITIALIZATION
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
   // Subscribe to state changes
   State.subscribe(() => {
@@ -160,22 +570,22 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (curr === 'returns_policy') State.setScreen('product_details');
     else if (curr === 'account_recovery') State.setScreen('welcome');
     else if (curr === 'wholesale') State.setScreen('explore');
-    else State.setScreen('studio');
+    else State.setScreen(State.mode === 'seller' ? 'studio' : 'explore');
   });
 
   // Screen Jumper Menu
-  document.getElementById('btn-steps-menu').addEventListener('click', () => {
-    screensModal.classList.add('active');
+  document.getElementById('btn-steps-menu')?.addEventListener('click', () => {
+    screensModal?.classList.add('active');
   });
-  document.getElementById('btn-close-screens-menu').addEventListener('click', () => {
-    screensModal.classList.remove('active');
+  document.getElementById('btn-close-screens-menu')?.addEventListener('click', () => {
+    screensModal?.classList.remove('active');
   });
-  screensModal.addEventListener('click', (e) => {
+  screensModal?.addEventListener('click', (e) => {
     if (e.target === screensModal) screensModal.classList.remove('active');
   });
 
   // Global Audio Button in Header
-  document.getElementById('btn-global-audio').addEventListener('click', () => {
+  document.getElementById('btn-global-audio')?.addEventListener('click', () => {
     const curr = State.currentScreen;
     if (curr === 'welcome') AudioAssistance.playStep1();
     else if (curr === 'pehchan') AudioAssistance.playStep2();
@@ -192,21 +602,14 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (curr === 'wholesale') AudioAssistance.speak("संस्थागत थोक खरीद: 180 से अधिक शिल्प क्लस्टरों से सीधा जीएसटी चालान।");
   });
 
-  // Header Language Button -> Opens 10 Languages Screen!
-  document.getElementById('btn-language').addEventListener('click', () => {
+  // Header Language Button -> Opens 10 Languages Screen
+  document.getElementById('btn-language')?.addEventListener('click', () => {
     AudioAssistance.stop();
     State.setScreen('languages');
   });
 
-  // Bottom Navigation Bar tabs
-  document.querySelectorAll('.nav-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      const screen = tab.getAttribute('data-screen');
-      AudioAssistance.stop();
-      State.setScreen(screen);
-    });
-  });
-
-  // Initial Render
+  // Initialize UI
+  updateRoleBarUI();
+  updateBottomNavUI();
   renderCurrentScreen();
 });

@@ -73,7 +73,7 @@ export function renderWholesaleScreen(container) {
           Ideal for Festive Gifting, Hotel Interiors, or Retail Inventory without remiddlemanning.
         </p>
 
-        <button type="button" class="btn-primary" style="background:#FFFFFF; color:#7A2E0E; margin-bottom:8px; font-weight:800;" onclick="window.showToast('Opening Instant Corporate RFP Generator...')">
+        <button type="button" class="btn-primary" style="background:#FFFFFF; color:#7A2E0E; margin-bottom:8px; font-weight:800;" onclick="window.openRfqModal('Gorakhpur Terracotta Botanical Planters', 'Gorakhpur Terracotta Cluster')">
           📄 Post Instant RFP / Request Quote
         </button>
 
@@ -132,7 +132,7 @@ export function renderWholesaleScreen(container) {
         </div>
 
         <div style="display:flex; gap:8px;">
-          <button type="button" class="btn-primary" style="flex:1; padding:8px; font-size:0.75rem;" onclick="window.showToast('Added 100x Gorakhpur Terracotta to Corporate RFQ!')">
+          <button type="button" class="btn-primary" style="flex:1; padding:8px; font-size:0.75rem;" onclick="window.openRfqModal('Gorakhpur Terracotta Botanical Planters', 'Gorakhpur Terracotta Cluster')">
             🛒 Add to Bulk RFQ
           </button>
           <button type="button" class="btn-secondary" style="padding:8px 12px; font-size:0.75rem;" onclick="window.showToast('Ordering single paid sample...')">
@@ -174,7 +174,7 @@ export function renderWholesaleScreen(container) {
         </div>
 
         <div style="display:flex; gap:8px;">
-          <button type="button" class="btn-primary" style="flex:1; padding:8px; font-size:0.75rem;" onclick="window.showToast('Added 50x Ajrakh Sets to Corporate RFQ!')">
+          <button type="button" class="btn-primary" style="flex:1; padding:8px; font-size:0.75rem;" onclick="window.openRfqModal('Kutch Natural Indigo Ajrakh Desk Sets', 'Kutch & Patan Artisan Guild')">
             🛒 Add to Bulk RFQ
           </button>
           <button type="button" class="btn-secondary" style="padding:8px 12px; font-size:0.75rem;" onclick="window.showToast('Ordering single paid sample...')">
@@ -216,7 +216,7 @@ export function renderWholesaleScreen(container) {
         </div>
 
         <div style="display:flex; gap:8px;">
-          <button type="button" class="btn-primary" style="flex:1; padding:8px; font-size:0.75rem;" onclick="window.showToast('Added 25x Bastar Brass to Corporate RFQ!')">
+          <button type="button" class="btn-primary" style="flex:1; padding:8px; font-size:0.75rem;" onclick="window.openRfqModal('Bastar Lost-Wax Brass Desktop Nandi', 'Bastar Craft Guild')">
             🛒 Add to Bulk RFQ
           </button>
           <button type="button" class="btn-secondary" style="padding:8px 12px; font-size:0.75rem;" onclick="window.showToast('Ordering single paid sample...')">

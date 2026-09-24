@@ -61,10 +61,10 @@ export function renderAccountRecoveryScreen(container) {
         </p>
 
         <div style="display:grid; grid-template-columns:1fr 1.3fr; gap:8px;">
-          <button type="button" class="btn-secondary" style="padding:10px; font-size:0.78rem;" onclick="window.showToast('SMS OTP re-sent to +91 98450 21980')">
+          <button type="button" class="btn-secondary" style="padding:10px; font-size:0.78rem;" onclick="window.showToast('SMS OTP re-sent: [ 8 3 1 4 ] to +91 98450 21980')">
             💬 SMS OTP
           </button>
-          <button type="button" class="btn-primary" style="padding:10px; font-size:0.78rem;" onclick="window.showToast('Calling your phone with spoken voice code...')">
+          <button type="button" class="btn-primary" style="padding:10px; font-size:0.78rem;" onclick="window.triggerVoiceOtpModal()">
             📞 Call with Voice OTP
           </button>
         </div>
@@ -141,7 +141,7 @@ export function renderAccountRecoveryScreen(container) {
           Carry your physical Pehchan Card to reactivate account with CSC village operator or post office.
         </p>
 
-        <button type="button" class="btn-secondary" style="padding:10px; font-size:0.8rem;" onclick="window.showToast('Locating 3 nearest CSC centers in Varanasi district...')">
+        <button type="button" class="btn-secondary" style="padding:10px; font-size:0.8rem;" onclick="window.openCscLocatorModal()">
           📍 Find Nearby CSC Centre
         </button>
       </div>

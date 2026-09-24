@@ -199,6 +199,6 @@ export function renderReturnsPolicyScreen(container) {
   });
 
   container.querySelector('#btn-file-return').addEventListener('click', () => {
-    window.showToast?.("Opening Camera to upload parcel unboxing photo...");
+    window.openReturnModal();
   });
 }

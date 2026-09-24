@@ -250,11 +250,11 @@ export function renderProductDetailsScreen(container) {
         <span class="sticky-delivery-tag">Free Delivery</span>
       </div>
 
-      <button type="button" class="header-btn" style="background:#FFF5EE; border:1px solid var(--color-terracotta-border); border-radius:8px; padding:10px 14px;" onclick="window.navigateToScreen('cart_review')">
+      <button type="button" class="header-btn" id="btn-add-to-cart" title="Add to Direct Order" style="background:#FFF5EE; border:1px solid var(--color-terracotta-border); border-radius:8px; padding:10px 14px;">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-terracotta)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       </button>
 
-      <button type="button" class="btn-primary" style="flex:1; padding:12px 14px; font-size:0.85rem;" onclick="window.navigateToScreen('checkout')">
+      <button type="button" class="btn-primary" id="btn-buy-now" style="flex:1; padding:12px 14px; font-size:0.85rem;">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
         Buy Now (Direct Payout)
       </button>
@@ -262,6 +262,30 @@ export function renderProductDetailsScreen(container) {
   `;
 
   // Handlers
+  container.querySelector('#btn-add-to-cart')?.addEventListener('click', () => {
+    State.addToCart({
+      id: 'prod-terracotta',
+      title: 'Gorakhpur Terracotta Pitcher',
+      artisan: 'Ramdev Kumhar',
+      origin: 'Gorakhpur Cluster (GI #182)',
+      price: 750,
+      image: '/assets/raw_pottery_snap.jpg'
+    });
+    window.showToast?.("Added to Craft Cart! 100% direct artisan payout.");
+  });
+
+  container.querySelector('#btn-buy-now')?.addEventListener('click', () => {
+    State.addToCart({
+      id: 'prod-terracotta',
+      title: 'Gorakhpur Terracotta Pitcher',
+      artisan: 'Ramdev Kumhar',
+      origin: 'Gorakhpur Cluster (GI #182)',
+      price: 750,
+      image: '/assets/raw_pottery_snap.jpg'
+    });
+    State.setScreen('cart_review');
+  });
+
   container.querySelector('#btn-oral-history').addEventListener('click', () => {
     AudioAssistance.speak(
       "My grandfather carved pitchers for the temple courtyard. This sacred Gomati riverbed clay cools water naturally without a drop of electricity.",

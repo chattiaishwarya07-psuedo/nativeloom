@@ -37,6 +37,12 @@
           Screens ▾
         </button>
 
+        <!-- Cart Header Button with Live Badge -->
+        <button class="header-cart-btn" id="btn-header-cart" title="Direct Craft Cart" onclick="window.navigateToScreen('cart_review')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <span class="cart-count-badge" id="header-cart-count">2</span>
+        </button>
+
         <!-- Audio Assistance Speaker -->
         <button class="header-btn" id="btn-global-audio" title="Audio Assistance (Aawaz Sahayata)" style="background:#FFF9F5; border:1px solid var(--color-terracotta-border); border-radius:50%; width:34px; height:34px; color:var(--color-terracotta); padding:0;">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
@@ -53,6 +59,16 @@
         </div>
       </div>
     </header>
+
+    <!-- Role Mode Switcher Bar (Seller / Karigar vs Buyer / Patron) -->
+    <div class="role-mode-bar" id="role-mode-bar">
+      <button class="role-mode-btn active" id="btn-mode-seller" onclick="window.switchAppMode('seller')">
+        👨‍🎨 Karigar Studio (Seller)
+      </button>
+      <button class="role-mode-btn buyer-mode" id="btn-mode-buyer" onclick="window.switchAppMode('buyer')">
+        🛍️ Patron Market (Buyer)
+      </button>
+    </div>
 
     <!-- Screen Switcher Dropdown Modal (Complete Directory of All 12 Live Screens) -->
     <div class="modal-overlay" id="modal-screens-menu">
