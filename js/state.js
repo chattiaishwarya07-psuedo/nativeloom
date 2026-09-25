@@ -7,7 +7,7 @@
 export const State = {
   // Mode: 'seller' (Karigar / Artisan) | 'buyer' (Patron / Consumer / Wholesale)
   mode: 'seller', 
-  currentScreen: 'studio',
+  currentScreen: 'splash',
   activeTab: 'studio',
   language: 'hi', // 'hi' | 'en' | 'bn' | 'ta' | 'te' | 'mr' | 'gu' | 'kn' | 'bho' | 'mai'
   

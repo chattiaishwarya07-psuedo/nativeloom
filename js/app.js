@@ -17,6 +17,7 @@ import { renderCheckoutScreen } from './screens/checkout.js';
 import { renderArtisansScreen } from './screens/artisans_directory.js';
 import { renderOrdersScreen } from './screens/orders_dispatch.js';
 import { renderLanguageScreen } from './screens/language_selection.js';
+import { renderSplashScreen } from './screens/splash.js';
 import { renderReturnsPolicyScreen } from './screens/returns_policy.js';
 import { renderAccountRecoveryScreen } from './screens/account_recovery.js';
 import { renderWholesaleScreen } from './screens/wholesale_b2b.js';
@@ -24,6 +25,7 @@ import { AudioAssistance } from './speech.js';
 
 // Complete Screen Registry
 const Screens = {
+  splash: renderSplashScreen,
   welcome: renderWelcomeScreen,
   pehchan: renderPehchanScreen,
   bank: renderBankScreen,
@@ -154,6 +156,20 @@ function renderCurrentScreen() {
   const current = State.currentScreen;
   const renderer = Screens[current] || renderWelcomeScreen;
   renderer(outlet);
+
+  const appHeader = document.getElementById('app-header');
+  const roleBar = document.getElementById('role-mode-bar');
+
+  if (current === 'splash') {
+    if (appHeader) appHeader.style.display = 'none';
+    if (roleBar) roleBar.style.display = 'none';
+    if (bottomNav) bottomNav.style.display = 'none';
+    return;
+  } else {
+    if (appHeader) appHeader.style.display = 'flex';
+    if (roleBar) roleBar.style.display = 'flex';
+    if (bottomNav) bottomNav.style.display = 'flex';
+  }
 
   // Update Header Back button visibility & title
   if (current === 'welcome') {
