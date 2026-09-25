@@ -33,43 +33,23 @@ export function renderSplashScreen(container) {
       <!-- Center Brand Group -->
       <div style="display:flex; flex-direction:column; align-items:center; max-width:320px; width:100%;">
         
-        <!-- KalaVerse Circular Emblem SVG -->
+        <!-- KalaVerse Circular Emblem (Exact User Icon) -->
         <div class="kala-emblem-wrap" style="
           width: 140px;
           height: 140px;
-          margin-bottom: 28px;
+          margin-bottom: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
           position: relative;
         ">
-          <svg viewBox="0 0 160 160" width="140" height="140" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Outer Gold / Terracotta Ring with Stitched Detailing -->
-            <circle cx="80" cy="80" r="74" stroke="#D97706" stroke-width="2.5" />
-            <circle cx="80" cy="80" r="67" stroke="#D97706" stroke-width="1.2" stroke-dasharray="4 4" stroke-opacity="0.85" />
-            
-            <!-- Cardinal Petal / Wheel Markers -->
-            <path d="M80 6 C76 14, 84 14, 80 6 Z" fill="#D97706" />
-            <path d="M80 154 C76 146, 84 146, 80 154 Z" fill="#D97706" />
-            <path d="M6 80 C14 76, 14 84, 6 80 Z" fill="#D97706" />
-            <path d="M154 80 C146 76, 146 84, 154 80 Z" fill="#D97706" />
-
-            <!-- Inner Traditional Arch Motifs -->
-            <path d="M50 34 C64 26, 96 26, 110 34" stroke="#D97706" stroke-width="1.2" stroke-linecap="round" stroke-opacity="0.7" />
-            <path d="M50 126 C64 134, 96 134, 110 126" stroke="#D97706" stroke-width="1.2" stroke-linecap="round" stroke-opacity="0.7" />
-            
-            <!-- Interlocking Indigo & Terracotta Lines (Artisan Craft Loom & Urn ligature) -->
-            <!-- Indigo Loom / Urn Loop -->
-            <path d="M80 50 V105 C80 114 74 120 65 120 C54 120 48 110 48 98 C48 76 72 65 80 65 C88 65 112 76 112 98 C112 110 106 120 95 120" 
-                  stroke="#1E3A5F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-            
-            <!-- Terracotta Flowing Ribbon Loop -->
-            <path d="M68 62 C58 70 54 82 58 98 C64 116 80 118 84 102 C88 86 78 72 70 85 C64 94 65 106 74 114 C82 120 92 118 96 108 C102 92 84 76 80 50" 
-                  stroke="#9A3412" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-
-            <!-- Center Accent Dot -->
-            <circle cx="80" cy="54" r="2.5" fill="#D97706" />
-          </svg>
+          <img src="/assets/kalaverse_logo.png" alt="KalaVerse Emblem" style="
+            width: 132px;
+            height: 132px;
+            object-fit: contain;
+            border-radius: 50%;
+            filter: drop-shadow(0 4px 14px rgba(135, 52, 19, 0.12));
+          ">
         </div>
 
         <!-- Brand Title: KalaVerse -->
