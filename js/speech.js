@@ -1,73 +1,79 @@
 /**
- * Hastshilp Sangam - Speech Synthesis / Audio Assistance Engine
- * Speaks instructions in Hindi or English when users click "Play Instructions"
+ * Native Loom - Speech Synthesis / Audio Assistance Engine
+ * Speaks instructions in the user's active regional language (10 Languages supported)
  */
+
+import { i18n } from './i18n.js';
 
 export const AudioAssistance = {
   isSpeaking: false,
 
-  speak(text, lang = 'hi-IN') {
+  speak(text, lang = null) {
+    if (!text) return;
+    const targetLocale = lang || i18n.getVoiceLocale();
+
     if (!('speechSynthesis' in window)) {
-      alert("Audio assistance: " + text);
+      console.log("Audio assistance: " + text);
       return;
     }
 
-    window.speechSynthesis.cancel();
+    try {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = targetLocale;
+      utterance.rate = 0.95;
+      utterance.pitch = 1.0;
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
-    utterance.rate = 0.95;
-    utterance.pitch = 1.0;
+      utterance.onstart = () => {
+        this.isSpeaking = true;
+        document.body.classList.add('audio-playing');
+      };
 
-    utterance.onstart = () => {
-      this.isSpeaking = true;
-      document.body.classList.add('audio-playing');
-    };
+      utterance.onend = () => {
+        this.isSpeaking = false;
+        document.body.classList.remove('audio-playing');
+      };
 
-    utterance.onend = () => {
-      this.isSpeaking = false;
-      document.body.classList.remove('audio-playing');
-    };
+      utterance.onerror = () => {
+        this.isSpeaking = false;
+        document.body.classList.remove('audio-playing');
+      };
 
-    utterance.onerror = () => {
-      this.isSpeaking = false;
-      document.body.classList.remove('audio-playing');
-    };
-
-    window.speechSynthesis.speak(utterance);
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.warn("Speech synthesis error:", e);
+    }
   },
 
   playStep1() {
-    this.speak(
-      "नमस्ते। हस्तशिल्प संगम में आपका स्वागत है। अगर आप शिल्पकार हैं तो कारीगर चुनें, और सीधे शून्य प्रतिशत कमीशन पर अपना सामान बेचें। अपना मोबाइल नंबर और चार अंकों का ओटीपी दर्ज करें।",
-      "hi-IN"
-    );
+    this.speak(i18n.t('voiceGreetingWelcome'));
   },
 
   playStep2() {
     this.speak(
-      "पहचान सत्यापन: वस्त्र मंत्रालय के पहचान पत्र को कैमरे के सामने रखें या अपना 14 अंकों का पहचान क्रमांक दर्ज करें, ताकि सरकारी अनुदान सीधे आपके खाते में आए।",
-      "hi-IN"
+      i18n.currentLang === 'hi' 
+        ? "पहचान सत्यापन: वस्त्र मंत्रालय के पहचान पत्र को कैमरे के सामने रखें या अपना 14 अंकों का पहचान क्रमांक दर्ज करें।"
+        : "Pehchan Verification: Keep your Ministry of Textiles Artisan Card ready to unlock direct government benefits."
     );
   },
 
   playStep3() {
     this.speak(
-      "बैंक खाता जोड़ना: अपने पासबुक की फोटो अपलोड करें या खाता संख्या और आईएफएससी कोड भरें। बिना किसी बिचौलिए के सौ प्रतिशत भुगतान सीधे आपके बैंक खाते में पहुंचेगा।",
-      "hi-IN"
+      i18n.currentLang === 'hi'
+        ? "बैंक खाता जोड़ना: बिना किसी बिचौलिए के सौ प्रतिशत भुगतान सीधे आपके बैंक खाते में पहुंचेगा।"
+        : "Bank Khata: 100% direct DBT payouts straight into your account with 0% middleman commission."
     );
   },
 
   playTrustScore() {
-    this.speak(
-      "कारीगर ट्रस्ट स्कोर अट्ठानवे प्रतिशत है। पहचान प्रमाणित होने से आपको इंडिया पोस्ट का दैनिक पिकअप और शून्य बाज़ार शुल्क मिलता है।",
-      "hi-IN"
-    );
+    this.speak(i18n.t('voiceGreetingArtisan'));
   },
 
   stop() {
     if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
+      try {
+        window.speechSynthesis.cancel();
+      } catch (e) {}
       this.isSpeaking = false;
       document.body.classList.remove('audio-playing');
     }

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Hastshilp Sangam / Karigra - Main Design System & Global Styles
+   Native Loom / Native Loom - Main Design System & Global Styles
    Strict adherence to provided screenshots: Terracotta, Artisanal Ivory, Sage Green
    ========================================================================== */
 
@@ -288,15 +288,7 @@ body {
 
 /* Audio Assistance Banner */
 .audio-banner {
-  background: #FFFDF9;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
-  margin: 12px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  box-shadow: var(--shadow-sm);
+  display: none !important;
 }
 
 .audio-banner-header {
@@ -507,13 +499,7 @@ body {
 
 /* Mode Switcher Bar in Header */
 .role-mode-bar {
-  display: flex;
-  background: #EFE8DE;
-  padding: 4px;
-  border-radius: var(--radius-pill);
-  margin: 4px 16px 8px 16px;
-  border: 1px solid var(--border-subtle);
-  position: relative;
+  display: none !important;
 }
 
 .role-mode-btn {

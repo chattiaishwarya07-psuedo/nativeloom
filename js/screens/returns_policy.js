@@ -131,10 +131,10 @@ export function renderReturnsPolicyScreen(container) {
             <div class="timeline-step-number">2</div>
             <div class="timeline-content-card">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;">
-                <span class="timeline-title">Doorstep pickup by India Post</span>
+                <span class="timeline-title">Doorstep pickup by Delivery Agent</span>
                 <span class="badge-subtle" style="font-size:0.6rem;">Within a week</span>
               </div>
-              <div class="timeline-desc">An India Post postal agent collects the securely packed item straight from your address. Free reverse pickup directly from your doorstep.</div>
+              <div class="timeline-desc">A Delivery Agent collects the securely packed item straight from your address. Free reverse pickup directly from your doorstep.</div>
             </div>
           </div>
 

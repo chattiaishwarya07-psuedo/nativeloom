@@ -22,19 +22,16 @@ export function renderWelcomeScreen(container) {
         <div class="stepper-caption">Step 1 of 4: Welcome &amp; Identity</div>
       </div>
 
-      <!-- Audio Assistance Available Banner -->
-      <div class="audio-banner" style="margin-left:0; margin-right:0; margin-top:10px;">
-        <div class="audio-banner-header">Audio Assistance Available</div>
-        <div class="audio-banner-text">Tap to listen to spoken instructions in your preferred language</div>
-        <button type="button" class="audio-play-btn" id="btn-play-step1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Play Instructions
-        </button>
+
+
+      <!-- Simple Spoken Guide Video Demo Banner -->
+      <div class="video-guide-card" onclick="window.playSpokenGuideDemo()" style="position:relative; width:100%; border-radius:14px; overflow:hidden; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.12); margin-top:14px; margin-bottom:16px; border:1px solid rgba(122,40,19,0.18); background:#1F1916;">
+        <img src="/assets/spoken_guide_demo.png" alt="Simple Spoken Guide - Tap to Play Video" style="width:100%; height:auto; display:block; object-fit:cover; transition:transform 0.25s ease;">
       </div>
 
       <!-- Choose Your Identity Header -->
-      <h1 class="screen-headline">Choose Your Identity</h1>
-      <p class="screen-subtext">Join India's dedicated platform connecting indigenous artisans directly to patrons.</p>
+      <h1 class="screen-headline" style="font-size:1.35rem; font-weight:900; margin-bottom:4px;">Choose Your Identity</h1>
+      <p class="screen-subtext" style="margin-bottom:16px;">Join India's dedicated platform connecting indigenous artisans directly to patrons.</p>
 
       <!-- Select How You Will Participate -->
       <div class="section-label-row">
@@ -78,55 +75,66 @@ export function renderWelcomeScreen(container) {
         </div>
       </div>
 
-      <!-- Direct Phone Authentication Box -->
-      <div class="phone-auth-box">
-        <div class="phone-auth-title">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-terracotta)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
-          Direct Phone Authentication
-        </div>
-        <p class="phone-auth-desc">Enter your active mobile number to receive a secure 4-digit code</p>
-
-        <label class="input-label" for="phone-input">10-Digit Mobile Number</label>
-        <div class="phone-input-group">
-          <span class="country-code">
-            <span style="font-size:1.1rem; line-height:1;">🇮🇳</span> +91
-          </span>
-          <input type="tel" id="phone-input" class="phone-number-field" value="${State.phone}" maxlength="10" placeholder="98450 21980">
-          <span class="otp-ready-badge">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            OTP Ready
+      <!-- Direct Phone Authentication Box (Step 1 of 4) -->
+      <div class="phone-auth-box" style="background:#FFFFFF; border:1px solid var(--border-subtle); border-radius:var(--radius-xl); padding:18px 16px; box-shadow:var(--shadow-sm); margin-bottom:16px;">
+        
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <label style="font-size:0.75rem; font-weight:800; color:var(--text-primary); letter-spacing:0.04em;">
+            MOBILE NUMBER
+          </label>
+          <span style="font-size:0.7rem; font-weight:700; color:#57534E; display:flex; align-items:center; gap:4px;">
+            🔒 100% Encrypted
           </span>
         </div>
-        <div class="phone-hint">Numeric keypad enabled • Standard carrier SMS rates may apply</div>
 
-        <!-- Enter 4-Digit SMS Code -->
-        <div class="otp-label-row">
-          <label class="input-label" style="margin-bottom:0;">Enter 4-Digit SMS Code</label>
-          <span class="otp-timer">⏱ Expires in 01:48</span>
+        <!-- Mobile Input Row -->
+        <div style="display:flex; align-items:center; background:#FAF7F2; border:1.5px solid #EADBCE; border-radius:10px; padding:10px 14px; gap:10px; margin-bottom:6px;">
+          <span style="font-size:0.85rem; font-weight:800; color:#1C1917; white-space:nowrap;">
+            IN <strong>+91</strong>
+          </span>
+          <div style="width:1px; height:20px; background:#D6C7B2;"></div>
+          <input type="tel" id="phone-input" value="98765 43210" maxlength="12" style="flex:1; border:none; background:transparent; outline:none; font-size:1.05rem; font-weight:800; color:#1C1917; letter-spacing:0.04em;">
+          <button type="button" onclick="document.getElementById('phone-input').value=''; document.getElementById('phone-input').focus();" style="background:none; border:none; color:#A89582; cursor:pointer; font-size:1rem; padding:0; line-height:1;">
+            ⊗
+          </button>
+        </div>
+        <div style="font-size:0.7rem; color:var(--text-secondary); margin-bottom:16px;">
+          SMS with instant single-use code will be sent
         </div>
 
-        <div class="otp-boxes-grid">
-          <input type="text" class="otp-box" maxlength="1" value="8" id="otp-1">
-          <input type="text" class="otp-box" maxlength="1" value="3" id="otp-2">
-          <input type="text" class="otp-box" maxlength="1" value="1" id="otp-3">
-          <input type="text" class="otp-box" maxlength="1" value="" placeholder="•" id="otp-4" autofocus>
+        <!-- 4-Digit Security Code (OTP) -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <label style="font-size:0.75rem; font-weight:800; color:var(--text-primary); letter-spacing:0.04em;">
+            4-DIGIT SECURITY CODE (OTP)
+          </label>
+          <span style="font-size:0.72rem; font-weight:700; color:#C2410C; display:flex; align-items:center; gap:4px;">
+            ⏱ 00:48
+          </span>
         </div>
 
-        <div class="resend-row">
-          <span>Didn't get the message?</span>
-          <div class="resend-links">
-            <button type="button" class="resend-btn" id="btn-resend-sms">Resend OTP via SMS</button>
-            <span style="color:var(--border-subtle)">|</span>
-            <button type="button" class="resend-btn" id="btn-resend-call">Call</button>
-          </div>
+        <!-- 4 Large Square Digit Boxes -->
+        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin-bottom:14px;">
+          <input type="text" class="otp-box" maxlength="1" value="7" id="otp-1" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #7A2813; border-radius:10px; outline:none; color:#1C1917;">
+          <input type="text" class="otp-box" maxlength="1" value="4" id="otp-2" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #7A2813; border-radius:10px; outline:none; color:#1C1917;">
+          <input type="text" class="otp-box" maxlength="1" value="2" id="otp-3" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #7A2813; border-radius:10px; outline:none; color:#1C1917;">
+          <input type="text" class="otp-box" maxlength="1" value="" placeholder="•" id="otp-4" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #D6C7B2; border-radius:10px; outline:none; color:#1C1917;" autofocus>
         </div>
 
-        <button type="button" class="btn-primary" id="btn-verify-continue">
-          Verify &amp; Continue →
+        <!-- Resend OTP Row -->
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.74rem; margin-bottom:18px;">
+          <span style="color:var(--text-secondary);">Didn't receive code?</span>
+          <button type="button" id="btn-resend-sms" style="background:none; border:none; color:#7A2813; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; font-size:0.74rem; padding:0;">
+            📞 Resend OTP via Call or SMS
+          </button>
+        </div>
+
+        <!-- Verify & Continue Button -->
+        <button type="button" class="btn-primary" id="btn-verify-continue" style="width:100%; background:#7A2813; color:#FFFFFF; border:none; padding:14px; font-size:0.95rem; font-weight:800; border-radius:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 3px 8px rgba(122,40,19,0.25);">
+          <span>Verify &amp; Continue →</span>
         </button>
 
-        <p class="terms-caption">
-          By continuing, you agree to Hastshilp Sangam's <a href="javascript:void(0)">Artisan Terms</a> and <a href="javascript:void(0)">Fair Trade Charter</a>.
+        <p class="terms-caption" style="margin-top:10px; font-size:0.68rem; text-align:center; color:var(--text-muted);">
+          By continuing, you agree to Native Loom's <a href="javascript:void(0)" style="color:#7A2813; font-weight:700;">Artisan Terms</a> and <a href="javascript:void(0)" style="color:#7A2813; font-weight:700;">Fair Trade Charter</a>.
         </p>
       </div>
 
@@ -190,7 +198,7 @@ export function renderWelcomeScreen(container) {
   });
 
   // Audio Play
-  container.querySelector('#btn-play-step1').addEventListener('click', () => {
+  container.querySelector('#btn-play-step1')?.addEventListener('click', () => {
     AudioAssistance.playStep1();
   });
 

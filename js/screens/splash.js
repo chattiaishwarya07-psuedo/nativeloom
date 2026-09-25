@@ -1,7 +1,6 @@
 /**
- * Splash & Launch Landing Screen: KalaVerse
- * Pixel-perfect recreation of User Uploaded Reference Screenshot
- * Features the signature KalaVerse artisan emblem, branding, progress bar,
+ * Splash & Launch Landing Screen: Native Loom
+ * Features the signature artisan emblem, branding, progress bar,
  * pulsing dots, and Hindi loading subtext.
  */
 
@@ -10,11 +9,9 @@ import { State } from '../state.js';
 export function renderSplashScreen(container) {
   // Hide top header and bottom nav while on splash screen for full immersion
   const header = document.getElementById('app-header');
-  const roleBar = document.getElementById('role-mode-bar');
   const bottomNav = document.getElementById('bottom-navigation');
   
   if (header) header.style.display = 'none';
-  if (roleBar) roleBar.style.display = 'none';
   if (bottomNav) bottomNav.style.display = 'none';
 
   container.innerHTML = `
@@ -33,7 +30,7 @@ export function renderSplashScreen(container) {
       <!-- Center Brand Group -->
       <div style="display:flex; flex-direction:column; align-items:center; max-width:320px; width:100%;">
         
-        <!-- KalaVerse Circular Emblem (Exact User Icon) -->
+        <!-- Artisan Emblem -->
         <div class="kala-emblem-wrap" style="
           width: 140px;
           height: 140px;
@@ -43,35 +40,45 @@ export function renderSplashScreen(container) {
           justify-content: center;
           position: relative;
         ">
-          <img src="/assets/kalaverse_logo.png" alt="KalaVerse Emblem" style="
-            width: 132px;
-            height: 132px;
-            object-fit: contain;
+          <div style="
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            filter: drop-shadow(0 4px 14px rgba(135, 52, 19, 0.12));
+            background: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(122, 40, 19, 0.25);
+            border: 3px solid #FCD7C2;
+            overflow: hidden;
           ">
+            <img src="assets/native_loom_logo.png" alt="Native Loom" style="width:100%; height:100%; object-fit:contain;">
+          </div>
         </div>
 
-        <!-- Brand Title: KalaVerse -->
+        <!-- Brand Title: Native Loom -->
         <h1 style="
           font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-          font-size: 2.25rem;
+          font-size: 1.85rem;
           font-weight: 800;
           color: #1C3550;
-          margin: 0 0 6px 0;
+          margin: 0 0 4px 0;
           letter-spacing: -0.02em;
-        ">KalaVerse</h1>
+          text-align: center;
+        ">Native Loom</h1>
+        <div style="font-size: 1.05rem; font-weight: 700; color: #7A2813; margin-bottom: 6px;">(नेटिव लूम • Native Loom)</div>
 
-        <!-- Subtitle: ARTISAN HANDMADE PLATFORM -->
+        <!-- Subtitle: NATIONAL INDIGENOUS ARTISAN PLATFORM -->
         <div style="
           font-family: 'Plus Jakarta Sans', sans-serif;
-          font-size: 0.72rem;
+          font-size: 0.68rem;
           font-weight: 700;
           color: #5A6B82;
-          letter-spacing: 0.22em;
+          letter-spacing: 0.16em;
           text-transform: uppercase;
           margin-bottom: 28px;
-        ">ARTISAN HANDMADE PLATFORM</div>
+          text-align: center;
+        ">NATIONAL INDIGENOUS ARTISAN PLATFORM</div>
 
         <!-- Progress Loading Bar (130px, brown fill on left, beige track) -->
         <div style="
@@ -145,11 +152,9 @@ export function renderSplashScreen(container) {
     </style>
   `;
 
-  // Restore header and bottom navigation when leaving splash screen
-  function exitSplashScreen(targetScreen = 'welcome') {
+  // Restore header when leaving splash screen
+  function exitSplashScreen(targetScreen = 'account_select') {
     if (header) header.style.display = 'flex';
-    if (roleBar) roleBar.style.display = 'flex';
-    if (bottomNav) bottomNav.style.display = 'flex';
     State.setScreen(targetScreen);
   }
 
@@ -164,7 +169,7 @@ export function renderSplashScreen(container) {
       // Auto transition after loading finishes (1.8s)
       setTimeout(() => {
         if (State.currentScreen === 'splash') {
-          exitSplashScreen('welcome');
+          exitSplashScreen('account_select');
         }
       }, 500);
     }
@@ -173,14 +178,14 @@ export function renderSplashScreen(container) {
   // Instant Enter Button Click Handler
   container.querySelector('#btn-enter-platform')?.addEventListener('click', () => {
     clearInterval(progressInterval);
-    exitSplashScreen('welcome');
+    exitSplashScreen('account_select');
   });
 
   // Tap anywhere on splash to skip immediately
   container.querySelector('.splash-screen')?.addEventListener('click', (e) => {
     if (e.target.tagName !== 'BUTTON' && !e.target.closest('button')) {
       clearInterval(progressInterval);
-      exitSplashScreen('welcome');
+      exitSplashScreen('account_select');
     }
   });
 }

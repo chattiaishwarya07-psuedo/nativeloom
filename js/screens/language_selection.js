@@ -3,7 +3,7 @@
  * Exact recreation of User Provided Reference Screenshot (Screen 1)
  */
 
-import { State } from '../state.js';
+import { State, AccountType } from '../state.js';
 import { AudioAssistance } from '../speech.js';
 
 export const RegionalLanguages = [
@@ -14,7 +14,7 @@ export const RegionalLanguages = [
     region: 'North & Central India',
     greeting: '"Namaste" • Welcome',
     tag: 'Primary Language',
-    voiceText: 'नमस्ते! हस्तशिल्प संगम में आपका स्वागत है।'
+    voiceText: 'नमस्ते! नेटिव लूम में आपका स्वागत है।'
   },
   {
     id: 'en',
@@ -23,7 +23,7 @@ export const RegionalLanguages = [
     region: 'Pan-India & International Crafts Guide',
     greeting: '"Welcome"',
     tag: 'Standard Interface',
-    voiceText: 'Welcome to Hastshilp Sangam, connecting indigenous artisans directly to patrons.'
+    voiceText: 'Welcome to Native Loom, connecting indigenous artisans directly to patrons.'
   },
   {
     id: 'bn',
@@ -32,7 +32,7 @@ export const RegionalLanguages = [
     region: 'West Bengal & Tripura',
     greeting: '"Nomoshkar" • Welcome',
     tag: 'Handloom & Terracotta',
-    voiceText: 'নমস্কার! হস্তশিল্প সঙ্গমে আপনাকে স্বাগত।'
+    voiceText: 'নমস্কার! নেটিভ লুমে আপনাকে স্বাগত।'
   },
   {
     id: 'ta',
@@ -41,7 +41,7 @@ export const RegionalLanguages = [
     region: 'Tamil Nadu Craft Clusters',
     greeting: '"Vanakkam" • Welcome',
     tag: 'Bronze & Kanchipuram Silk',
-    voiceText: 'வணக்கம்! கைவினைப் பொருட்கள் சங்கத்திற்கு உங்களை வரவேற்கிறோம்.'
+    voiceText: 'வணக்கம்! நேட்டிவ் லூமிற்கு உங்களை வரவேற்கிறோம்.'
   },
   {
     id: 'te',
@@ -50,7 +50,7 @@ export const RegionalLanguages = [
     region: 'Andhra Pradesh & Telangana',
     greeting: '"Namaskaram" • Welcome',
     tag: 'Kalamkari & Lepakshi',
-    voiceText: 'నమస్కారం! హస్తకళల సంగమానికి మీకు స్వాగతం.'
+    voiceText: 'నమస్కారం! నేటివ్ లూమ్‌కు మీకు స్వాగతం.'
   },
   {
     id: 'mr',
@@ -59,7 +59,7 @@ export const RegionalLanguages = [
     region: 'Maharashtra Craft Clusters',
     greeting: '"Namaskar" • Welcome',
     tag: 'Paithani & Warli',
-    voiceText: 'नमस्कार! हस्तशिल्प संगम मध्ये आपले स्वागत आहे.'
+    voiceText: 'नमस्कार! नेटिव लूम मध्ये आपले स्वागत आहे.'
   },
   {
     id: 'gu',
@@ -68,7 +68,7 @@ export const RegionalLanguages = [
     region: 'Kutch & Patan Artisan Guilds',
     greeting: '"Namaste" • Welcome',
     tag: 'Ajrakh & Bandhani',
-    voiceText: 'નમસ્તે! હસ્તશિલ્પ સંગમમાં આપનું સ્વાગત છે.'
+    voiceText: 'નમસ્તે! નેટિવ લૂમમાં આપનું સ્વાગત છે.'
   },
   {
     id: 'kn',
@@ -77,7 +77,7 @@ export const RegionalLanguages = [
     region: 'Karnataka Craft Clusters',
     greeting: '"Namaskara" • Welcome',
     tag: 'Channapatna Toys',
-    voiceText: 'ನಮಸ್ಕಾರ! ಹಸ್ತಶಿಲ್ಪ ಸಂಗಮಕ್ಕೆ ನಿಮಗೆ ಸ್ವಾಗತ.'
+    voiceText: 'ನಮಸ್ಕಾರ! ನೇಟಿವ್ ಲೂಮ್‌ಗೆ ನಿಮಗೆ ಸ್ವಾಗತ.'
   },
   {
     id: 'bho',
@@ -86,7 +86,7 @@ export const RegionalLanguages = [
     region: 'Purvanchal & Bihar',
     greeting: '"Pranam" • Welcome',
     tag: 'Sikki Grass & Tikuli',
-    voiceText: 'प्रणाम! हस्तशिल्प संगम में राउर सभे के बहुत बहुत स्वागत बा।'
+    voiceText: 'प्रणाम! नेटिव लूम में राउर सभे के बहुत बहुत स्वागत बा।'
   },
   {
     id: 'mai',
@@ -95,7 +95,7 @@ export const RegionalLanguages = [
     region: 'Mithila / Madhubani Region',
     greeting: '"Pranam" • Welcome',
     tag: 'Madhubani Painting',
-    voiceText: 'प्रणाम! हस्तशिल्प संगम मे अहाँक स्वागत अछि।'
+    voiceText: 'प्रणाम! नेटिव लूम मे अहाँक स्वागत अछि।'
   }
 ];
 
@@ -137,19 +137,7 @@ export function renderLanguageScreen(container) {
   container.innerHTML = `
     <div class="lang-selection-screen animate-fade-in" style="padding-bottom:30px;">
       
-      <!-- Top Audio Banner -->
-      <div style="background:#FFF9F5; border:1px solid var(--color-terracotta-border); border-radius:var(--radius-md); padding:10px 12px; display:flex; align-items:center; gap:10px; margin: 8px 0 12px;">
-        <div style="width:36px; height:36px; border-radius:10px; background:var(--color-terracotta); color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-        </div>
-        <div style="flex:1;">
-          <div style="font-size:0.82rem; font-weight:800; color:var(--text-primary); display:flex; align-items:center; gap:6px;">
-            Listen or Choose Your Language
-            <span class="badge-amber" style="font-size:0.6rem; padding:1px 5px;">• VOICE</span>
-          </div>
-          <div style="font-size:0.72rem; color:var(--text-secondary);">Tap to hear spoken instructions in your dialect</div>
-        </div>
-      </div>
+
 
       <!-- Select Language by Voice Box -->
       <div style="background:#FFFFFF; border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:14px; margin-bottom:14px; box-shadow:var(--shadow-sm);">
@@ -201,6 +189,7 @@ export function renderLanguageScreen(container) {
       card.addEventListener('click', (e) => {
         if (e.target.closest('.lang-audio-round')) return;
         selectedLangId = card.getAttribute('data-id');
+        window.i18n?.setLanguage(selectedLangId);
         container.querySelector('#languages-list-container').innerHTML = renderList();
         attachHandlers();
       });
@@ -210,7 +199,10 @@ export function renderLanguageScreen(container) {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const text = btn.getAttribute('data-voice');
-        AudioAssistance.speak(text);
+        const langCard = btn.closest('.lang-card');
+        const lid = langCard ? langCard.getAttribute('data-id') : null;
+        const voiceLoc = window.i18n?.metadata?.voiceLocale || (lid ? window.i18n?.metadata?.voiceLocale : 'hi-IN');
+        AudioAssistance.speak(text, voiceLoc);
       });
     });
   }
@@ -219,16 +211,32 @@ export function renderLanguageScreen(container) {
 
   // Voice search trigger
   container.querySelector('#btn-voice-lang').addEventListener('click', () => {
-    AudioAssistance.speak("कृपया अपनी भाषा बोलें। Speak your language now.");
+    AudioAssistance.speak(window.i18n ? window.i18n.t('voiceGreetingWelcome') : "कृपया अपनी भाषा बोलें।");
     window.showToast?.("Listening for mother tongue...");
   });
 
   // Save Language
-  container.querySelector('#btn-save-lang').addEventListener('click', () => {
-    State.language = selectedLangId;
-    window.showToast?.(`Language saved: ${selectedLangId.toUpperCase()}!`);
+  container.querySelector('#btn-save-lang')?.addEventListener('click', () => {
+    if (window.i18n) {
+      window.i18n.setLanguage(selectedLangId);
+    } else {
+      State.language = selectedLangId;
+    }
+    const meta = window.i18n?.metadata;
+    const toastMsg = selectedLangId === 'en'
+      ? `Language saved: English!`
+      : `भाषा सुरक्षित: ${meta ? meta.native + ' (' + meta.english + ')' : selectedLangId.toUpperCase()}!`;
+    window.showToast?.(toastMsg);
     setTimeout(() => {
-      State.setScreen('welcome');
-    }, 600);
+      if (State.previousScreen && !['language_select', 'languages', 'splash'].includes(State.previousScreen)) {
+        State.setScreen(State.previousScreen);
+        return;
+      }
+      const role = State.session.accountType;
+      if (role === AccountType.ARTISAN) State.setScreen('artisan_studio');
+      else if (role === AccountType.BUYER) State.setScreen('buyer_explore');
+      else if (role === AccountType.CORPORATE) State.setScreen('corporate_clusters');
+      else State.setScreen('explore');
+    }, 300);
   });
 }

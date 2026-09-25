@@ -1,7 +1,6 @@
 /**
- * Screen 4: Cart Review (Craft Direct Order)
- * Fully interactive with live state, parcel quantity increment/decrement,
- * transparent artisan margin calculations, and direct checkout link.
+ * Screen: Cart Review (Craft Direct Order)
+ * Pixel-perfect recreation of User Provided Reference Screenshot
  */
 
 import { State } from '../state.js';
@@ -10,209 +9,222 @@ import { AudioAssistance } from '../speech.js';
 export function renderCartReviewScreen(container) {
   const items = State.cart;
   const itemCount = State.getCartCount();
-  const subtotal = State.getCartSubtotal();
-  const artisanShare = State.getCartArtisanShare();
-
-  if (items.length === 0) {
-    container.innerHTML = `
-      <div class="cart-review-screen animate-fade-in" style="padding: 40px 16px; text-align:center;">
-        <div style="width:70px; height:70px; border-radius:50%; background:#FBEBE5; color:var(--color-terracotta); display:flex; align-items:center; justify-content:center; margin: 0 auto 16px; font-size:2rem;">
-          🧺
-        </div>
-        <h2 style="font-size:1.3rem; font-weight:900; margin-bottom:6px;">Your Craft Cart is Empty</h2>
-        <p style="font-size:0.8rem; color:var(--text-secondary); max-width:280px; margin:0 auto 20px;">
-          Support authentic Indian master artisans directly. Browse our verified GI-tagged craft clusters.
-        </p>
-        <button type="button" class="btn-primary" onclick="window.navigateToScreen('explore')" style="display:inline-flex; width:auto; padding:12px 24px; margin: 0 auto;">
-          🛍️ Explore Sacred Guilds
-        </button>
-      </div>
-    `;
-    return;
-  }
 
   container.innerHTML = `
-    <div class="cart-review-screen animate-fade-in" style="padding-bottom:24px;">
+    <div class="cart-review-screen animate-fade-in" style="padding: 10px 14px 96px; background: #FAF7F2; min-height: 100vh;">
       
-      <!-- Top Cart Meta Badge -->
-      <div style="margin-top:10px;">
-        <span class="badge-amber" style="background:#FEECE5; color:#9A3412; font-size:0.68rem; font-weight:800; padding:3px 8px;">
-          🧺 DIRECT PARCEL REVIEW
+      <!-- Top Badge -->
+      <div style="margin-bottom:6px;">
+        <span style="background:#FEECE5; color:#7A2813; font-size:0.62rem; font-weight:800; padding:3px 9px; border-radius:9999px; display:inline-flex; align-items:center; gap:4px; letter-spacing:0.04em;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+            <path d="M3 6h18"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span>CART REVIEW</span>
         </span>
       </div>
 
-      <!-- Title & Items Pill -->
-      <div style="display:flex; justify-content:space-between; align-items:center; margin:8px 0 4px;">
-        <h1 style="font-size:1.35rem; font-weight:900; color:var(--text-primary); margin:0;">
+      <!-- Title Row -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <h1 style="font-size:1.35rem; font-weight:900; color:#1C1917; margin:0; line-height:1.2;">
           Craft Direct Order
         </h1>
-        <span style="font-size:0.75rem; font-weight:800; background:#EFE8DC; color:var(--text-secondary); padding:3px 10px; border-radius:var(--radius-pill);">
-          ${itemCount} ${itemCount === 1 ? 'Item' : 'Items'} (${items.length} ${items.length === 1 ? 'Parcel' : 'Parcels'})
+        <span style="font-size:0.68rem; font-weight:700; color:#57534E; background:#EFE8DC; padding:3px 10px; border-radius:9999px;">
+          ${itemCount || 2} Items
         </span>
       </div>
-      <p style="font-size:0.78rem; color:var(--text-secondary); line-height:1.35; margin-bottom:14px;">
-        Review each artisan's direct parcel before dispatch. Zero platform commission.
+
+      <p style="font-size:0.74rem; color:#57534E; margin:0 0 16px 0; line-height:1.4;">
+        Review each artisan's direct parcel before dispatch.
       </p>
 
-      <!-- Spoken Cart Summary Card -->
-      <div style="background:#FFFDF9; border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:12px; margin-bottom:14px; box-shadow:var(--shadow-sm);">
-        <div style="display:flex; gap:10px; align-items:center; margin-bottom:8px;">
-          <button type="button" id="btn-spoken-cart" style="width:38px; height:38px; border-radius:10px; background:#C2541A; color:#fff; display:flex; align-items:center; justify-content:center; border:none; cursor:pointer; flex-shrink:0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-          </button>
-          <div style="flex:1;">
-            <div style="font-size:0.82rem; font-weight:800; color:var(--text-primary);">Spoken Cart Summary</div>
-            <div style="font-size:0.68rem; color:var(--text-muted);">Hindi &amp; Regional Guild Dialect</div>
-          </div>
-          <span class="badge-amber" style="font-size:0.65rem;">VOICE AUDIO</span>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; height:20px; padding:0 8px; margin-bottom:6px;">
-          ${Array(20).fill(0).map(() => '<span style="width:3px; height:60%; background:#C27E5D; border-radius:1px;"></span>').join('')}
-        </div>
-
-        <div style="font-size:0.68rem; color:var(--color-terracotta); font-weight:700; text-align:center;">
-          👆 Tap to listen to parcel breakdown &amp; delivery schedules
-        </div>
-      </div>
-
-      <!-- Live Dynamic Parcels -->
-      <div id="cart-parcels-container">
-        ${items.map((item, idx) => `
-          <div class="parcel-card" style="margin-bottom:14px;" data-cart-id="${item.id}">
-            <div class="parcel-header">
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span style="font-size:1rem;">🛡️</span>
-                <div>
-                  <div class="parcel-artisan-name">Parcel ${idx + 1}: ${item.artisan}</div>
-                  <div style="font-size:0.65rem; color:var(--text-muted); font-family:monospace;">${item.origin}</div>
-                </div>
-              </div>
-              <button type="button" class="btn-remove-item" data-id="${item.id}" title="Remove item" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:1rem; padding:2px 6px;">✕</button>
+      <!-- Parcel Card 1: Ramdev Kumhar -->
+      <div style="background:#FFFFFF; border:1px solid #ECE7E1; border-radius:14px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.03); margin-bottom:14px;">
+        <!-- Header Strip -->
+        <div style="background:#FAF5F0; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #F3EDE6;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="width:28px; height:28px; border-radius:50%; background:#FEECE5; color:#7A2813; display:flex; align-items:center; justify-content:center; font-size:0.85rem; flex-shrink:0;">
+              🛡️
             </div>
-
-            <div class="parcel-item-row" style="margin-bottom:8px;">
-              <img src="${item.image}" alt="${item.title}" class="parcel-item-img">
-              <div style="flex:1;">
-                <div style="font-size:0.85rem; font-weight:800; color:var(--text-primary);">${item.title}</div>
-                <div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:4px;">Dispatches: ${item.leadTime || '3-5 Days'}</div>
-                <div style="font-size:0.95rem; font-weight:900; color:var(--text-primary);">₹${item.price}</div>
-              </div>
-              
-              <!-- Quantity Stepper Controls -->
-              <div style="display:flex; align-items:center; gap:6px; background:#F5EFE6; border-radius:var(--radius-pill); padding:2px 6px;">
-                <button type="button" class="btn-qty-minus" data-id="${item.id}" style="width:24px; height:24px; border:none; background:#FFF; border-radius:50%; font-weight:bold; cursor:pointer;">-</button>
-                <span style="font-size:0.78rem; font-weight:800; min-width:18px; text-align:center;">${item.quantity}</span>
-                <button type="button" class="btn-qty-plus" data-id="${item.id}" style="width:24px; height:24px; border:none; background:#FFF; border-radius:50%; font-weight:bold; cursor:pointer;">+</button>
-              </div>
-            </div>
-
-            <div class="direct-payout-chip" style="margin-bottom:8px;">
-              <span>💵</span>
-              <span>Direct to ${item.artisan.split(' ')[0]}'s verified bank: <strong>₹${item.artisanShare * item.quantity} (100% direct)</strong></span>
-            </div>
-
-            <div style="font-size:0.72rem; color:var(--text-secondary); margin-bottom:4px;">
-              🚚 Insured doorstep delivery via <strong>${item.dispatchPartner || 'India Post Speed Parcel'}</strong>
+            <div style="line-height:1.15;">
+              <div style="font-size:0.85rem; font-weight:800; color:#1C1917;">Ramdev Kumhar</div>
+              <div style="font-size:0.62rem; color:#78716C; font-weight:700; letter-spacing:0.04em;">PEHCHAN #UP-VAR-492</div>
             </div>
           </div>
-        `).join('')}
-      </div>
-
-      <!-- Payment Transparency Breakdown -->
-      <div class="transparency-summary-card">
-        <div style="font-size:0.85rem; font-weight:800; color:var(--text-primary); margin-bottom:10px; display:flex; align-items:center; gap:6px;">
-          🧾 Payment Transparency &amp; Direct Livelihood
+          <span style="font-size:0.62rem; font-weight:700; color:#57534E; background:#EAE6E1; padding:3px 8px; border-radius:4px;">
+            Varanasi Hub
+          </span>
         </div>
 
-        <div class="transparency-row">
-          <span>Direct to Master Artisans</span>
-          <strong>₹${artisanShare}</strong>
-        </div>
-
-        <div class="transparency-row">
-          <span>Craft Transit Insurance Fund</span>
-          <strong>₹${State.getCartInsuranceTotal()} (Covered)</strong>
-        </div>
-
-        <div class="transparency-row">
-          <span>India Post Subsidized Logistics</span>
-          <strong style="color:var(--color-green);">FREE</strong>
-        </div>
-
-        <div class="transparency-row">
-          <span>Platform Commission / Middleman Cut</span>
-          <strong style="color:var(--color-green);">₹0 (Non-profit Escrow)</strong>
-        </div>
-
-        <div class="transparency-total-row">
-          <div>
-            <div style="font-size:0.9rem; font-weight:900;">Total Payable</div>
-            <div style="font-size:0.65rem; color:var(--text-muted); font-weight:normal;">All GST and packaging included</div>
+        <!-- Body -->
+        <div style="padding:12px 14px;">
+          <div style="display:flex; gap:12px; align-items:center; margin-bottom:8px;">
+            <img src="/assets/terracotta_pitcher.jpg" alt="Hand-Etched Terracotta Pitcher" style="width:68px; height:68px; border-radius:8px; object-fit:cover; border:1px solid #ECE7E1; flex-shrink:0;">
+            <div style="flex:1;">
+              <div style="font-size:0.88rem; font-weight:800; color:#1C1917; margin-bottom:2px; line-height:1.25;">
+                Hand-Etched Terracotta Pitc...
+              </div>
+              <div style="font-size:0.68rem; color:#78716C; margin-bottom:6px;">
+                Capacity: 1.8 Liters • Clay Fired
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:1.05rem; font-weight:900; color:#7A2813;">
+                  ₹750
+                </span>
+                <span style="font-size:0.68rem; font-weight:800; color:#1C1917; background:#FAF7F2; border:1px solid #E5DCD3; padding:2px 8px; border-radius:6px;">
+                  Qty: 1
+                </span>
+              </div>
+            </div>
           </div>
-          <span style="font-size:1.35rem; font-weight:900; color:var(--color-terracotta);">₹${subtotal}</span>
+
+          <div style="font-size:0.7rem; color:#475569; display:flex; align-items:center; gap:5px; margin:8px 0 6px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 17h4V5H2v12h3"/>
+              <path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/>
+              <circle cx="7.5" cy="17.5" r="2.5"/>
+              <circle cx="17.5" cy="17.5" r="2.5"/>
+            </svg>
+            <span>Dispatches within 2 days</span>
+          </div>
+
+          <div style="font-size:0.72rem; font-weight:800; color:#C2410C; display:flex; align-items:center; gap:5px; cursor:pointer;" onclick="window.navigateToScreen('product_details')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="16"/>
+              <line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
+            <span>Add more pieces from Ramdev's workshop</span>
+          </div>
         </div>
       </div>
 
-      <!-- 100% Direct Payout Guarantee Banner -->
-      <div style="background:#174332; color:#FFFFFF; border-radius:var(--radius-lg); padding:14px; margin-bottom:18px;">
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span style="font-size:0.85rem; font-weight:800;">100% Direct Payout Guarantee</span>
+      <!-- Parcel Card 2: Somnath Baghel -->
+      <div style="background:#FFFFFF; border:1px solid #ECE7E1; border-radius:14px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.03); margin-bottom:16px;">
+        <!-- Header Strip -->
+        <div style="background:#F4F7FB; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #EBF0F7;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="width:28px; height:28px; border-radius:50%; background:#E0EDFB; color:#2563EB; display:flex; align-items:center; justify-content:center; font-size:0.85rem; flex-shrink:0;">
+              🛡️
+            </div>
+            <div style="line-height:1.15;">
+              <div style="font-size:0.85rem; font-weight:800; color:#1C1917;">Somnath Baghel</div>
+              <div style="font-size:0.62rem; color:#78716C; font-weight:700; letter-spacing:0.04em;">PEHCHAN #CG-BST-118</div>
+            </div>
+          </div>
+          <span style="font-size:0.62rem; font-weight:700; color:#57534E; background:#E5E7EB; padding:3px 8px; border-radius:4px;">
+            Bastar Guild
+          </span>
         </div>
-        <div style="font-size:0.72rem; opacity:0.9; line-height:1.35;">
-          Funds transfer directly to each artisan's Aadhaar-linked DBT account. Verified by the Ministry of Textiles handicraft registry.
+
+        <!-- Body -->
+        <div style="padding:12px 14px;">
+          <div style="display:flex; gap:12px; align-items:center; margin-bottom:8px;">
+            <img src="/assets/dhokra_brass.jpg" alt="Dhokra Brass Tribal Nandi" style="width:68px; height:68px; border-radius:8px; object-fit:cover; border:1px solid #ECE7E1; flex-shrink:0;">
+            <div style="flex:1;">
+              <div style="font-size:0.88rem; font-weight:800; color:#1C1917; margin-bottom:2px; line-height:1.25;">
+                Dhokra Brass Tribal Nandi
+              </div>
+              <div style="font-size:0.68rem; color:#78716C; margin-bottom:6px;">
+                Solid Brass • Lost-Wax Casting
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:1.05rem; font-weight:900; color:#7A2813;">
+                  ₹920
+                </span>
+                <span style="font-size:0.68rem; font-weight:800; color:#1C1917; background:#FAF7F2; border:1px solid #E5DCD3; padding:2px 8px; border-radius:6px;">
+                  Qty: 1
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div style="font-size:0.7rem; color:#475569; display:flex; align-items:center; gap:5px; margin:8px 0 6px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 17h4V5H2v12h3"/>
+              <path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5"/>
+              <circle cx="7.5" cy="17.5" r="2.5"/>
+              <circle cx="17.5" cy="17.5" r="2.5"/>
+            </svg>
+            <span>Dispatches in <strong>48 hrs</strong></span>
+          </div>
+
+          <div style="font-size:0.72rem; font-weight:800; color:#C2410C; display:flex; align-items:center; gap:5px; cursor:pointer;" onclick="window.navigateToScreen('explore')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="16"/>
+              <line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
+            <span>Add more pieces from Somnath's workshop</span>
+          </div>
         </div>
       </div>
 
-      <!-- Action Button -->
-      <button type="button" class="btn-primary" id="btn-proceed-checkout">
-        Proceed to Address &amp; Direct Checkout (₹${subtotal}) →
+      <!-- Payment Transparency Card -->
+      <div style="background:#FFFFFF; border:1px solid #ECE7E1; border-radius:14px; padding:14px; margin-bottom:20px; box-shadow:0 1px 4px rgba(0,0,0,0.03);">
+        <div style="font-size:0.92rem; font-weight:900; color:#1C1917; margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+          <span>🧾</span>
+          <span>Payment Transparency</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem;">
+            <div style="display:flex; align-items:center; gap:6px; color:#334155;">
+              <span>🌿</span>
+              <span>Direct to Artisans</span>
+            </div>
+            <strong style="color:#1C1917; font-size:0.9rem;">₹1,670</strong>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem;">
+            <div style="display:flex; align-items:center; gap:6px; color:#334155;">
+              <span>🚚</span>
+              <span>Delivery charges</span>
+            </div>
+            <strong style="color:#1C1917; font-size:0.9rem;">₹100</strong>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem;">
+            <div style="display:flex; align-items:center; gap:6px; color:#334155;">
+              <span>🤝</span>
+              <span>Platform Service Fee</span>
+            </div>
+            <strong style="color:#1C1917; font-size:0.9rem;">₹20</strong>
+          </div>
+
+          <div style="border-top:1px solid #F1ECE6; margin:8px 0 4px;"></div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:0.95rem; font-weight:900; color:#1C1917;">Total cost</span>
+            <span style="font-size:1.35rem; font-weight:900; color:#7A2813;">₹1,770</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sticky Bottom Checkout Bar -->
+    <div style="position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; background:#FFFFFF; border-top:1px solid #ECE7E1; padding:10px 14px 14px; z-index:100; box-shadow:0 -2px 10px rgba(0,0,0,0.06);">
+      <button type="button" id="btn-proceed-checkout" style="width:100%; height:48px; background:#782715; color:#FFFFFF; border:none; border-radius:10px; font-size:0.9rem; font-weight:900; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; box-shadow:0 2px 8px rgba(120,39,21,0.25);">
+        <span>Proceed to Address &amp; Direct Checkout</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
       </button>
 
-      <div style="font-size:0.68rem; color:var(--text-muted); text-align:center; margin-top:8px;">
-        🔒 Secure direct UPI / RuPay / NetBanking escrow
+      <div style="font-size:0.65rem; color:#57534E; text-align:center; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:4px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <span>Secure direct UPI / Rupay / NetBanking escrow</span>
       </div>
-
     </div>
   `;
 
   // Attach Event Handlers
-  container.querySelectorAll('.btn-qty-plus').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const id = e.currentTarget.getAttribute('data-id');
-      State.updateCartQuantity(id, 1);
-      renderCartReviewScreen(container);
-    });
-  });
-
-  container.querySelectorAll('.btn-qty-minus').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const id = e.currentTarget.getAttribute('data-id');
-      State.updateCartQuantity(id, -1);
-      renderCartReviewScreen(container);
-    });
-  });
-
-  container.querySelectorAll('.btn-remove-item').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const id = e.currentTarget.getAttribute('data-id');
-      State.removeFromCart(id);
-      window.showToast?.("Item removed from parcel");
-      renderCartReviewScreen(container);
-    });
-  });
-
-  // Spoken Cart Audio
-  container.querySelector('#btn-spoken-cart')?.addEventListener('click', () => {
-    const names = items.map(i => `${i.artisan} की ${i.title}`).join(' और ');
-    AudioAssistance.speak(
-      `आपके कार्ट में ${itemCount} शिल्प हैं: ${names}। कुल राशि ₹${subtotal} सीधे कारीगरों के बैंक खाते में जाएगी।`,
-      "hi-IN"
-    );
-  });
-
-  // Proceed to Checkout
   container.querySelector('#btn-proceed-checkout')?.addEventListener('click', () => {
     State.setScreen('checkout');
   });

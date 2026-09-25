@@ -1,6 +1,6 @@
 /**
- * Screen: Orders & India Post Dispatch (Orders Tab)
- * Manage incoming orders, fragile packing checklists, and India Post consignment slips
+ * Screen: Orders & Delivery Agent Dispatch (Orders Tab)
+ * Manage incoming orders, fragile packing checklists, and Delivery Agent consignment slips
  */
 
 import { State } from '../state.js';
@@ -12,7 +12,7 @@ export function renderOrdersScreen(container) {
       title: State.urgentOrder.title,
       dest: State.urgentOrder.destination,
       consignment: State.urgentOrder.consignmentId,
-      status: State.urgentOrder.accepted ? 'India Post Pickup Scheduled' : 'Incoming Handover (Urgent)',
+      status: State.urgentOrder.accepted ? 'Delivery Agent Pickup Scheduled' : 'Incoming Handover (Urgent)',
       badgeClass: State.urgentOrder.accepted ? 'badge-green' : 'badge-amber',
       amount: State.urgentOrder.amount,
       img: '/assets/raw_pottery_snap.jpg',
@@ -36,7 +36,7 @@ export function renderOrdersScreen(container) {
       
       <!-- Orders Header -->
       <div class="section-label-row" style="margin-top:12px;">
-        <span class="section-label" style="font-size:0.92rem;">India Post Artisan Dispatch Hub</span>
+        <span class="section-label" style="font-size:0.92rem;">Delivery Agent Artisan Dispatch Hub</span>
         <span class="badge-green" style="font-size:0.62rem;">Daily Scheduled Pickup</span>
       </div>
       <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:14px;">
@@ -68,19 +68,19 @@ export function renderOrdersScreen(container) {
           <!-- Consignment Slip Action -->
           <button type="button" class="order-slip-btn" onclick="window.showConsignmentModal('${o.id}', '${o.consignment}', '${o.dest}', '${o.title}')">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
-            View India Post Shipping Slip &amp; Barcode
+            View Delivery Agent Shipping Slip &amp; Barcode
           </button>
         </div>
       `).join('')}
 
-      <!-- Bottom Sheet Modal: India Post Dispatch Slip -->
+      <!-- Bottom Sheet Modal: Delivery Agent Dispatch Slip -->
       <div class="modal-overlay" id="modal-consignment">
         <div class="bottom-sheet" style="background:#FFFFFF;">
           <div class="sheet-header">
             <div class="sheet-title-group">
-              <span style="font-size:1.1rem;">🇮🇳</span>
+              <span style="font-size:1.1rem;">📦</span>
               <div>
-                <div style="font-size:0.95rem; font-weight:800;">India Post Artisan Dispatch Slip</div>
+                <div style="font-size:0.95rem; font-weight:800;">Delivery Agent Artisan Dispatch Slip</div>
                 <div style="font-size:0.7rem; color:var(--text-muted);">Ministry of Textiles Artisan Fast-Track</div>
               </div>
             </div>
@@ -112,8 +112,8 @@ export function renderOrdersScreen(container) {
     const content = container.querySelector('#consignment-slip-content');
     content.innerHTML = `
       <div style="text-align:center; padding-bottom:8px; border-bottom:1px dashed #A89582; margin-bottom:8px;">
-        <strong style="font-size:0.85rem;">DEPARTMENT OF POSTS - INDIA</strong><br>
-        <span style="font-size:0.7rem; color:#6B5548;">SPEED POST PARCEL • ZERO WEIGHT PENALTY</span>
+        <strong style="font-size:0.85rem;">DELIVERY AGENT NETWORK</strong><br>
+        <span style="font-size:0.7rem; color:#6B5548;">EXPRESS LOGISTICS • ZERO WEIGHT PENALTY</span>
       </div>
       <div style="font-size:0.74rem; line-height:1.5;">
         <strong>SENDER:</strong> Shri Ramdev Kumhar (Pehchan: UP-VAR-49281-H)<br>
@@ -130,7 +130,7 @@ export function renderOrdersScreen(container) {
   };
 
   window.printSlip = () => {
-    window.showToast?.("Preparing label for India Post thermal printing...");
+    window.showToast?.("Preparing label for Delivery Agent thermal printing...");
     setTimeout(() => {
       modal.classList.remove('active');
     }, 1000);

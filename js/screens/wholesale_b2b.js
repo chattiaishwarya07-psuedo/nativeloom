@@ -295,7 +295,7 @@ export function renderWholesaleScreen(container) {
             <span>🚚</span>
             <div>
               <div style="font-size:0.76rem; font-weight:800;">Insured Commercial Freight</div>
-              <div style="font-size:0.68rem; color:var(--text-secondary);">India Post Commercial Express &amp; palletized air logistics with zero-transit breakages guarantee.</div>
+              <div style="font-size:0.68rem; color:var(--text-secondary);">Delivery Agent Commercial Express &amp; palletized air logistics with zero-transit breakages guarantee.</div>
             </div>
           </div>
 
