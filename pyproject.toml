@@ -1,0 +1,16 @@
+[project]
+name = "native-loom"
+version = "1.0.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn>=0.28.0",
+    "python-multipart>=0.0.9",
+    "opencv-python-headless>=4.9.0",
+    "pillow>=10.0.0",
+    "numpy>=1.26.0",
+    "xgboost>=2.0.0",
+    "scikit-learn>=1.4.0",
+    "requests>=2.31.0",
+    "httpx>=0.27.0"
+]
