@@ -79,8 +79,10 @@ const Screens = {
   craft_studio: renderCraftStudioScreen,
   artisan_orders: renderArtisanIncomingOrdersScreen,
   artisan_bank: renderBankScreen,
+  bank: renderBankScreen,
   artisan_pehchan: renderPehchanScreen,
-  artisan_profile: renderArtisanProfileScreen,
+  pehchan: renderPehchanScreen,
+  studio: renderStudioScreen,
 
   // Buyer Stack
   buyer_explore: renderExploreScreen,
@@ -303,6 +305,9 @@ function renderCurrentScreen() {
     if (appHeader) appHeader.style.display = 'none';
     if (bottomNav) bottomNav.style.display = 'none';
     return;
+  } else if (current === 'artisan_bank') {
+    if (appHeader) appHeader.style.display = 'none';
+    if (bottomNav) bottomNav.style.display = 'none';
   } else {
     if (appHeader) appHeader.style.display = 'flex';
   }
@@ -730,12 +735,21 @@ function initApp() {
     openQuickLanguageModal();
   });
 
-  // Initialize UI & Language Pill - Start from landing page (splash)
+  // Initialize UI & Language Pill - Start from URL or landing page (splash)
   if (typeof window !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);
     const hashScreen = window.location.hash ? window.location.hash.substring(1) : null;
     const paramScreen = urlParams.get('screen');
-    State.currentScreen = hashScreen || paramScreen || 'splash';
+    const targetScreen = hashScreen || paramScreen || 'splash';
+    State.setScreen(targetScreen);
+
+    window.addEventListener('hashchange', () => {
+      const newHash = window.location.hash ? window.location.hash.substring(1) : null;
+      if (newHash && newHash !== State.currentScreen) {
+        State.setScreen(newHash);
+        renderCurrentScreen();
+      }
+    });
   }
 
   updateRoleBarUI();

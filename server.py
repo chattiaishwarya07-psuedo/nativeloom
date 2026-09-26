@@ -1,7 +1,7 @@
 """
 Native Loom Unified Server
 Serves static frontend assets and seamlessly reverse-proxies /api/ calls
-to the FastAPI AI backend (http://127.0.0.1:8000).
+to the FastAPI AI backend (http://127.0.0.1:8002).
 """
 
 import http.server
@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 PORT = 8080
-BACKEND_PORT = 8000
+BACKEND_PORT = 8002
 BACKEND_HOST = "127.0.0.1"
 BACKEND_URL = f"http://{BACKEND_HOST}:{BACKEND_PORT}"
 
