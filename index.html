@@ -28,8 +28,8 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
         
-        <!-- Native Loom Brand Logo & Title -->
-        <div style="display:flex; align-items:center; gap:8px; cursor:pointer;" onclick="window.navigateToScreen('explore')" title="Native Loom">
+        <!-- Native Loom Brand Logo & Title (Functionless display brand) -->
+        <div style="display:flex; align-items:center; gap:8px; cursor:default; user-select:none;" title="Native Loom">
           <div id="header-brand-logo" style="width:32px; height:32px; border-radius:50%; background:#FFFFFF; border:1px solid #E5DCD3; display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; box-shadow:0 1px 3px rgba(0,0,0,0.06);">
             <img src="assets/native_loom_logo.png" alt="Native Loom" style="width:100%; height:100%; object-fit:contain;">
           </div>
@@ -40,32 +40,39 @@
       </div>
 
       <div class="header-right" style="display:flex; align-items:center; gap:6px;">
-        <!-- Audio Assistance Pill -->
-        <button class="header-btn" id="btn-global-audio" title="Audio Assistance (Aawaz Sahayata)" style="background:#FFF0E6; border:1px solid #FCD7C2; border-radius:var(--radius-pill); padding:4px 9px; font-size:0.75rem; font-weight:700; color:#7A2813; display:flex; align-items:center; gap:4px; height:28px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-          <span id="btn-global-audio-label">Audio</span>
+        <!-- Voice Guide ON / OFF Master Toggle Pill (Available on every screen) -->
+        <button class="header-btn voice-guide-toggle-btn vg-on" id="btn-voice-guide-toggle" title="Voice Guide is ON (Click to turn OFF)" aria-pressed="true" style="height:28px;">
+          <span class="vg-icon" style="display:flex; align-items:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </span>
+          <span class="vg-label" style="color:#7A2813;">Voice: ON</span>
         </button>
 
-        <!-- Language Pill EN | Hindi ▾ -->
-        <button class="header-btn" id="btn-language" title="Change Language / भाषा बदलें" onclick="window.openQuickLanguageModal && window.openQuickLanguageModal()" style="background:#FFF0E6; border:1px solid #FCD7C2; border-radius:var(--radius-pill); padding:4px 9px; font-size:0.72rem; font-weight:700; color:#7A2813; display:flex; align-items:center; gap:4px; height:28px;">
-          <span id="btn-language-label">🌐 हिन्दी ▾</span>
+        <!-- Theme Toggle Button (Light / Dark) -->
+        <button class="header-btn" id="btn-theme-toggle" title="Toggle Dark/Light Theme" aria-label="Toggle Theme" style="height:28px; width:28px; padding:0; display:flex; align-items:center; justify-content:center; background:#FFF0E6; border:1px solid #FCD7C2; border-radius:50%; cursor:pointer;">
+          <span id="theme-icon" style="display:flex; align-items:center; justify-content:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
         </button>
 
-        <!-- Quick Screen Jumper Menu Button -->
-        <button class="header-btn" id="btn-steps-menu" title="Jump to Screen" style="font-size:0.7rem; font-weight:800; color:#7A2813; background:#FFFFFF; border:1px solid var(--border-subtle); border-radius:var(--radius-pill); padding:4px 8px; height:28px;">
-          Screens ▾
+        <!-- Language Pill English ▾ -->
+        <button class="header-btn" id="btn-language" title="Change Language / भाषा बदलें" onclick="window.openQuickLanguageModal && window.openQuickLanguageModal()" style="background:#FFF0E6; border:1px solid #FCD7C2; border-radius:var(--radius-pill); padding:4px 9px; font-size:0.72rem; font-weight:700; color:#7A2813; display:flex; align-items:center; gap:5px; height:28px;">
+          <span id="btn-language-label" style="display:flex; align-items:center; gap:5px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span>English ▾</span>
+          </span>
         </button>
 
         <!-- Profile Avatar Button for Buyer Market -->
-        <button class="header-btn" id="btn-header-profile" title="Patron Profile" onclick="window.navigateToScreen('buyer_profile')" style="display:none; width:30px; height:30px; border-radius:50%; background:#4A1508; color:#FFFFFF; border:none; align-items:center; justify-content:center; cursor:pointer; font-size:0.85rem; padding:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <button class="header-btn" id="btn-header-profile" title="Patron Profile" onclick="window.navigateToScreen('buyer_profile')" style="display:none; width:30px; height:30px; border-radius:50%; background:#FFF0E6; color:#7A2813; border:1px solid #FCD7C2; align-items:center; justify-content:center; cursor:pointer; padding:0;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#7A2813" stroke="#7A2813">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
           </svg>
         </button>
 
         <!-- Cart Header Button with Live Badge -->
-        <button class="header-cart-btn" id="btn-header-cart" title="Direct Craft Cart" onclick="window.navigateToScreen('cart_review')" style="position:relative; width:28px; height:28px; padding:0; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:1px solid var(--border-subtle); border-radius:50%; color:var(--text-primary); cursor:pointer;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <button class="header-cart-btn" id="btn-header-cart" title="Direct Craft Cart" onclick="window.navigateToScreen('cart_review')" style="position:relative; width:28px; height:28px; padding:0; display:flex; align-items:center; justify-content:center; background:#FFF0E6; border:1px solid #FCD7C2; border-radius:50%; color:#7A2813; cursor:pointer;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
           <span class="cart-count-badge" id="header-cart-count" style="position:absolute; top:-4px; right:-4px; background:#7A2813; color:#fff; font-size:0.58rem; font-weight:800; border-radius:50%; width:16px; height:16px; display:flex; align-items:center; justify-content:center;">2</span>
         </button>
       </div>
@@ -77,7 +84,9 @@
       <div class="bottom-sheet" style="padding-bottom:24px; max-height:86vh;">
         <div class="sheet-header">
           <div class="sheet-title-group">
-            <span style="font-size:1.2rem;">🧭</span>
+            <span style="display:flex; align-items:center;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            </span>
             <div>
               <div style="font-size:0.95rem; font-weight:800;" id="screens-menu-title">Navigation / All Live Screens</div>
               <div style="font-size:0.7rem; color:var(--text-muted);" id="screens-menu-subtitle">Exact match to reference UI designs &amp; workflows</div>
@@ -92,76 +101,101 @@
             IMPACTS &amp; METRICS
           </div>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('about_impact')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FEF3C7; border-color:#F59E0B; color:#92400E;">
-            📊 <strong>Impacts &amp; Metrics</strong> (0% Commission, Direct DBT)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('about_impact')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FEF3C7; border-color:#F59E0B; color:#92400E; display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span><strong>Impacts &amp; Metrics</strong> (0% Commission, Direct DBT)</span>
           </button>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('account_select')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border);">
-            🗂️ <strong>Account Type Selection</strong> (Artisan / Patron / Corporate Cards)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('account_select')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border); display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            <span><strong>Account Type Selection</strong> (Artisan / Patron / Corporate Cards)</span>
           </button>
 
           <div style="font-size:0.68rem; font-weight:800; color:var(--color-terracotta); text-transform:uppercase; margin-top:8px;">
             BATCH 2: AI CRAFT STUDIO &amp; COMMERCE
           </div>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('craft_studio')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
-            ✨ <strong>AI Smart Craft Studio</strong> (1-Photo Auto Polish &amp; Fair Price)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('craft_studio')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            <span><strong>AI Smart Craft Studio</strong> (1-Photo Auto Polish &amp; Fair Price)</span>
           </button>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('explore')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
-            🛍️ <strong>Explore Market</strong> (Buyer Home &amp; 4 Sacred Guilds)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('explore')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span><strong>Explore Market</strong> (Buyer Home &amp; 4 Sacred Guilds)</span>
           </button>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('product_details')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
-            🏺 <strong>Craft Product Details</strong> (Terracotta Pitcher &amp; 12-Day Journey)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('product_details')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8a2 2 0 0 1 2 2v2a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V5a2 2 0 0 1 2-2z"/><path d="M6 11v4a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/></svg>
+            <span><strong>Craft Product Details</strong> (Terracotta Pitcher &amp; 12-Day Journey)</span>
           </button>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('cart_review')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
-            🧺 <strong>Cart Review</strong> (Craft Direct Order 2 Parcels)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('cart_review')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+            <span><strong>Cart Review</strong> (Craft Direct Order 2 Parcels)</span>
           </button>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('checkout')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
-            💳 <strong>Checkout &amp; Direct Patronage</strong> (Impact Receipt &amp; Blessing)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('checkout')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            <span><strong>Checkout &amp; Direct Patronage</strong> (Impact Receipt &amp; Blessing)</span>
           </button>
 
           <div style="font-size:0.68rem; font-weight:800; color:var(--color-terracotta); text-transform:uppercase; margin-top:8px;">
             BATCH 1: ONBOARDING &amp; VERIFICATION
           </div>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('welcome')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
-            👨‍🎨 <strong>Step 1: Welcome &amp; Identity</strong> (Phone Auth &amp; Role)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('welcome')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span><strong>Step 1: Welcome &amp; Identity</strong> (Phone Auth &amp; Role)</span>
           </button>
           
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('pehchan')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
-            🪪 <strong>Step 2: Pehchan Verification</strong> (OCR Frame &amp; Match)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('pehchan')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h6"/></svg>
+            <span><strong>Step 2: Pehchan Verification</strong> (OCR Frame &amp; Match)</span>
           </button>
           
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('bank')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
-            🏦 <strong>Step 3: Bank Khata Jodna</strong> (Direct DBT &amp; IFSC)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('bank')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+            <span><strong>Step 3: Bank Khata Jodna</strong> (Direct DBT &amp; IFSC)</span>
           </button>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('studio')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem;">
-            🏺 <strong>Step 4: Artisan Studio &amp; Trust Score</strong> (98/100 Sheet)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('studio')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span><strong>Step 4: Artisan Studio &amp; Trust Score</strong> (98/100 Sheet)</span>
+          </button>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('manage_crafts')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border); display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+            <span><strong>Craft Inventory &amp; Management</strong> (Add, Edit &amp; Delete Products)</span>
+          </button>
+
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('artisan_discover')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border); display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            <span><strong>Artisan Market Discovery</strong> (Demand Radar, Bulk RFQs &amp; Guilds)</span>
           </button>
 
           <div style="font-size:0.68rem; font-weight:800; color:var(--color-terracotta); text-transform:uppercase; margin-top:8px;">
             BATCH 3: INCLUSION, PROTECTION &amp; B2B
           </div>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('languages')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border);">
-            🗣️ <strong>10 Regional Languages Available</strong> (Voice &amp; Dialect Select)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('languages')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border); display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span><strong>10 Regional Languages Available</strong> (Voice &amp; Dialect Select)</span>
           </button>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('returns_policy')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border);">
-            🛡️ <strong>Craft Piece Detail: Returns &amp; Protection</strong> (Insurance Fund)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('returns_policy')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border); display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span><strong>Craft Piece Detail: Returns &amp; Protection</strong> (Insurance Fund)</span>
           </button>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('account_recovery')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border);">
-            🔄 <strong>Trouble Logging In / OTP?</strong> (Rural CSC &amp; Voice Help)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('account_recovery')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border); display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+            <span><strong>Trouble Logging In / OTP?</strong> (Rural CSC &amp; Voice Help)</span>
           </button>
 
-          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('wholesale')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border);">
-            🏛️ <strong>Direct-from-Cluster Wholesale B2B</strong> (Bulk &amp; Corporate)
+          <button type="button" class="btn-secondary" onclick="window.navigateToScreen('wholesale')" style="text-align:left; justify-content:flex-start; padding:10px 12px; font-size:0.78rem; background:#FFF9F5; border-color:var(--color-terracotta-border); display:flex; align-items:center; gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+            <span><strong>Direct-from-Cluster Wholesale B2B</strong> (Bulk &amp; Corporate)</span>
           </button>
 
         </div>
@@ -173,8 +207,8 @@
       <!-- Injected by Router -->
     </main>
 
-    <!-- Bottom Navigation Bar (Stitch App Style - Always Visible & Interactive) -->
-    <nav class="bottom-nav" id="bottom-navigation" style="display:flex;">
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav" id="bottom-navigation" style="display:none;">
       <button class="nav-tab" data-screen="explore" id="tab-explore" onclick="window.navigateToScreen('explore')">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <span>Explore</span>

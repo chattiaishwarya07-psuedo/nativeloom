@@ -8,15 +8,6 @@ import { AudioAssistance } from '../speech.js';
 
 export const RegionalLanguages = [
   {
-    id: 'hi',
-    native: 'हिन्दी',
-    english: 'Hindi',
-    region: 'North & Central India',
-    greeting: '"Namaste" • Welcome',
-    tag: 'Primary Language',
-    voiceText: 'नमस्ते! नेटिव लूम में आपका स्वागत है।'
-  },
-  {
     id: 'en',
     native: 'English',
     english: 'English',
@@ -26,22 +17,22 @@ export const RegionalLanguages = [
     voiceText: 'Welcome to Native Loom, connecting indigenous artisans directly to patrons.'
   },
   {
+    id: 'hi',
+    native: 'हिन्दी',
+    english: 'Hindi',
+    region: 'North & Central India',
+    greeting: '"Namaste" • Welcome',
+    tag: 'National Official',
+    voiceText: 'नमस्ते! नेटिव लूम में आपका स्वागत है।'
+  },
+  {
     id: 'bn',
     native: 'বাংলা',
-    english: 'Bangla',
+    english: 'Bengali',
     region: 'West Bengal & Tripura',
     greeting: '"Nomoshkar" • Welcome',
     tag: 'Handloom & Terracotta',
     voiceText: 'নমস্কার! নেটিভ লুমে আপনাকে স্বাগত।'
-  },
-  {
-    id: 'ta',
-    native: 'தமிழ்',
-    english: 'Tamil',
-    region: 'Tamil Nadu Craft Clusters',
-    greeting: '"Vanakkam" • Welcome',
-    tag: 'Bronze & Kanchipuram Silk',
-    voiceText: 'வணக்கம்! நேட்டிவ் லூமிற்கு உங்களை வரவேற்கிறோம்.'
   },
   {
     id: 'te',
@@ -51,6 +42,15 @@ export const RegionalLanguages = [
     greeting: '"Namaskaram" • Welcome',
     tag: 'Kalamkari & Lepakshi',
     voiceText: 'నమస్కారం! నేటివ్ లూమ్‌కు మీకు స్వాగతం.'
+  },
+  {
+    id: 'ta',
+    native: 'தமிழ்',
+    english: 'Tamil',
+    region: 'Tamil Nadu Craft Clusters',
+    greeting: '"Vanakkam" • Welcome',
+    tag: 'Bronze & Kanchipuram Silk',
+    voiceText: 'வணக்கம்! நேட்டிவ் லூமிற்கு உங்களை வரவேற்கிறோம்.'
   },
   {
     id: 'mr',
@@ -80,13 +80,49 @@ export const RegionalLanguages = [
     voiceText: 'ನಮಸ್ಕಾರ! ನೇಟಿವ್ ಲೂಮ್‌ಗೆ ನಿಮಗೆ ಸ್ವಾಗತ.'
   },
   {
-    id: 'bho',
-    native: 'भोजपुरी',
-    english: 'Bhojpuri',
-    region: 'Purvanchal & Bihar',
-    greeting: '"Pranam" • Welcome',
-    tag: 'Sikki Grass & Tikuli',
-    voiceText: 'प्रणाम! नेटिव लूम में राउर सभे के बहुत बहुत स्वागत बा।'
+    id: 'ml',
+    native: 'മലയാളം',
+    english: 'Malayalam',
+    region: 'Kerala Artisan Weaves',
+    greeting: '"Namaskaram" • Welcome',
+    tag: 'Aranmula & Bell Metal',
+    voiceText: 'നമസ്കാരം! നേറ്റീവ് ലൂമിലേക്ക് സ്വാഗതം.'
+  },
+  {
+    id: 'pa',
+    native: 'ਪੰਜਾਬੀ',
+    english: 'Punjabi',
+    region: 'Punjab Phulkari Clusters',
+    greeting: '"Sat Sri Akal" • Welcome',
+    tag: 'Phulkari & Jutti',
+    voiceText: 'ਸਤਿ ਸ਼੍ਰੀ ਅਕਾਲ! ਨੇਟਿਵ ਲੂਮ ਵਿੱਚ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ।'
+  },
+  {
+    id: 'or',
+    native: 'ଓଡ଼ିଆ',
+    english: 'Odia',
+    region: 'Odisha Pattachitra & Ikat',
+    greeting: '"Namaskar" • Welcome',
+    tag: 'Pattachitra & Silver Filigree',
+    voiceText: 'ନମସ୍କାର! ନେଟିଭ୍ ଲୁମ୍‌କୁ ଆପଣଙ୍କୁ ସ୍ୱାଗତ।'
+  },
+  {
+    id: 'as',
+    native: 'অসমীয়া',
+    english: 'Assamese',
+    region: 'Assam Muga Silk & Cane',
+    greeting: '"Nomoskar" • Welcome',
+    tag: 'Muga Silk & Bell Metal',
+    voiceText: 'নমস্কাৰ! নেটিভ লুমলৈ আপোনাক স্বাগতম।'
+  },
+  {
+    id: 'ur',
+    native: 'اُردُو',
+    english: 'Urdu',
+    region: 'Kashmir & Lucknow Zari',
+    greeting: '"Adaab" • Welcome',
+    tag: 'Zardozi & Chikan',
+    voiceText: 'آداب! نیٹو لوم میں آپ کا خیر مقدم ہے۔'
   },
   {
     id: 'mai',
@@ -96,14 +132,118 @@ export const RegionalLanguages = [
     greeting: '"Pranam" • Welcome',
     tag: 'Madhubani Painting',
     voiceText: 'प्रणाम! नेटिव लूम मे अहाँक स्वागत अछि।'
+  },
+  {
+    id: 'ks',
+    native: 'कॉशुर',
+    english: 'Kashmiri',
+    region: 'Kashmir Valley Pashmina',
+    greeting: '"Salam" • Welcome',
+    tag: 'Pashmina & Walnut Wood',
+    voiceText: 'سلام! نیٹو لومس منز خوش آمدید۔'
+  },
+  {
+    id: 'ne',
+    native: 'नेपाली',
+    english: 'Nepali',
+    region: 'Sikkim & Darjeeling Hills',
+    greeting: '"Namaste" • Welcome',
+    tag: 'Thangka & Himalayan Weaves',
+    voiceText: 'नमस्ते! नेटिव लूममा तपाईंलाई स्वागत छ।'
+  },
+  {
+    id: 'sa',
+    native: 'संस्कृतम्',
+    english: 'Sanskrit',
+    region: 'Ancient Heritage Crafts',
+    greeting: '"Namaskaraha" • Welcome',
+    tag: 'Vedic Shilpa Shastra',
+    voiceText: 'नमस्कारः! नेटिव लूम मध्ये भवतां स्वागतम्।'
+  },
+  {
+    id: 'kok',
+    native: 'कोंकणी',
+    english: 'Konkani',
+    region: 'Goa & Coastal Konkan',
+    greeting: '"Dev Boro Dis Dinv" • Welcome',
+    tag: 'Terracotta & Shell Craft',
+    voiceText: 'नमस्कार! नेटिव लूम खातीर तुमकां येवकार।'
+  },
+  {
+    id: 'sd',
+    native: 'सिंधी',
+    english: 'Sindhi',
+    region: 'Sindhi Ajrak Traditions',
+    greeting: '"Pranam" • Welcome',
+    tag: 'Ajrak & Ralli Quilts',
+    voiceText: 'प्रणाम! नेटिव लूम में तव्हां जो सुआगत आहे।'
+  },
+  {
+    id: 'brx',
+    native: 'बड़ो',
+    english: 'Bodo',
+    region: 'Bodoland Weaving Guilds',
+    greeting: '"Khulumba" • Welcome',
+    tag: 'Aronai & Dokhona',
+    voiceText: 'खुलुमबाय! नेटिव लूम आव नोंथांखौ बरायबाय।'
+  },
+  {
+    id: 'doi',
+    native: 'डोगरी',
+    english: 'Dogri',
+    region: 'Jammu Foothill Crafts',
+    greeting: '"Namaste" • Welcome',
+    tag: 'Basohli Paintings',
+    voiceText: 'नमस्ते! नेटिव लूम च थुआड़ा स्वागत ऐ।'
+  },
+  {
+    id: 'sat',
+    native: 'ᱥᱟᱱᱛᱟᱲᱤ',
+    english: 'Santali',
+    region: 'Chota Nagpur Indigenous Arts',
+    greeting: '"Johar" • Welcome',
+    tag: 'Sohrai & Dhokra',
+    voiceText: 'ᱡᱚᱦᱟᱨ! ᱱᱮᱴᱤᱵᱷ ᱞᱩᱢ ᱨᱮ ᱟᱯᱮᱭᱟᱜ ᱥᱟᱹᱜᱩᱱ ᱫᱟᱨᱟᱢ।'
+  },
+  {
+    id: 'bho',
+    native: 'भोजपुरी',
+    english: 'Bhojpuri',
+    region: 'Purvanchal & Bihar',
+    greeting: '"Pranam" • Welcome',
+    tag: 'Sikki Grass & Tikuli',
+    voiceText: 'प्रणाम! नेटिव लूम में राउर सभे के बहुत बहुत स्वागत बा।'
+  },
+  {
+    id: 'mni',
+    native: 'মৈতৈলোন্',
+    english: 'Manipuri',
+    region: 'Manipur Handloom & Kauna Crafts',
+    greeting: '"Khurumjari" • Welcome',
+    tag: 'Kauna & Shaphee Lanphee',
+    voiceText: 'নেটিভ লুমদা তরাম্না ওকচরি, অচুম্বা শিন্মীশিংগা হকথেংননা শম্নহল্লি।'
   }
 ];
 
 export function renderLanguageScreen(container) {
-  let selectedLangId = State.language || 'hi';
+  let selectedLangId = State.language || 'en';
+
+  let filteredLanguages = [...RegionalLanguages];
 
   function renderList() {
-    return RegionalLanguages.map(lang => {
+    if (!filteredLanguages.length) {
+      return `
+        <div style="text-align:center; padding:24px 12px; background:#FFFFFF; border-radius:12px; border:1px dashed var(--border-subtle);">
+          <div style="display:flex; justify-content:center; margin-bottom:6px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
+          <div style="font-size:0.85rem; font-weight:800; color:var(--text-primary);">Language not found</div>
+          <div style="font-size:0.7rem; color:var(--text-secondary);">Try Hindi, English, Tamil, Marathi, or Bhojpuri</div>
+        </div>
+      `;
+    }
+
+    return filteredLanguages.map(lang => {
       const isSel = lang.id === selectedLangId;
       return `
         <div class="lang-card ${isSel ? 'selected' : ''}" data-id="${lang.id}">
@@ -136,7 +276,7 @@ export function renderLanguageScreen(container) {
 
   container.innerHTML = `
     <div class="lang-selection-screen animate-fade-in" style="padding-bottom:30px;">
-      
+
 
 
       <!-- Select Language by Voice Box -->
@@ -160,9 +300,9 @@ export function renderLanguageScreen(container) {
         </div>
       </div>
 
-      <!-- 10 Regional Languages Available -->
+      <!-- 22+ Regional Languages Available -->
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <span style="font-size:0.78rem; font-weight:800; color:var(--text-primary);">10 Regional Languages Available</span>
+        <span style="font-size:0.78rem; font-weight:800; color:var(--text-primary);">22+ Regional Languages Available</span>
         <span style="font-size:0.68rem; color:var(--text-muted); font-weight:600;">All India Dialects</span>
       </div>
 
@@ -208,6 +348,26 @@ export function renderLanguageScreen(container) {
   }
 
   attachHandlers();
+
+  // Manual search input listener
+  const langSearchInput = container.querySelector('#input-lang-search');
+  langSearchInput?.addEventListener('input', (e) => {
+    const q = (e.target.value || '').toLowerCase().trim();
+    if (!q) {
+      filteredLanguages = [...RegionalLanguages];
+    } else {
+      filteredLanguages = RegionalLanguages.filter(l =>
+        l.native.toLowerCase().includes(q) ||
+        l.english.toLowerCase().includes(q) ||
+        l.region.toLowerCase().includes(q)
+      );
+    }
+    const listContainer = container.querySelector('#languages-list-container');
+    if (listContainer) {
+      listContainer.innerHTML = renderList();
+      attachHandlers();
+    }
+  });
 
   // Voice search trigger
   container.querySelector('#btn-voice-lang').addEventListener('click', () => {

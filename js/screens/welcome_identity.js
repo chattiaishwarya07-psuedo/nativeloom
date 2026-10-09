@@ -9,7 +9,7 @@ import { AudioAssistance } from '../speech.js';
 export function renderWelcomeScreen(container) {
   container.innerHTML = `
     <div class="welcome-screen animate-fade-in">
-      
+
       <!-- Stepper Progress Bar -->
       <div class="stepper-container" style="padding-left:0; padding-right:0;">
         <div class="stepper-header">
@@ -24,10 +24,6 @@ export function renderWelcomeScreen(container) {
 
 
 
-      <!-- Simple Spoken Guide Video Demo Banner -->
-      <div class="video-guide-card" onclick="window.playSpokenGuideDemo()" style="position:relative; width:100%; border-radius:14px; overflow:hidden; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.12); margin-top:14px; margin-bottom:16px; border:1px solid rgba(122,40,19,0.18); background:#1F1916;">
-        <img src="/assets/spoken_guide_demo.png" alt="Simple Spoken Guide - Tap to Play Video" style="width:100%; height:auto; display:block; object-fit:cover; transition:transform 0.25s ease;">
-      </div>
 
       <!-- Choose Your Identity Header -->
       <h1 class="screen-headline" style="font-size:1.35rem; font-weight:900; margin-bottom:4px;">Choose Your Identity</h1>
@@ -77,13 +73,14 @@ export function renderWelcomeScreen(container) {
 
       <!-- Direct Phone Authentication Box (Step 1 of 4) -->
       <div class="phone-auth-box" style="background:#FFFFFF; border:1px solid var(--border-subtle); border-radius:var(--radius-xl); padding:18px 16px; box-shadow:var(--shadow-sm); margin-bottom:16px;">
-        
+
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
           <label style="font-size:0.75rem; font-weight:800; color:var(--text-primary); letter-spacing:0.04em;">
             MOBILE NUMBER
           </label>
           <span style="font-size:0.7rem; font-weight:700; color:#57534E; display:flex; align-items:center; gap:4px;">
-            🔒 100% Encrypted
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>100% Encrypted</span>
           </span>
         </div>
 
@@ -108,7 +105,8 @@ export function renderWelcomeScreen(container) {
             4-DIGIT SECURITY CODE (OTP)
           </label>
           <span style="font-size:0.72rem; font-weight:700; color:#C2410C; display:flex; align-items:center; gap:4px;">
-            ⏱ 00:48
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>00:48</span>
           </span>
         </div>
 
@@ -124,7 +122,8 @@ export function renderWelcomeScreen(container) {
         <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.74rem; margin-bottom:18px;">
           <span style="color:var(--text-secondary);">Didn't receive code?</span>
           <button type="button" id="btn-resend-sms" style="background:none; border:none; color:#7A2813; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px; font-size:0.74rem; padding:0;">
-            📞 Resend OTP via Call or SMS
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>Resend OTP via Call or SMS</span>
           </button>
         </div>
 
@@ -202,7 +201,7 @@ export function renderWelcomeScreen(container) {
     AudioAssistance.playStep1();
   });
 
-  // Auto-focus logic for 4 digit inputs
+  // Auto-focus & smooth manual typing for 4-digit OTP inputs
   const otpInputs = [
     container.querySelector('#otp-1'),
     container.querySelector('#otp-2'),
@@ -211,11 +210,42 @@ export function renderWelcomeScreen(container) {
   ];
 
   otpInputs.forEach((input, idx) => {
-    input.addEventListener('keyup', (e) => {
+    if (!input) return;
+    input.addEventListener('focus', () => {
+      input.select();
+    });
+
+    input.addEventListener('keydown', (e) => {
       if (e.key >= '0' && e.key <= '9') {
-        if (idx < 3) otpInputs[idx + 1].focus();
+        e.preventDefault();
+        input.value = e.key;
+        if (idx < 3 && otpInputs[idx + 1]) {
+          otpInputs[idx + 1].focus();
+          otpInputs[idx + 1].select();
+        }
       } else if (e.key === 'Backspace') {
-        if (idx > 0 && !input.value) otpInputs[idx - 1].focus();
+        e.preventDefault();
+        input.value = '';
+        if (idx > 0 && otpInputs[idx - 1]) {
+          otpInputs[idx - 1].focus();
+          otpInputs[idx - 1].select();
+        }
+      } else if (e.key === 'ArrowRight' && idx < 3) {
+        otpInputs[idx + 1]?.focus();
+      } else if (e.key === 'ArrowLeft' && idx > 0) {
+        otpInputs[idx - 1]?.focus();
+      }
+    });
+
+    input.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+      if (text) {
+        for (let i = 0; i < 4 && i < text.length; i++) {
+          if (otpInputs[i]) otpInputs[i].value = text[i];
+        }
+        const nextIdx = Math.min(text.length, 3);
+        otpInputs[nextIdx]?.focus();
       }
     });
   });

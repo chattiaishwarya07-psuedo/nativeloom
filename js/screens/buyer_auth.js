@@ -9,7 +9,7 @@ import { State, AccountType } from '../state.js';
 export function renderBuyerAuthScreen(container) {
   container.innerHTML = `
     <div class="buyer-auth-screen animate-fade-in" style="padding: 16px 14px 32px; background: #FAF7F2; min-height: 100vh;">
-      
+
       <!-- Top Step Meta Row -->
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
         <button type="button" class="header-btn" onclick="window.navigateToScreen('account_select')" style="display:flex; align-items:center; gap:4px; font-size:0.75rem; font-weight:700; color:var(--text-secondary); background:none; border:none; cursor:pointer;">
@@ -33,7 +33,7 @@ export function renderBuyerAuthScreen(container) {
 
       <!-- Auth Form Card -->
       <div style="background:#FFFFFF; border:1px solid var(--border-subtle); border-radius:var(--radius-xl); padding:18px 16px; box-shadow:var(--shadow-sm); margin-bottom:16px;">
-        
+
         <!-- Full Name -->
         <label style="display:block; font-size:0.74rem; font-weight:800; color:var(--text-primary); margin-bottom:6px;">
           YOUR FULL NAME
@@ -70,10 +70,10 @@ export function renderBuyerAuthScreen(container) {
         </div>
 
         <div style="display:flex; justify-content:center; gap:10px; margin:6px 0 16px;">
-          <input type="text" maxlength="1" value="5" style="width:42px; height:42px; text-align:center; font-size:1.1rem; font-weight:800; background:#FAF7F2; border:1.5px solid #1C3550; border-radius:8px; outline:none; box-sizing:border-box;">
-          <input type="text" maxlength="1" value="2" style="width:42px; height:42px; text-align:center; font-size:1.1rem; font-weight:800; background:#FAF7F2; border:1.5px solid #1C3550; border-radius:8px; outline:none; box-sizing:border-box;">
-          <input type="text" maxlength="1" value="9" style="width:42px; height:42px; text-align:center; font-size:1.1rem; font-weight:800; background:#FAF7F2; border:1.5px solid #1C3550; border-radius:8px; outline:none; box-sizing:border-box;">
-          <input type="text" maxlength="1" value="1" style="width:42px; height:42px; text-align:center; font-size:1.1rem; font-weight:800; background:#FAF7F2; border:1.5px solid #1C3550; border-radius:8px; outline:none; box-sizing:border-box;">
+          <input type="text" maxlength="1" value="5" id="buyer-otp-1" class="buyer-otp-box" style="width:42px; height:42px; text-align:center; font-size:1.1rem; font-weight:800; background:#FAF7F2; border:1.5px solid #1C3550; border-radius:8px; outline:none; box-sizing:border-box;">
+          <input type="text" maxlength="1" value="2" id="buyer-otp-2" class="buyer-otp-box" style="width:42px; height:42px; text-align:center; font-size:1.1rem; font-weight:800; background:#FAF7F2; border:1.5px solid #1C3550; border-radius:8px; outline:none; box-sizing:border-box;">
+          <input type="text" maxlength="1" value="9" id="buyer-otp-3" class="buyer-otp-box" style="width:42px; height:42px; text-align:center; font-size:1.1rem; font-weight:800; background:#FAF7F2; border:1.5px solid #1C3550; border-radius:8px; outline:none; box-sizing:border-box;">
+          <input type="text" maxlength="1" value="1" id="buyer-otp-4" class="buyer-otp-box" style="width:42px; height:42px; text-align:center; font-size:1.1rem; font-weight:800; background:#FAF7F2; border:1.5px solid #1C3550; border-radius:8px; outline:none; box-sizing:border-box;">
         </div>
 
         <!-- Submit Button -->
@@ -94,13 +94,66 @@ export function renderBuyerAuthScreen(container) {
     </div>
   `;
 
+  // Auto-focus & smooth manual typing for 4-digit OTP inputs
+  const otpInputs = [
+    container.querySelector('#buyer-otp-1'),
+    container.querySelector('#buyer-otp-2'),
+    container.querySelector('#buyer-otp-3'),
+    container.querySelector('#buyer-otp-4')
+  ];
+
+  otpInputs.forEach((input, idx) => {
+    if (!input) return;
+    input.addEventListener('focus', () => {
+      input.select();
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key >= '0' && e.key <= '9') {
+        e.preventDefault();
+        input.value = e.key;
+        if (idx < 3 && otpInputs[idx + 1]) {
+          otpInputs[idx + 1].focus();
+          otpInputs[idx + 1].select();
+        }
+      } else if (e.key === 'Backspace') {
+        e.preventDefault();
+        input.value = '';
+        if (idx > 0 && otpInputs[idx - 1]) {
+          otpInputs[idx - 1].focus();
+          otpInputs[idx - 1].select();
+        }
+      } else if (e.key === 'ArrowRight' && idx < 3) {
+        otpInputs[idx + 1]?.focus();
+      } else if (e.key === 'ArrowLeft' && idx > 0) {
+        otpInputs[idx - 1]?.focus();
+      }
+    });
+
+    input.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+      if (text) {
+        for (let i = 0; i < 4 && i < text.length; i++) {
+          if (otpInputs[i]) otpInputs[i].value = text[i];
+        }
+        const nextIdx = Math.min(text.length, 3);
+        otpInputs[nextIdx]?.focus();
+      }
+    });
+  });
+
   // Submit Handler
   container.querySelector('#btn-submit-buyer-auth').addEventListener('click', () => {
-    window.showToast?.("Welcome, Aditi Varma! Patron Market unlocked.");
+    const name = container.querySelector('#input-buyer-name')?.value.trim() || 'Patron';
+    const phone = container.querySelector('#input-buyer-phone')?.value.trim() || '+91 98450 21980';
+    const pin = container.querySelector('#input-buyer-pin')?.value.trim() || '560038';
+
+    window.showToast?.(`Welcome, ${name}! Patron Market unlocked.`);
     State.loginAs(AccountType.BUYER, {
-      name: 'Aditi Varma',
-      phone: '+91 98450 21980',
-      city: 'Bengaluru'
+      name: name,
+      phone: phone,
+      pincode: pin
     });
   });
 }

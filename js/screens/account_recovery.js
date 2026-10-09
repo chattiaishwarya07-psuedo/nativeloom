@@ -14,7 +14,7 @@ export function renderAccountRecoveryScreen(container) {
   function renderContent() {
     return `
       <div class="recovery-screen animate-fade-in" style="padding: 16px 14px 32px; background: #FAF7F2; min-height: 100vh;">
-        
+
         <!-- Top Audio Guide Banner (Terracotta Gradient) -->
         <div style="background:linear-gradient(135deg, #A84318 0%, #7A2E0E 100%); color:#FFFFFF; border-radius:var(--radius-lg); padding:14px; margin-bottom: 14px; position:relative;">
           <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
@@ -178,9 +178,9 @@ export function renderAccountRecoveryScreen(container) {
           </p>
           <div style="display:flex; align-items:center; background:#FAF7F2; border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:8px 12px; gap:8px; margin-bottom:10px;">
             <span style="font-size:0.9rem; font-weight:800; color:#1C3550;">+91</span>
-            <input type="tel" value="98450 21980" placeholder="10-digit mobile number" style="flex:1; border:none; background:transparent; outline:none; font-size:0.9rem; font-weight:700;">
+            <input type="tel" id="input-recovery-buyer-phone" value="98450 21980" placeholder="10-digit mobile number" style="flex:1; border:none; background:transparent; outline:none; font-size:0.9rem; font-weight:700;">
           </div>
-          <button type="button" class="btn-primary" style="width:100%; background:#1C3550; padding:10px; font-size:0.8rem;" onclick="window.showToast('Patron account recovery link sent via SMS & WhatsApp!')">
+          <button type="button" id="btn-recovery-buyer" class="btn-primary" style="width:100%; background:#1C3550; padding:10px; font-size:0.8rem;">
             Send Login Link →
           </button>
         </div>
@@ -201,9 +201,9 @@ export function renderAccountRecoveryScreen(container) {
           </p>
           <div style="display:flex; align-items:center; background:#FAF7F2; border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:8px 12px; gap:8px; margin-bottom:10px;">
             <span style="font-size:0.9rem;">📑</span>
-            <input type="text" value="09AAACV4920K1ZX" placeholder="15-character GSTIN" style="flex:1; border:none; background:transparent; outline:none; font-size:0.85rem; font-weight:800; letter-spacing:0.04em;">
+            <input type="text" id="input-recovery-corp-gst" value="09AAACV4920K1ZX" placeholder="15-character GSTIN" style="flex:1; border:none; background:transparent; outline:none; font-size:0.85rem; font-weight:800; letter-spacing:0.04em; text-transform:uppercase;">
           </div>
-          <button type="button" class="btn-primary" style="width:100%; background:#0F172A; padding:10px; font-size:0.8rem;" onclick="window.showToast('Authorized code dispatched to procurement@vistarahotels.in')">
+          <button type="button" id="btn-recovery-corp" class="btn-primary" style="width:100%; background:#0F172A; padding:10px; font-size:0.8rem;">
             Verify GSTIN &amp; Dispatch Code →
           </button>
         </div>
@@ -223,6 +223,22 @@ export function renderAccountRecoveryScreen(container) {
         update();
       });
     });
+
+    const buyerBtn = container.querySelector('#btn-recovery-buyer');
+    if (buyerBtn) {
+      buyerBtn.addEventListener('click', () => {
+        const phone = container.querySelector('#input-recovery-buyer-phone')?.value.trim() || '98450 21980';
+        window.showToast?.(`Patron recovery link sent to +91 ${phone} via SMS & WhatsApp!`);
+      });
+    }
+
+    const corpBtn = container.querySelector('#btn-recovery-corp');
+    if (corpBtn) {
+      corpBtn.addEventListener('click', () => {
+        const gst = container.querySelector('#input-recovery-corp-gst')?.value.trim().toUpperCase() || '09AAACV4920K1ZX';
+        window.showToast?.(`Authorized code dispatched for GSTIN ${gst} to company domain!`);
+      });
+    }
   }
 
   update();

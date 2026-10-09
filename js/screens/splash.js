@@ -5,12 +5,13 @@
  */
 
 import { State } from '../state.js';
+import { AudioAssistance } from '../speech.js';
 
 export function renderSplashScreen(container) {
   // Hide top header and bottom nav while on splash screen for full immersion
   const header = document.getElementById('app-header');
   const bottomNav = document.getElementById('bottom-navigation');
-  
+
   if (header) header.style.display = 'none';
   if (bottomNav) bottomNav.style.display = 'none';
 
@@ -25,11 +26,25 @@ export function renderSplashScreen(container) {
       padding: 32px 20px;
       background: #FAF7F2;
       user-select: none;
+      position: relative;
     ">
-      
+
+      <!-- Top Right: Voice Guide ON/OFF Toggle -->
+      <div style="position: absolute; top: 16px; right: 16px; z-index: 50;">
+        <button type="button" class="voice-guide-toggle-btn ${AudioAssistance.isEnabled ? 'vg-on' : 'vg-off'}" id="splash-voice-guide-btn" title="Toggle Voice Guide ON / OFF" style="height:28px;">
+          <span class="vg-icon" style="display:inline-flex; align-items:center;">
+            ${AudioAssistance.isEnabled
+              ? `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>`
+              : `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 1.7 4.54"/><path d="M19.07 4.93a10 10 0 0 1 .82 12.06"/></svg>`
+            }
+          </span>
+          <span class="vg-label" style="color:#7A2813;">${AudioAssistance.isEnabled ? 'Voice: ON' : 'Voice: OFF'}</span>
+        </button>
+      </div>
+
       <!-- Center Brand Group -->
       <div style="display:flex; flex-direction:column; align-items:center; max-width:320px; width:100%;">
-        
+
         <!-- Artisan Emblem -->
         <div class="kala-emblem-wrap" style="
           width: 140px;
@@ -66,8 +81,6 @@ export function renderSplashScreen(container) {
           letter-spacing: -0.02em;
           text-align: center;
         ">Native Loom</h1>
-        <div style="font-size: 1.05rem; font-weight: 700; color: #7A2813; margin-bottom: 6px;">(नेटिव लूम • Native Loom)</div>
-
         <!-- Subtitle: NATIONAL INDIGENOUS ARTISAN PLATFORM -->
         <div style="
           font-family: 'Plus Jakarta Sans', sans-serif;
@@ -105,14 +118,14 @@ export function renderSplashScreen(container) {
           <span class="splash-dot" style="width:6px; height:6px; background:#7A2813; border-radius:50%; display:inline-block; animation: splashPulse 1.2s infinite ease-in-out 0.4s;"></span>
         </div>
 
-        <!-- Loading Subtext: लोड हो रहा है... (Loading handmade treasures) -->
+        <!-- Loading Subtext: Loading handmade treasures... -->
         <p style="
           font-size: 0.88rem;
           color: #4B3629;
           font-weight: 500;
           margin: 0 0 24px 0;
           line-height: 1.4;
-        ">लोड हो रहा है... (Loading handmade treasures)</p>
+        ">Loading handmade treasures...</p>
 
         <!-- Tap to Continue / Skip Button -->
         <button type="button" id="btn-enter-platform" style="
@@ -179,6 +192,12 @@ export function renderSplashScreen(container) {
   container.querySelector('#btn-enter-platform')?.addEventListener('click', () => {
     clearInterval(progressInterval);
     exitSplashScreen('account_select');
+  });
+
+  // Voice Guide ON/OFF toggle on Splash Screen
+  container.querySelector('#splash-voice-guide-btn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    AudioAssistance.toggle();
   });
 
   // Tap anywhere on splash to skip immediately

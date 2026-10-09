@@ -11,7 +11,7 @@ export function renderArtisanAuthScreen(container) {
 
   container.innerHTML = `
     <div class="artisan-auth-screen animate-fade-in" style="padding: 16px 14px 32px; background: #FAF7F2; min-height: 100vh;">
-      
+
       <!-- Top Step Meta Row -->
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
         <button type="button" class="header-btn" onclick="window.navigateToScreen('account_select')" style="display:flex; align-items:center; gap:4px; font-size:0.75rem; font-weight:700; color:var(--text-secondary); background:none; border:none; cursor:pointer;">
@@ -35,21 +35,6 @@ export function renderArtisanAuthScreen(container) {
         <div style="font-size:0.72rem; color:var(--text-secondary); font-weight:600;">Step 1 of 4: Welcome &amp; Identity</div>
       </div>
 
-      <!-- Simple Spoken Guide Video Demo Banner -->
-      <div class="video-guide-card" onclick="window.playSpokenGuideDemo()" style="position:relative; width:100%; border-radius:14px; overflow:hidden; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,0.12); margin-bottom:16px; border:1px solid rgba(122,40,19,0.18); background:#1F1916;">
-        <img src="/assets/spoken_guide_demo.png" alt="Simple Spoken Guide - Tap to Play Video" style="width:100%; height:auto; display:block; object-fit:cover; transition:transform 0.25s ease;">
-      </div>
-
-      <!-- Spoken Audio Assistance Banner -->
-      <div style="background:#FFF0E6; border:1px solid #FCD7C2; border-radius:var(--radius-md); padding:10px 12px; display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-        <button type="button" onclick="window.AudioAssistance.speak('कारीगर लॉगिन: अपना 10 अंकों का मोबाइल नंबर दर्ज करें और ओटीपी सत्यापित करें।')" style="width:34px; height:34px; border-radius:50%; background:#7A2813; color:#FFFFFF; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </button>
-        <div style="flex:1;">
-          <div style="font-size:0.8rem; font-weight:800; color:#7A2813;">Aawaz Sahayata Available</div>
-          <div style="font-size:0.7rem; color:var(--text-secondary);">Tap speaker to hear instructions in your regional dialect</div>
-        </div>
-      </div>
 
       <!-- Title & Headline -->
       <h1 style="font-size:1.35rem; font-weight:900; color:var(--text-primary); margin:0 0 4px 0;">
@@ -61,7 +46,7 @@ export function renderArtisanAuthScreen(container) {
 
       <!-- Auth Card (Step 1 of 4 Matching Reference) -->
       <div style="background:#FFFFFF; border:1px solid var(--border-subtle); border-radius:var(--radius-xl); padding:18px 16px; box-shadow:var(--shadow-sm); margin-bottom:16px;">
-        
+
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
           <label style="font-size:0.75rem; font-weight:800; color:var(--text-primary); letter-spacing:0.04em;">
             MOBILE NUMBER
@@ -70,7 +55,7 @@ export function renderArtisanAuthScreen(container) {
             🔒 100% Encrypted
           </span>
         </div>
-        
+
         <!-- Mobile Input Row -->
         <div style="display:flex; align-items:center; background:#FAF7F2; border:1.5px solid #EADBCE; border-radius:10px; padding:10px 14px; gap:10px; margin-bottom:6px;">
           <span style="font-size:0.85rem; font-weight:800; color:#1C1917; white-space:nowrap;">
@@ -97,10 +82,10 @@ export function renderArtisanAuthScreen(container) {
 
         <!-- 4-Digit OTP Boxes -->
         <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin-bottom:14px;">
-          <input type="text" maxlength="1" value="7" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #7A2813; border-radius:10px; outline:none; color:#1C1917; box-sizing:border-box;">
-          <input type="text" maxlength="1" value="4" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #7A2813; border-radius:10px; outline:none; color:#1C1917; box-sizing:border-box;">
-          <input type="text" maxlength="1" value="2" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #7A2813; border-radius:10px; outline:none; color:#1C1917; box-sizing:border-box;">
-          <input type="text" maxlength="1" value="" placeholder="•" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #D6C7B2; border-radius:10px; outline:none; color:#1C1917; box-sizing:border-box;">
+          <input type="text" maxlength="1" value="7" id="artisan-otp-1" class="artisan-otp-box" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #7A2813; border-radius:10px; outline:none; color:#1C1917; box-sizing:border-box;">
+          <input type="text" maxlength="1" value="4" id="artisan-otp-2" class="artisan-otp-box" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #7A2813; border-radius:10px; outline:none; color:#1C1917; box-sizing:border-box;">
+          <input type="text" maxlength="1" value="2" id="artisan-otp-3" class="artisan-otp-box" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #7A2813; border-radius:10px; outline:none; color:#1C1917; box-sizing:border-box;">
+          <input type="text" maxlength="1" value="" placeholder="•" id="artisan-otp-4" class="artisan-otp-box" style="width:100%; height:52px; text-align:center; font-size:1.35rem; font-weight:900; background:#FAF7F2; border:1.5px solid #D6C7B2; border-radius:10px; outline:none; color:#1C1917; box-sizing:border-box;">
         </div>
 
         <!-- Resend OTP Row -->
@@ -129,11 +114,65 @@ export function renderArtisanAuthScreen(container) {
     </div>
   `;
 
+  // Auto-focus & smooth manual typing for 4-digit OTP inputs
+  const otpInputs = [
+    container.querySelector('#artisan-otp-1'),
+    container.querySelector('#artisan-otp-2'),
+    container.querySelector('#artisan-otp-3'),
+    container.querySelector('#artisan-otp-4')
+  ];
+
+  otpInputs.forEach((input, idx) => {
+    if (!input) return;
+    input.addEventListener('focus', () => {
+      input.select();
+    });
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key >= '0' && e.key <= '9') {
+        e.preventDefault();
+        input.value = e.key;
+        if (idx < 3 && otpInputs[idx + 1]) {
+          otpInputs[idx + 1].focus();
+          otpInputs[idx + 1].select();
+        }
+      } else if (e.key === 'Backspace') {
+        e.preventDefault();
+        input.value = '';
+        if (idx > 0 && otpInputs[idx - 1]) {
+          otpInputs[idx - 1].focus();
+          otpInputs[idx - 1].select();
+        }
+      } else if (e.key === 'ArrowRight' && idx < 3) {
+        otpInputs[idx + 1]?.focus();
+      } else if (e.key === 'ArrowLeft' && idx > 0) {
+        otpInputs[idx - 1]?.focus();
+      }
+    });
+
+    input.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+      if (text) {
+        for (let i = 0; i < 4 && i < text.length; i++) {
+          if (otpInputs[i]) otpInputs[i].value = text[i];
+        }
+        const nextIdx = Math.min(text.length, 3);
+        otpInputs[nextIdx]?.focus();
+      }
+    });
+  });
+
   // Attach submit handler
   container.querySelector('#btn-submit-artisan-auth').addEventListener('click', () => {
-    window.showToast?.("Artisan authenticated! Welcome back, Ramdev Kumhar.");
+    const phoneInput = container.querySelector('#input-artisan-phone');
+    const enteredPhone = phoneInput ? phoneInput.value.trim() : '98765 43210';
+    const enteredOtp = otpInputs.map(i => i.value).join('');
+
+    window.showToast?.(`Artisan authenticated (+91 ${enteredPhone})! Welcome back, Ramdev Kumhar.`);
     State.loginAs(AccountType.ARTISAN, {
       name: 'Ramdev Kumhar',
+      phone: enteredPhone,
       pehchan: 'UP-VAR-49281',
       cluster: 'Varanasi Clay Cluster, UP'
     });

@@ -14,16 +14,30 @@
  */
 
 export const LanguageMetadata = {
-  hi: { id: 'hi', native: 'हिन्दी', english: 'Hindi', voiceLocale: 'hi-IN', flag: '🇮🇳' },
   en: { id: 'en', native: 'English', english: 'English', voiceLocale: 'en-IN', flag: '🌏' },
-  bn: { id: 'bn', native: 'বাংলা', english: 'Bangla', voiceLocale: 'bn-IN', flag: '🇮🇳' },
-  ta: { id: 'ta', native: 'தமிழ்', english: 'Tamil', voiceLocale: 'ta-IN', flag: '🇮🇳' },
+  hi: { id: 'hi', native: 'हिन्दी', english: 'Hindi', voiceLocale: 'hi-IN', flag: '🇮🇳' },
+  bn: { id: 'bn', native: 'বাংলা', english: 'Bengali', voiceLocale: 'bn-IN', flag: '🇮🇳' },
   te: { id: 'te', native: 'తెలుగు', english: 'Telugu', voiceLocale: 'te-IN', flag: '🇮🇳' },
+  ta: { id: 'ta', native: 'தமிழ்', english: 'Tamil', voiceLocale: 'ta-IN', flag: '🇮🇳' },
   mr: { id: 'mr', native: 'मराठी', english: 'Marathi', voiceLocale: 'mr-IN', flag: '🇮🇳' },
   gu: { id: 'gu', native: 'ગુજરાતી', english: 'Gujarati', voiceLocale: 'gu-IN', flag: '🇮🇳' },
   kn: { id: 'kn', native: 'ಕನ್ನಡ', english: 'Kannada', voiceLocale: 'kn-IN', flag: '🇮🇳' },
+  ml: { id: 'ml', native: 'മലയാളം', english: 'Malayalam', voiceLocale: 'ml-IN', flag: '🇮🇳' },
+  pa: { id: 'pa', native: 'ਪੰਜਾਬੀ', english: 'Punjabi', voiceLocale: 'pa-IN', flag: '🇮🇳' },
+  or: { id: 'or', native: 'ଓଡ଼ିଆ', english: 'Odia', voiceLocale: 'or-IN', flag: '🇮🇳' },
+  as: { id: 'as', native: 'অসমীয়া', english: 'Assamese', voiceLocale: 'as-IN', flag: '🇮🇳' },
+  ur: { id: 'ur', native: 'اُردُو', english: 'Urdu', voiceLocale: 'ur-IN', flag: '🇮🇳' },
+  mai: { id: 'mai', native: 'मैथिली', english: 'Maithili', voiceLocale: 'hi-IN', flag: '🇮🇳' },
+  ks: { id: 'ks', native: 'कॉशुर', english: 'Kashmiri', voiceLocale: 'ur-IN', flag: '🇮🇳' },
+  ne: { id: 'ne', native: 'नेपाली', english: 'Nepali', voiceLocale: 'ne-NP', flag: '🇳🇵' },
+  sa: { id: 'sa', native: 'संस्कृतम्', english: 'Sanskrit', voiceLocale: 'hi-IN', flag: '🇮🇳' },
+  kok: { id: 'kok', native: 'कोंकणी', english: 'Konkani', voiceLocale: 'mr-IN', flag: '🇮🇳' },
+  sd: { id: 'sd', native: 'सिंधी', english: 'Sindhi', voiceLocale: 'hi-IN', flag: '🇮🇳' },
+  brx: { id: 'brx', native: 'बड़ो', english: 'Bodo', voiceLocale: 'hi-IN', flag: '🇮🇳' },
+  doi: { id: 'doi', native: 'डोगरी', english: 'Dogri', voiceLocale: 'hi-IN', flag: '🇮🇳' },
+  sat: { id: 'sat', native: 'ᱥᱟᱱᱛᱟᱲᱤ', english: 'Santali', voiceLocale: 'hi-IN', flag: '🇮🇳' },
   bho: { id: 'bho', native: 'भोजपुरी', english: 'Bhojpuri', voiceLocale: 'hi-IN', flag: '🇮🇳' },
-  mai: { id: 'mai', native: 'मैथिली', english: 'Maithili', voiceLocale: 'hi-IN', flag: '🇮🇳' }
+  mni: { id: 'mni', native: 'মৈতৈলোন্', english: 'Manipuri', voiceLocale: 'bn-IN', flag: '🇮🇳' }
 };
 
 export const Translations = {
@@ -5570,6 +5584,114 @@ export const PhraseDictionary = [
     "kn": "ಹೋಟೆಲ್ ಮತ್ತು ಬೊಟಿಕ್ ಪೀಠೋಪಕರಣ",
     "bho": "होटल के सजावट",
     "mai": "होटल आ बुटीक गृह सज्जा"
+  },
+  {
+    "en": "Cost Breakdown (Why this price)",
+    "hi": "लागत विवरण (यह मूल्य क्यों)",
+    "bn": "ব্যয় বিভাজন (এই মূল্য কেন)",
+    "ta": "செலவு முறிவு (இந்த விலை ஏன்)",
+    "te": "ఖర్చుల వివరాలు (ఈ ధర ఎందుకు)",
+    "mr": "खर्च तपशील (ही किंमत का)",
+    "gu": "ખર્ચ વિભાજન (આ કિંમત શા માટે)",
+    "kn": "ವೆಚ್ಚದ ವಿವರಣೆ (ಈ ಬೆಲೆ ಏಕೆ)",
+    "bho": "लागत विवरण (ई दाम काहें)",
+    "mai": "लागत विवरण (ई दाम किएक)"
+  },
+  {
+    "en": "Authentic Origin: Gorakhpur Clay Cluster (GI #182)",
+    "hi": "प्रमाणिक मूल: गोरखपुर क्ले क्लस्टर (जीआई #182)",
+    "bn": "প্রামাণিক উৎস: গোরখপুর ক্লে ক্লাস্টার (জিআই #১৮২)",
+    "ta": "உண்மையான தோற்றம்: கோரக்பூர் களிமண் தொகுப்பு (GI #182)",
+    "te": "ప్రామాణిక మూలం: గోరఖ్‌పూర్ క్లే క్లస్టర్ (GI #182)",
+    "mr": "अस्सल मूळ: गोरखपूर माती क्लस्टर (GI #182)",
+    "gu": "અસલી મૂળ: ગોરખપુર માટી ક્લસ્ટર (GI #182)",
+    "kn": "ಅಧಿಕೃತ ಮೂಲ: ಗೋರಖ್‌ಪುರ ಜೇಡಿಮಣ್ಣಿನ ಕ್ಲಸ್ಟರ್ (GI #182)",
+    "bho": "असली मूल: गोरखपुर माटी क्लस्टर (GI #182)",
+    "mai": "प्रमाणिक मूल: गोरखपुर माटि क्लस्टर (GI #182)"
+  },
+  {
+    "en": "Raw Photo • Workshop Capture",
+    "hi": "मूल फोटो • कार्यशाला से ली गई",
+    "bn": "মূল ছবি • কর্মশালার তোলা",
+    "ta": "அசல் புகைப்படம் • பணிமனை படம்",
+    "te": "అసలు ఫోటో • వర్క్‌షాప్ క్యాప్చర్",
+    "mr": "मूळ फोटो • कार्यशाळा कॅप्चर",
+    "gu": "મૂળ ફોટો • વર્કશોપ કેપ્ચર",
+    "kn": "ಮೂಲ ಫೋಟೋ • ಕಾರ್ಯಾಗಾರ ಕ್ಯಾಪ್ಚರ್",
+    "bho": "मूल फोटो • करखाना से लीहल",
+    "mai": "मूल फोटो • कार्यशाला सँ लीबि"
+  },
+  {
+    "en": "Hand-Etched Terracotta Pitcher",
+    "hi": "हाथ से तराशा गया टेराकोटा सुराही",
+    "bn": "হাতে খোদাই করা পোড়ামাটির সুরাহী",
+    "ta": "கைவேலைப்பாடு செய்யப்பட்ட சுடுமண் குவளை",
+    "te": "చేతితో చెక్కబడిన టెర్రకోట కూజా",
+    "mr": "हस्त-नक्षीदार टेराकोटा सुरही",
+    "gu": "હાથે નકશી કરેલી ટેરાકોટા સુરાહી",
+    "kn": "ಕೈಯಿಂದ ಕೆತ್ತಲಾದ ಟೆರಾಕೋಟಾ ಹೂಜಿ",
+    "bho": "हाथ से गढ़ल टेराकोटा सुराही",
+    "mai": "हाथ सँ गढ़ल टेराकोटा सुराही"
+  },
+  {
+    "en": "Handcrafted Diyas (Set of 12)",
+    "hi": "हस्तनिर्मित दीये (12 का सेट)",
+    "bn": "হস্তনির্মিত প্রদীপ (১২টির সেট)",
+    "ta": "கைவினை அகல் விளக்குகள் (12 தொகுப்பு)",
+    "te": "చేతితో చేసిన ప్రమిదలు (12 సెట్)",
+    "mr": "हस्तनिर्मित दिवे (१२ चा संच)",
+    "gu": "હસ્તનિર્મિત દીવાઓ (૧૨ નો સેટ)",
+    "kn": "ಹಸ್ತನಿರ್ಮಿತ ದೀಪಗಳು (12 ರ ಸೆಟ್)",
+    "bho": "हाथ से बनल दिया (12 गो)",
+    "mai": "हाथ सँ बनल दिया (12 टा)"
+  },
+  {
+    "en": "Decorative Clay Wall Hanging Relief",
+    "hi": "सजावटी मिट्टी की दीवार रिलीफ",
+    "bn": "আলংকারিক মাটির দেওয়াল ভাস্কর্য",
+    "ta": "அலங்கார களிமண் சுவர் சிற்பம்",
+    "te": "అలంకార మట్టి గోడ శిల్పం",
+    "mr": "सजावटी मातीची भिंत रिलीफ",
+    "gu": "સુશોભન માટીની દીવાલ રિલિફ",
+    "kn": "ಅಲಂಕಾರಿಕ ಮಣ್ಣಿನ ಗೋಡೆ ಉಬ್ಬುಚಿತ್ರ",
+    "bho": "सजावटी माटी के दीवाल रिलीफ",
+    "mai": "सजावटी माटिक भित्ति रिलीफ"
+  },
+  {
+    "en": "On Loom (Pre-Order)",
+    "hi": "करघे पर (प्री-ऑर्डर)",
+    "bn": "তাঁতে বোনা হচ্ছে (প্রি-অর্ডার)",
+    "ta": "தறியில் (முன்பதிவு)",
+    "te": "మగ్గంపై (ముందస్తు ఆర్డర్)",
+    "mr": "मागवर (प्री-ऑर्डर)",
+    "gu": "સાળ પર (પ્રી-ઓર્ડર)",
+    "kn": "ಮಗ್ಗದಲ್ಲಿ (ಪೂರ್ವ-ಆದೇಶ)",
+    "bho": "करघा पर (प्री-ऑर्डर)",
+    "mai": "करघा पर (प्री-ऑर्डर)"
+  },
+  {
+    "en": "Listen to Screen • Audio Guide",
+    "hi": "स्क्रीन सुनें • ऑडियो गाइड",
+    "bn": "স্ক্রিন শুনুন • অডিও গাইড",
+    "ta": "திரையைக் கேளுங்கள் • ஆடியோ வழிகாட்டி",
+    "te": "స్క్రీన్ వినండి • ఆడియో గైడ్",
+    "mr": "स्क्रीन ऐका • ऑडिओ मार्गदर्शक",
+    "gu": "સ્ક્રીન સાંભળો • ઑડિયો માર્ગદર્શિકા",
+    "kn": "ಸ್ಕ್ರೀನ್ ಆಲಿಸಿ • ಆಡಿಯೋ ಮಾರ್ಗದರ್ಶಿ",
+    "bho": "स्क्रीन सुनीं • ऑडियो गाइड",
+    "mai": "स्क्रीन सुनू • ऑडियो गाइड"
+  },
+  {
+    "en": "Step-by-step spoken instructions in Bhojpuri & Hindi",
+    "hi": "भोजपुरी और हिंदी में चरण-दर-चरण मौखिक निर्देश",
+    "bn": "ভোজপুরি ও হিন্দিতে ধাপে ধাপে কথ্য নির্দেশাবলী",
+    "ta": "போஜ்புரி மற்றும் இந்தியில் படிப்படியான குரல் வழிமுறைகள்",
+    "te": "భోజ్‌పురి మరియు హిందీలో దశలవారీగా మాట్లాడే సూచనలు",
+    "mr": "भोजपुरी आणि हिंदीमध्ये चरण-दर-चरण तोंडी सूचना",
+    "gu": "ભોજપુરી અને હિન્દીમાં સ્ટેપ-બાય-સ્ટેપ મૌખિક સૂચનાઓ",
+    "kn": "ಭೋಜಪುರಿ ಮತ್ತು ಹಿಂದಿಯಲ್ಲಿ ಹಂತ-ಹಂತದ ಮಾತನಾಡುವ ಸೂಚನೆಗಳು",
+    "bho": "भोजपुरी आ हिंदी में एक-एक कदम बोलल निर्देश",
+    "mai": "भोजपुरी आ हिंदी में क्रमबद्ध मौखिक निर्देश"
   }
 ];
 
@@ -9557,11 +9679,20 @@ function stripSymbols(str) {
 
 export const i18n = {
   get currentLang() {
-    return (window.State && window.State.language) || localStorage.getItem('klv_language') || 'hi';
+    if (typeof window !== 'undefined' && window.State && window.State.language) {
+      return window.State.language;
+    }
+    if (typeof localStorage !== 'undefined') {
+      const saved = localStorage.getItem('nl_language') || localStorage.getItem('klv_language');
+      if (saved && saved !== 'undefined' && saved !== 'null') {
+        return saved;
+      }
+    }
+    return 'en';
   },
 
   get metadata() {
-    return LanguageMetadata[this.currentLang] || LanguageMetadata.hi;
+    return LanguageMetadata[this.currentLang] || LanguageMetadata.en;
   },
 
   /**
@@ -9656,14 +9787,17 @@ export const i18n = {
    * Set active language, persist to localStorage, update state, and re-render app.
    */
   setLanguage(langId) {
-    if (!LanguageMetadata[langId]) langId = 'hi';
-    localStorage.setItem('klv_language', langId);
+    if (!LanguageMetadata[langId]) langId = 'en';
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('nl_language', langId);
+      localStorage.setItem('klv_language', langId);
+    }
     if (window.State) {
       window.State.language = langId;
     }
     document.documentElement.lang = langId;
     this.updateHeaderPill();
-    
+
     // Automatically re-render current screen with new language
     if (window.State && typeof window.State.notify === 'function') {
       window.State.notify();
@@ -9674,6 +9808,14 @@ export const i18n = {
       const container = (typeof document !== 'undefined') ? (document.querySelector('.mobile-container') || document.body) : null;
       this.translatePage(container);
     }, 15);
+
+    // If Voice Guide is ON, speak summary of current page in the newly selected language
+    if (typeof window !== 'undefined' && window.AudioAssistance && window.AudioAssistance.isEnabled) {
+      const cur = (window.State && window.State.currentScreen) || 'home';
+      setTimeout(() => {
+        window.AudioAssistance.speakPageSummary(cur);
+      }, 150);
+    }
   },
 
   /**
@@ -9696,7 +9838,7 @@ export const i18n = {
    * Return speech synthesizer BCP-47 locale tag
    */
   getVoiceLocale() {
-    return this.metadata.voiceLocale || 'hi-IN';
+    return this.metadata.voiceLocale || 'en-IN';
   },
 
   /**

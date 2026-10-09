@@ -99,6 +99,96 @@ class HybridRecommendationEngine:
             f"इस सप्ताह अपने चाक पर 40 और सुराही और दीये बनाएं।"
         )
 
+        recommended_crafts = [
+            {
+                "id": "rec-diya-set",
+                "title": "Akhand Festive Clay Diya Set (Pack of 12)",
+                "category": "Terracotta Pottery",
+                "badge": "Festive Peak Demand",
+                "market_demand": {
+                    "surge": f"+{demand['surge_percentage'] + 23}% Search Spike",
+                    "regions": "Delhi NCR, Mumbai & Pune",
+                    "reason": "Urban festive buyers searching for unglazed, eco-friendly Diwali puja diyas",
+                    "urgency": "High (Diwali in 15 days)"
+                },
+                "craft_expertise": {
+                    "technique": "High-Speed Wheel Spinning & Alluvial Silt Tempering",
+                    "match_score": "98% Match",
+                    "artisan_fit": "Directly matches Ramdev Kumhar's hereditary foot-spun wheel speed and natural porous clay formulation",
+                    "batch_capacity": "35-40 sets per day"
+                },
+                "pricing": {
+                    "target_price": 340,
+                    "price_range": "₹320 – ₹380 / set",
+                    "recommended_batch": 40,
+                    "est_profit": "₹11,200",
+                    "raw_material_cost": 60,
+                    "hours_cost": 180,
+                    "kiln_cost": 40
+                },
+                "image": "/assets/raw_pottery_snap.jpg",
+                "audio_hindi": "अखंड मिट्टी दीया सेट: दिल्ली और मुंबई में दिवाली के लिए 68% अधिक मांग है। आपकी चाक कला से 40 सेट बनाकर आप 11,200 रुपये शुद्ध लाभ कमा सकते हैं।"
+            },
+            {
+                "id": "rec-cooling-surahi",
+                "title": "Self-Cooling Evaporative Water Surahi (2.5L)",
+                "category": "Terracotta Pottery",
+                "badge": "High Margin Opportunity",
+                "market_demand": {
+                    "surge": "+52% Search Volume",
+                    "regions": "Bengaluru, Mumbai & Ahmedabad",
+                    "reason": "Health-conscious urban households seeking electricity-free alkaline water cooling without plastic",
+                    "urgency": "Steady High Demand"
+                },
+                "craft_expertise": {
+                    "technique": "Hand-Turned Fluting & Sun-Flora Stylus Etching",
+                    "match_score": "95% Match",
+                    "artisan_fit": "Requires 5-generation heritage neck fluting and microporous silt tempering to achieve natural evaporative cooling",
+                    "batch_capacity": "6-8 surahis per day"
+                },
+                "pricing": {
+                    "target_price": 1450,
+                    "price_range": "₹1,350 – ₹1,600 / piece",
+                    "recommended_batch": 20,
+                    "est_profit": "₹21,600",
+                    "raw_material_cost": 180,
+                    "hours_cost": 720,
+                    "kiln_cost": 150
+                },
+                "image": "/assets/terracotta_pitcher.jpg",
+                "audio_hindi": "प्राकृतिक जल सुराही: बेंगलुरु और मुंबई में बिना बिजली के शीतल पानी वाले घड़ों की भारी मांग है। 20 सुराही बनाने पर 21,600 रुपये का लाभ होगा।"
+            },
+            {
+                "id": "rec-curd-handis",
+                "title": "Unglazed Terracotta Dahi Handis (Set of 4)",
+                "category": "Terracotta Pottery",
+                "badge": "Bulk Repeat Demand",
+                "market_demand": {
+                    "surge": "+38% Monthly Inquiries",
+                    "regions": "Lucknow, Varanasi & Delhi NCR",
+                    "reason": "Organic restaurants, festive catering, and traditional sweets makers needing porous setting pots",
+                    "urgency": "Ongoing Wholesale Demand"
+                },
+                "craft_expertise": {
+                    "technique": "Thick-Walled Wheel Moulding & Pit-Kiln Baking",
+                    "match_score": "92% Match",
+                    "artisan_fit": "Uses thick alluvial clay walls with natural moisture absorption for curd setting and fermentation",
+                    "batch_capacity": "20-25 sets per day"
+                },
+                "pricing": {
+                    "target_price": 480,
+                    "price_range": "₹450 – ₹550 / set",
+                    "recommended_batch": 30,
+                    "est_profit": "₹9,800",
+                    "raw_material_cost": 90,
+                    "hours_cost": 240,
+                    "kiln_cost": 60
+                },
+                "image": "/assets/pottery_cup.jpg",
+                "audio_hindi": "दही और मिठाई हांडी सेट: ऑर्गेनिक रेस्तरां और मिष्ठान भंडारों से 38% अधिक ऑर्डर आ रहे हैं। 30 सेट बनाने पर 9,800 रुपये का लाभ है।"
+            }
+        ]
+
         return {
             "status": "success",
             "engine": "Hybrid-XGBoost-Qwen2.5-VL",
@@ -110,6 +200,7 @@ class HybridRecommendationEngine:
             "target_buyers": demand["top_demand_regions"],
             "suggested_batch_size": 40,
             "priority_items": ["Surahis", "Festive Diyas"],
+            "recommended_crafts": recommended_crafts,
             "price_analysis_preview": "Target price ₹320-₹350/set recommended for peak festive margins."
         }
 

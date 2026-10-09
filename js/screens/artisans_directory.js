@@ -83,11 +83,11 @@ export function renderArtisansScreen(container) {
             </div>
 
             <div style="display:flex; gap:8px;">
-              <button type="button" class="btn-secondary" style="flex:1; padding:8px; font-size:0.75rem;" onclick="window.showToast('Connecting with ${a.name} via Guild Hotline...')">
-                💬 Guild Message
+              <button type="button" class="btn-secondary" style="flex:1; padding:8px; font-size:0.75rem; color:#7A2813; font-weight:800; border:1px solid #EADBCE; background:#FFFBF7;" onclick="window.showArtisanStoryModal({ name: '${a.name}', avatar: '${a.avatar}', pehchanId: '${a.pehchanId}', cluster: '${a.craft}', trustScore: ${a.trustScore}, story: '${a.name} is a master of ${a.craft}. ${a.speciality}. ${a.experience}.' })">
+                🎙️ Artisan Story
               </button>
-              <button type="button" class="btn-primary" style="flex:1; padding:8px; font-size:0.75rem;" onclick="window.navigateToScreen('explore')">
-                View Studio Crafts
+              <button type="button" class="btn-primary" style="flex:1; padding:8px; font-size:0.75rem; background:#7A2813;" onclick="window.navigateToScreen('buyer_search')">
+                View Crafts
               </button>
             </div>
           </div>

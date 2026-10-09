@@ -1,7 +1,7 @@
 /**
  * Native Loom - Centralized Single Source of Truth Data Layer
  * Centralized Platform Data Model:
- * 
+ *
  * Cluster { id, name, state, giTagNumber, description, leadArtisanId, capacityPerMonth, wholesaleFromPrice, image }
  * Artisan { id, name, craftTitle, pehchanId, clusterId, trustScore, bankLinked, bankAccountMasked, bankName, ifsc, preferredDialect, avatar }
  * Craft   { id, title, artisanId, clusterId, category, attributes[], price, typicalGalleryPrice, stock, status, images[], voiceDescription{originalText, originalLang, translatedText}, giTagNumber }
@@ -56,6 +56,30 @@ export const Clusters = [
     wholesaleFromPrice: 420,
     specialty: 'Sheesham & Teak lattice screens, corporate desk boxes, brass-inlaid heirloom keepsake chests',
     image: '/assets/woodcraft_bowl.jpg'
+  },
+  {
+    id: 'cl-varanasi-silk',
+    name: 'Kabir Chaura Handloom Silk Guild',
+    state: 'Uttar Pradesh',
+    giTagNumber: 'GI #28',
+    description: 'Master handloom weavers producing authentic Banarasi Katan silk and Kadwa brocade dupattas with pure electroplated silver zari.',
+    leadArtisanId: 'artisan-anandi',
+    capacityPerMonth: '600 pieces / month',
+    wholesaleFromPrice: 2800,
+    specialty: 'Pure Katan silk brocades, bridal dupattas, heirloom tissue sarees, and zari stoles',
+    image: '/assets/ikat_saree.jpg'
+  },
+  {
+    id: 'cl-azamgarh-blackclay',
+    name: 'Nizamabad Black Clay Pottery Guild',
+    state: 'Uttar Pradesh',
+    giTagNumber: 'GI #182',
+    description: 'Distinctive lustrous black earthenware created through special smoke-reduction pit kilns and detailed zinc-mercury silvery inlay work.',
+    leadArtisanId: 'artisan-mohan',
+    capacityPerMonth: '1,200 pieces / month',
+    wholesaleFromPrice: 480,
+    specialty: 'High-lustre black pottery vases, ceremonial tea wares, decorative figurines, and keepsake vessels',
+    image: '/assets/bidriware_vase.jpg'
   }
 ];
 
@@ -89,7 +113,7 @@ export const Artisans = [
     ifsc: 'SBIN0001830',
     preferredDialect: 'Hindi / Chhattisgarhi',
     experienceYears: 28,
-    avatar: '/assets/artisan_sunita.jpg',
+    avatar: '/assets/artisan_budhram.jpg',
     bio: 'Guardian of 4,000-year-old lost-wax bell metal casting in the forests of Bastar, creating acoustic sacred bells and figurines.'
   },
   {
@@ -105,12 +129,12 @@ export const Artisans = [
     ifsc: 'PUNB0720100',
     preferredDialect: 'Hindi',
     experienceYears: 22,
-    avatar: '/assets/artisan_ramulu.jpg',
+    avatar: '/assets/artisan_rahul.jpg',
     bio: 'Preserving clay-free low-fire quartz glaze artistry with natural copper and cobalt oxide pigments in Jaipur.'
   },
   {
     id: 'artisan-saleem',
-    name: 'Mohammad Saleem',
+    name: 'Saleem Ahmed',
     craftTitle: 'Master Wood Carver',
     pehchanId: 'UP-SAH-38491',
     clusterId: 'cl-saharanpur-wood',
@@ -121,8 +145,40 @@ export const Artisans = [
     ifsc: 'CNRB0003849',
     preferredDialect: 'Hindi',
     experienceYears: 31,
-    avatar: '/assets/artisan_sunita.jpg',
+    avatar: '/assets/artisan_saleem.jpg',
     bio: 'Master of fine Jaali fretwork lattice chiseling and solid brass inlay in seasoned North Indian Sheesham wood.'
+  },
+  {
+    id: 'artisan-anandi',
+    name: 'Anandi Devi',
+    craftTitle: 'Master Silk Weaver',
+    pehchanId: 'UP-VAR-67120',
+    clusterId: 'cl-varanasi-silk',
+    trustScore: 99,
+    bankLinked: true,
+    bankName: 'Union Bank of India',
+    bankAccountMasked: '•••• 7719',
+    ifsc: 'UBIN0537719',
+    preferredDialect: 'Bhojpuri / Hindi',
+    experienceYears: 29,
+    avatar: '/assets/artisan_sunita.jpg',
+    bio: 'National Master Weaver carrying forward the centuries-old Kadwa brocade and pure Katan silk tradition on heritage Varanasi pit looms.'
+  },
+  {
+    id: 'artisan-mohan',
+    name: 'Mohan Lal',
+    craftTitle: 'Master Black Clay Potter',
+    pehchanId: 'UP-AZM-29183',
+    clusterId: 'cl-azamgarh-blackclay',
+    trustScore: 96,
+    bankLinked: true,
+    bankName: 'Punjab National Bank',
+    bankAccountMasked: '•••• 3892',
+    ifsc: 'PUNB0291800',
+    preferredDialect: 'Hindi',
+    experienceYears: 26,
+    avatar: '/assets/artisan_ramulu.jpg',
+    bio: 'Renowned Nizamabad potter specializing in smoke-reduction kiln firing, yielding distinctive high-sheen black vessels with silvery inlay.'
   }
 ];
 
@@ -139,7 +195,8 @@ export const Crafts = [
     stock: 8,
     status: 'Ready',
     badge: '• Ready (8)',
-    images: ['/assets/raw_pottery_snap.jpg'],
+    image: '/assets/terracotta_pitcher.jpg',
+    images: ['/assets/terracotta_pitcher.jpg', '/assets/raw_pottery_snap.jpg', '/assets/clay_wall_plate.jpg', '/assets/handcrafted_diyas.jpg'],
     volume: '1.8 Litres',
     voiceDescription: {
       originalText: 'हम ई सुराही आपन पुरखों के तरीका से राप्ती नदी के शुद्ध माटी से चाक पर गढ़ले बानी। ई पानी के प्राकृतिक रूप से शीतल रखेला आ मीठ स्वाद देवेला।',
@@ -160,7 +217,8 @@ export const Crafts = [
     stock: 4,
     status: 'Low Stock',
     badge: '• Low Stock (4)',
-    images: ['/assets/dhokra_brass.jpg'],
+    image: '/assets/dhokra_brass.jpg',
+    images: ['/assets/dhokra_brass.jpg', '/assets/bidriware_vase.jpg', '/assets/silver_wire_spools.jpg', '/assets/dhokra_brass.jpg'],
     volume: 'Height: 8.5 inches',
     voiceDescription: {
       originalText: 'ई घंटी हमनी के बस्तर के जंगल में मोम के धागा बनाके ढलाई कइले बानी। एकर आवाज़ बहुत मीठ आ पवित्र बा।',
@@ -181,7 +239,8 @@ export const Crafts = [
     stock: 12,
     status: 'Ready',
     badge: '• Ready (12)',
-    images: ['/assets/blue_pottery.jpg'],
+    image: '/assets/blue_pottery.jpg',
+    images: ['/assets/blue_pottery.jpg', '/assets/blue_pottery.jpg', '/assets/bidriware_vase.jpg', '/assets/blue_pottery.jpg'],
     volume: 'Height: 10 inches',
     voiceDescription: {
       originalText: 'यह फूलदान हमने पिसे हुए क्वार्ट्ज पत्थर और मुल्तानी मिट्टी के मिश्रण से बनाया है, जिस पर प्राकृतिक कोबाल्ट ऑक्साइड से हाथ से चित्रकारी की गई है।',
@@ -202,7 +261,8 @@ export const Crafts = [
     stock: 6,
     status: 'Ready',
     badge: '• Ready (6)',
-    images: ['/assets/woodcraft_bowl.jpg'],
+    image: '/assets/woodcraft_bowl.jpg',
+    images: ['/assets/woodcraft_bowl.jpg', '/assets/teak_lumber.jpg', '/assets/silver_wire_spools.jpg', '/assets/woodcraft_bowl.jpg'],
     volume: '8 x 5 x 3 inches',
     voiceDescription: {
       originalText: 'सहारनपुर के शीशम की लकड़ी पर यह जालीदार नक्काशी हमारे उस्ताद कारीगरों ने हाथों की छेनी से तराशी है।',
@@ -210,6 +270,50 @@ export const Crafts = [
       translatedText: 'Carved out of sustainably seasoned Indian Rosewood (Sheesham) featuring open fretwork lattice patterns with natural beeswax buffing and hand-cut pure brass corner inlays.'
     },
     giTagNumber: 'GI #124'
+  },
+  {
+    id: 'craft-katan-silk',
+    title: 'Katan Silk Zari Brocade Dupatta',
+    artisanId: 'artisan-anandi',
+    clusterId: 'cl-varanasi-silk',
+    category: 'Handloom Silk',
+    attributes: ['GI Tag Certified', '100% Pure Katan Silk', 'Master Silk Weaver Seal', 'Silver Electroplated Zari', 'Handloom Heritage'],
+    price: 4200,
+    typicalGalleryPrice: 8500,
+    stock: 5,
+    status: 'On Loom',
+    badge: '• On Loom (5)',
+    image: '/assets/ikat_saree.jpg',
+    images: ['/assets/ikat_saree.jpg', '/assets/silver_wire_spools.jpg', '/assets/ikat_saree.jpg', '/assets/silver_wire_spools.jpg'],
+    volume: '2.4m x 1.1m',
+    voiceDescription: {
+      originalText: 'हम ई कतान रेशम के दुपट्टा कबीर चौरा के पारंपरिक हथकरघा पर असली जरी से बुनले बानी।',
+      originalLang: 'Bhojpuri / Hindi',
+      translatedText: 'Handwoven on traditional pit looms in Kabir Chaura using pure mulberry Katan silk and delicate electroplated silver zari threads in timeless floral Kadwa motifs.'
+    },
+    giTagNumber: 'GI #28'
+  },
+  {
+    id: 'craft-nizamabad-clay',
+    title: 'Nizamabad Black Clay & Wood Toys',
+    artisanId: 'artisan-mohan',
+    clusterId: 'cl-azamgarh-blackclay',
+    category: 'Black Clay Pottery',
+    attributes: ['GI Tag Certified', 'Smoke-Fired Lustre', 'Silvery Zinc Inlay', 'Lead Free', 'Collector Edition'],
+    price: 1250,
+    typicalGalleryPrice: 2800,
+    stock: 4,
+    status: 'Ready',
+    badge: '• Ready (4)',
+    image: '/assets/bidriware_vase.jpg',
+    images: ['/assets/bidriware_vase.jpg', '/assets/silver_wire_spools.jpg', '/assets/raw_pottery_snap.jpg', '/assets/bidriware_vase.jpg'],
+    volume: 'Height: 7 inches',
+    voiceDescription: {
+      originalText: 'निजामाबाद की इस काली मिट्टी के बर्तन को हमने बंद भट्टी में धुएं से पकाया है और चांदी जैसी चमक दी है।',
+      originalLang: 'Hindi',
+      translatedText: 'Crafted using local clay and smoke-fired in enclosed sealed kilns with mustard oil cake to impart a permanent deep gunmetal black sheen, inlaid with intricate silvery zinc patterns.'
+    },
+    giTagNumber: 'GI #182'
   },
   {
     id: 'craft-terracotta-diyas',
@@ -223,7 +327,8 @@ export const Crafts = [
     stock: 18,
     status: 'Ready',
     badge: '• Ready (18)',
-    images: ['/assets/handcrafted_diyas.jpg'],
+    image: '/assets/handcrafted_diyas.jpg',
+    images: ['/assets/handcrafted_diyas.jpg', '/assets/raw_pottery_snap.jpg', '/assets/terracotta_pitcher.jpg', '/assets/clay_wall_plate.jpg'],
     volume: 'Set of 12 pieces',
     voiceDescription: {
       originalText: 'दीपावली खातिर हमनी के पवित्र गंगा माटी से ई दीया तैयार कइले बानी। ई बहुत चोखा आ शुद्ध बा।',
@@ -244,7 +349,8 @@ export const Crafts = [
     stock: 3,
     status: 'Low Stock',
     badge: '• Low Stock (3)',
-    images: ['/assets/clay_wall_plate.jpg'],
+    image: '/assets/clay_wall_plate.jpg',
+    images: ['/assets/clay_wall_plate.jpg', '/assets/terracotta_pitcher.jpg', '/assets/raw_pottery_snap.jpg', '/assets/handcrafted_diyas.jpg'],
     volume: 'Diameter: 12 inches',
     voiceDescription: {
       originalText: 'सूर्य देवता के प्रतीक ई दीवार पट्टिका घर के वास्तु खातिर बहुत मंगलकारी मानल जाला।',

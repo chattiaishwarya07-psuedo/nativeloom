@@ -10,15 +10,15 @@ import { aiClient } from '../ai_client.js';
 export function renderStudioScreen(container) {
   container.innerHTML = `
     <div class="studio-screen animate-fade-in" style="padding: 14px 14px 80px; background: #FAF8F5; min-height: 100vh; max-width: 480px; margin: 0 auto; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-      
+
       <!-- Top Step Tracker Banner -->
       <div style="background:#F6F1EA; border:1px solid #EAE3D9; border-radius:12px; padding:10px 14px; margin-bottom:14px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
           <span style="font-size:0.72rem; font-weight:800; color:#7A2813; letter-spacing:0.04em; text-transform:uppercase;">
             STEP 4 OF 4 • ARTISAN STUDIO &amp; DASHBOARD
           </span>
-          <button type="button" onclick="window.navigateToScreen('artisan_profile')" style="width:26px; height:26px; border-radius:50%; background:#6B1D0F; color:#FFFFFF; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;" title="Artisan Profile">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <button type="button" onclick="window.navigateToScreen('artisan_profile')" style="width:28px; height:28px; border-radius:50%; background:#7A2813; color:#FFFFFF; border:1.5px solid rgba(255,255,255,0.5); display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 1px 4px rgba(122,40,19,0.3);" title="Artisan Profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="#FFFFFF" data-keep-color="true" style="fill:#FFFFFF !important; color:#FFFFFF !important;"><path fill="#FFFFFF" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
           </button>
         </div>
         <!-- Gradient Progress Bar (Terracotta to Dark Green) -->
@@ -29,7 +29,7 @@ export function renderStudioScreen(container) {
 
       <!-- Card 1: Artisan Profile Hero & Flawless Trust Score -->
       <div style="background:#FFFFFF; border:1px solid #ECE6DE; border-radius:14px; padding:16px 14px; margin-bottom:14px; box-shadow:0 1px 4px rgba(0,0,0,0.03);">
-        
+
         <!-- Profile Top Section -->
         <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
           <div style="position:relative; width:64px; height:64px; flex-shrink:0;">
@@ -70,7 +70,7 @@ export function renderStudioScreen(container) {
                 <span style="font-size:0.55rem; color:#71655D; font-weight:700;">/100</span>
               </div>
             </div>
-            
+
             <div style="flex:1;">
               <div style="font-size:0.95rem; font-weight:800; color:#1E150F; margin-bottom:3px;">
                 Flawless Trust Score
@@ -93,11 +93,11 @@ export function renderStudioScreen(container) {
         <!-- Terracotta Header -->
         <div style="background:#7A2813; color:#FFFFFF; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
           <div style="display:flex; align-items:center; gap:8px; font-size:0.9rem; font-weight:800;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="13" x="1" y="3" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" data-keep-color="true" style="stroke:#FFFFFF !important; color:#FFFFFF !important;"><rect width="16" height="13" x="1" y="3" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
             <span>Urgent Order Incoming</span>
           </div>
           <div style="background:rgba(255,255,255,0.18); border-radius:12px; padding:2px 8px; display:flex; align-items:center; gap:4px; font-size:0.7rem; font-weight:600;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-keep-color="true" style="stroke:#FFFFFF !important; color:#FFFFFF !important;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <span>14m ago</span>
           </div>
         </div>
@@ -107,8 +107,8 @@ export function renderStudioScreen(container) {
           <div style="display:flex; gap:12px; margin-bottom:12px;">
             <img src="/assets/terracotta_pitcher.jpg" alt="Hand-Carved Terracotta Pitcher" style="width:68px; height:68px; object-fit:cover; border-radius:8px; border:1px solid #ECE6DE;" onerror="this.src='/assets/raw_pottery_snap.jpg'">
             <div style="flex:1;">
-              <div style="font-size:0.92rem; font-weight:800; color:#1E150F; margin-bottom:6px;">
-                Hand-Carved Terracotta Pit...
+              <div style="font-size:0.92rem; font-weight:800; color:#1E150F; margin-bottom:6px; cursor:pointer;" title="Hand-Carved Terracotta Pitcher" onclick="window.showToast?.('Hand-Carved Terracotta Pitcher')">
+                Hand-Carved Terracotta Pitcher
               </div>
               <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:6px;">
                 <span style="background:#FEECE5; color:#9A3412; font-size:0.68rem; font-weight:800; padding:2px 8px; border-radius:10px;">
@@ -131,7 +131,7 @@ export function renderStudioScreen(container) {
 
           <!-- Accept & Pack Button -->
           <button type="button" class="btn-primary" id="btn-accept-pack" style="width:100%; background:#7A2813; color:#FFFFFF; border:none; border-radius:8px; padding:12px; font-size:0.88rem; font-weight:800; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" data-keep-color="true" style="stroke:#FFFFFF !important; color:#FFFFFF !important;"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
             <span>Accept &amp; Pack (Pickup Today 3 PM)</span>
           </button>
         </div>
@@ -141,8 +141,8 @@ export function renderStudioScreen(container) {
       <div style="background:#FFFFFF; border:1px solid #ECE6DE; border-radius:14px; padding:14px; margin-bottom:14px; box-shadow:0 1px 4px rgba(0,0,0,0.03);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
           <div style="display:flex; align-items:center; gap:8px;">
-            <div style="width:28px; height:28px; border-radius:6px; background:#1C3550; color:#FFFFFF; display:flex; align-items:center; justify-content:center;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="5 6 12 3 19 6"/><line x1="4" y1="10" x2="4" y2="21"/><line x1="20" y1="10" x2="20" y2="21"/><line x1="8" y1="14" x2="8" y2="17"/><line x1="12" y1="14" x2="12" y2="17"/><line x1="16" y1="14" x2="16" y2="17"/></svg>
+            <div style="width:30px; height:30px; border-radius:8px; background:#7A2813; color:#FFFFFF; display:flex; align-items:center; justify-content:center; box-shadow:0 1px 4px rgba(122,40,19,0.25);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" data-keep-color="true" style="stroke:#FFFFFF !important; color:#FFFFFF !important;"><line x1="3" y1="21" x2="21" y2="21"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="5 6 12 3 19 6"/><line x1="4" y1="10" x2="4" y2="21"/><line x1="20" y1="10" x2="20" y2="21"/><line x1="8" y1="14" x2="8" y2="17"/><line x1="12" y1="14" x2="12" y2="17"/><line x1="16" y1="14" x2="16" y2="17"/></svg>
             </div>
             <div>
               <span style="font-size:0.85rem; font-weight:800; color:#1E150F;">Bank of Baroda</span>
@@ -158,7 +158,7 @@ export function renderStudioScreen(container) {
           <div style="background:#FAF8F5; border-radius:10px; padding:10px 12px;">
             <div style="display:flex; align-items:center; gap:4px; font-size:0.65rem; font-weight:700; color:#71655D; margin-bottom:2px;">
               <span>TOTAL EARNINGS</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1E6B47" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
             </div>
             <div style="font-size:1.3rem; font-weight:900; color:#1E150F; margin-bottom:2px;">₹48,500</div>
             <div style="font-size:0.68rem; color:#1E6B47; font-weight:700;">+18% this month</div>
@@ -179,33 +179,74 @@ export function renderStudioScreen(container) {
         </a>
       </div>
 
-      <!-- Card 4: AI Suggestions Card -->
-      <div style="background:#FFFDF8; border:1px solid #FDE68A; border-radius:14px; padding:14px; margin-bottom:16px; box-shadow:0 1px 4px rgba(0,0,0,0.03);">
+      <!-- Card 4: AI Suggestions Toggle Button (Appears ONLY when clicked) -->
+      <div style="margin-bottom:14px;">
+        <button type="button" id="btn-toggle-ai-suggestions" style="width:100%; background:linear-gradient(135deg, #FFFDF7 0%, #FEF3C7 100%); border:1.5px solid #F59E0B; border-radius:12px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; box-shadow:0 2px 6px rgba(245,158,11,0.12); transition:all 0.2s ease;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:8px; background:#D97706; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-size:16px;">
+              💡
+            </div>
+            <div style="text-align:left;">
+              <div style="font-size:0.86rem; font-weight:800; color:#92400E; display:flex; align-items:center; gap:6px;">
+                <span>AI Market Suggestions</span>
+                <span style="background:#D97706; color:#FFFFFF; font-size:0.6rem; font-weight:800; padding:2px 6px; border-radius:8px;">2 New</span>
+              </div>
+              <div style="font-size:0.7rem; color:#78350F; margin-top:2px;">
+                Diwali Demand is High • Tap to View Suggestions
+              </div>
+            </div>
+          </div>
+          <div id="ai-toggle-indicator" style="background:#FFFFFF; border:1px solid #FDE68A; color:#B45309; font-size:0.74rem; font-weight:800; padding:5px 10px; border-radius:20px; display:flex; align-items:center; gap:4px; flex-shrink:0;">
+            <span id="ai-toggle-label">View Tips</span>
+            <span id="ai-toggle-arrow">▾</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- Collapsible AI Suggestions Content (Hidden by default, shown ONLY when button is clicked) -->
+      <div id="ai-suggestions-collapsible" style="display:none; background:#FFFDF8; border:1.5px solid #FDE68A; border-radius:14px; padding:14px; margin-bottom:16px; box-shadow:0 2px 8px rgba(217,119,6,0.08); animation: fadeIn 0.25s ease;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
           <div style="display:flex; align-items:center; gap:8px;">
-            <div style="width:26px; height:26px; border-radius:6px; background:#D97706; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-size:14px;">
+            <div style="width:28px; height:28px; border-radius:6px; background:#D97706; color:#FFFFFF; display:flex; align-items:center; justify-content:center; font-size:14px;">
               🏺
             </div>
             <div>
-              <div style="font-size:0.65rem; font-weight:800; color:#D97706; letter-spacing:0.04em;">AI SUGGESTIONS</div>
-              <div id="ai-suggestions-title" style="font-size:0.95rem; font-weight:800; color:#1E150F;">
-                Festive Surge: +45% Demand for Diwali
+              <div style="font-size:0.64rem; font-weight:800; color:#D97706; letter-spacing:0.04em;">AI SUGGESTIONS</div>
+              <div id="ai-suggestions-title" style="font-size:0.92rem; font-weight:800; color:#1E150F;">
+                Diwali Festival: High Demand for Clay Items
               </div>
             </div>
           </div>
           <span style="color:#D97706; font-size:1.1rem;">✦</span>
         </div>
 
-        <p id="ai-suggestions-body" style="font-size:0.75rem; color:#5C524A; line-height:1.4; margin:0 0 12px 0;">
-          Many buyers from Delhi and Mumbai want festive clay pots and diyas right now. Make <strong>40 more surahis and diyas</strong> on your wheel this week.
+        <!-- Simple tags -->
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+          <span style="background:#FEF3C7; color:#92400E; font-size:0.65rem; font-weight:800; padding:3px 8px; border-radius:10px; display:inline-flex; align-items:center; gap:4px;">
+            <span>📈</span>
+            <span>Market Demand: High</span>
+          </span>
+          <span style="background:#E0F2FE; color:#0369A1; font-size:0.65rem; font-weight:800; padding:3px 8px; border-radius:10px; display:inline-flex; align-items:center; gap:4px;">
+            <span>🏺</span>
+            <span>Craft Expertise: Wheel Pottery</span>
+          </span>
+        </div>
+
+        <p id="ai-suggestions-body" style="font-size:0.75rem; color:#5C524A; line-height:1.4; margin:0 0 10px 0;">
+          Buyers in big cities want handmade diyas and clay pots right now. Making extra pieces this week will earn you good profit.
         </p>
 
+        <!-- Recommended Crafts List (Populated dynamically with simple wording) -->
+        <div id="ai-recommended-crafts-container" style="display:flex; flex-direction:column; gap:10px; margin-bottom:12px;">
+          <!-- Populated dynamically by aiClient -->
+        </div>
+
         <div style="display:flex; gap:8px;">
-          <button type="button" id="btn-request-price-analysis" style="flex:1; border:1px solid #EAE3D9; background:#FFFFFF; border-radius:8px; padding:9px 12px; font-size:0.78rem; font-weight:700; color:#1E150F; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer;">
+          <button type="button" id="btn-request-price-analysis" style="flex:1; border:1px solid #EAE3D9; background:#FFFFFF; border-radius:8px; padding:8px 12px; font-size:0.76rem; font-weight:700; color:#1E150F; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer;" title="View Market Demand & Price Analysis">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-            <span>Request Price Analysis</span>
+            <span>Price Analysis</span>
           </button>
-          <button type="button" id="btn-listen-ai-suggestions" style="width:40px; border:1px solid #EAE3D9; background:#FFFFFF; border-radius:8px; padding:0; display:flex; align-items:center; justify-content:center; color:#873413; cursor:pointer;">
+          <button type="button" id="btn-listen-ai-suggestions" style="width:38px; border:1px solid #EAE3D9; background:#FFFFFF; border-radius:8px; padding:0; display:flex; align-items:center; justify-content:center; color:#873413; cursor:pointer;" title="Listen to AI Suggestions Spoken Audio">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
           </button>
         </div>
@@ -214,53 +255,33 @@ export function renderStudioScreen(container) {
       <!-- Section: Active Crafts -->
       <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:2px;">
         <span style="font-size:1.15rem; font-weight:800; color:#1E150F;">Active Crafts</span>
-        <a href="javascript:void(0)" onclick="window.navigateToScreen('craft_studio')" style="font-size:0.78rem; font-weight:700; color:#7A2813; text-decoration:none;">Manage All &gt;</a>
+        <a href="javascript:void(0)" onclick="window.navigateToScreen('manage_crafts')" style="font-size:0.78rem; font-weight:700; color:#7A2813; text-decoration:none;">Manage All &gt;</a>
       </div>
       <div style="font-size:0.72rem; color:#71655D; margin-bottom:12px;">
-        6 items currently listed in marketplace
+        ${(State.artisan?.activeCrafts || []).length} items currently listed in marketplace
       </div>
 
       <!-- 2-Column Craft Cards -->
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px;">
-        
-        <!-- Craft 1: Handcrafted Diyas -->
-        <div style="background:#FFFFFF; border:1px solid #ECE6DE; border-radius:10px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.03); cursor:pointer;" onclick="window.navigateToScreen('craft_studio')" title="Edit Craft in AI Studio">
-          <div style="position:relative; width:100%; height:135px;">
-            <img src="/assets/handcrafted_diyas.jpg" alt="Handcrafted Diyas" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='/assets/blue_pottery.jpg'">
-            <span style="position:absolute; top:6px; left:6px; background:#1F4E3A; color:#FFFFFF; font-size:0.62rem; font-weight:800; padding:2px 8px; border-radius:10px;">
-              • Ready (18)
-            </span>
-          </div>
-          <div style="padding:10px;">
-            <div style="font-size:0.82rem; font-weight:800; color:#1E150F; margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-              Handcrafted Diyas (...
+        ${(State.artisan?.activeCrafts || []).map(craft => `
+          <div style="background:#FFFFFF; border:1px solid #ECE6DE; border-radius:10px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.03); cursor:pointer;" onclick="window.showCraftDetails?.('${craft.id}') || window.navigateToScreen('product_details')" title="View ${craft.title}">
+            <div style="position:relative; width:100%; height:135px;">
+              <img src="${craft.image || '/assets/terracotta_pitcher.jpg'}" alt="${craft.title}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='/assets/terracotta_pitcher.jpg'">
+              <span style="position:absolute; top:6px; left:6px; background:${craft.status === 'Low Stock' ? '#C2410C' : '#1F4E3A'}; color:#FFFFFF; font-size:0.62rem; font-weight:800; padding:2px 8px; border-radius:10px;">
+                ${craft.badge || `• Ready (${craft.stock || 12})`}
+              </span>
             </div>
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <span style="font-size:0.95rem; font-weight:900; color:#1E150F;">₹320</span>
-              <span style="font-size:0.68rem; color:#71655D; font-weight:600;">12 sold</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Craft 2: Decorative Clay Wall Plate -->
-        <div style="background:#FFFFFF; border:1px solid #ECE6DE; border-radius:10px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.03); cursor:pointer;" onclick="window.navigateToScreen('craft_studio')" title="Edit Craft in AI Studio">
-          <div style="position:relative; width:100%; height:135px;">
-            <img src="/assets/clay_wall_plate.jpg" alt="Decorative Clay Wall Plate" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='/assets/woodcraft_bowl.jpg'">
-            <span style="position:absolute; top:6px; left:6px; background:#C2410C; color:#FFFFFF; font-size:0.62rem; font-weight:800; padding:2px 8px; border-radius:10px;">
-              • Low Stock (3)
-            </span>
-          </div>
-          <div style="padding:10px;">
-            <div style="font-size:0.82rem; font-weight:800; color:#1E150F; margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-              Decorative Clay Wall ...
-            </div>
-            <div style="display:flex; justify-content:space-between; align-items:baseline;">
-              <span style="font-size:0.95rem; font-weight:900; color:#1E150F;">₹850</span>
-              <span style="font-size:0.68rem; color:#71655D; font-weight:600;">9 sold</span>
+            <div style="padding:10px;">
+              <div style="font-size:0.82rem; font-weight:800; color:#1E150F; margin-bottom:4px; line-height:1.2; cursor:pointer;" title="${craft.title}" onclick="event.stopPropagation(); window.showToast?.('${craft.title}')">
+                ${craft.title}
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:baseline;">
+                <span style="font-size:0.95rem; font-weight:900; color:#1E150F;">₹${craft.price}</span>
+                <span style="font-size:0.68rem; color:#71655D; font-weight:600;">${craft.soldCount || 0} sold</span>
+              </div>
             </div>
           </div>
-        </div>
-
+        `).join('')}
       </div>
 
       <!-- Add New Craft Button -->
@@ -275,8 +296,8 @@ export function renderStudioScreen(container) {
           </div>
         </div>
         <div style="display:flex; align-items:center; gap:10px; opacity:0.9;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" data-keep-color="true" style="stroke:#FFFFFF !important; color:#FFFFFF !important;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" data-keep-color="true" style="stroke:#FFFFFF !important; color:#FFFFFF !important;"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
         </div>
       </div>
 
@@ -285,7 +306,7 @@ export function renderStudioScreen(container) {
     <!-- Bottom Sheet Modal: Artisan Trust Score Breakdown -->
     <div class="modal-overlay ${State.trustScoreModalOpen ? 'active' : ''}" id="modal-trust-score">
       <div class="bottom-sheet">
-        
+
         <!-- Sheet Header -->
         <div class="sheet-header">
           <div class="sheet-title-group">
@@ -316,7 +337,7 @@ export function renderStudioScreen(container) {
 
         <!-- 4 Score Categories Breakdown List -->
         <div class="score-categories-list">
-          
+
           <div class="score-category-item">
             <div class="score-cat-title">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -335,7 +356,7 @@ export function renderStudioScreen(container) {
 
           <div class="score-category-item">
             <div class="score-cat-title">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
               Buyer Reviews &amp; Order Acceptance
             </div>
             <span class="score-cat-points amber">18 / 20 pts</span>
@@ -359,25 +380,124 @@ export function renderStudioScreen(container) {
           </div>
         </div>
 
+        <!-- Audio Explanation Button -->
+        <button type="button" class="btn-secondary" id="btn-play-trust-audio" style="width:100%; margin-top:12px; padding:10px 14px; font-size:0.78rem; font-weight:800; border-radius:10px; display:flex; align-items:center; justify-content:center; gap:6px; background:#FFF0E6; color:#7A2813; border:1px solid #FCD7C2; cursor:pointer;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          <span>Listen to Trust Score Audio Guide</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Bottom Sheet Modal: AI Market Demand & Craft Expertise Price Analysis -->
+    <div class="modal-overlay" id="modal-ai-price-analysis">
+      <div class="bottom-sheet" style="max-height:88vh; overflow-y:auto;">
+
+        <div class="sheet-header">
+          <div class="sheet-title-group">
+            <div style="width:32px; height:32px; border-radius:8px; background:#FEF3C7; display:flex; align-items:center; justify-content:center; color:#D97706; font-size:16px;">
+              📊
+            </div>
+            <div>
+              <div style="font-size:0.95rem; font-weight:800; color:var(--text-primary);">Market Demand &amp; Craft Expertise</div>
+              <div style="font-size:0.7rem; color:#B45309; font-weight:700;">Hybrid AI: XGBoost Demand + Qwen2.5-VL Portfolio Match</div>
+            </div>
+          </div>
+          <button type="button" class="sheet-close-btn" id="btn-close-analysis-sheet">✕</button>
+        </div>
+
+        <!-- 1. Market Demand Intelligence -->
+        <div style="background:#FFFBF2; border:1px solid #FDE68A; border-radius:10px; padding:12px; margin-bottom:12px;">
+          <div style="font-size:0.7rem; font-weight:800; color:#B45309; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px;">
+            1. REAL-TIME MARKET DEMAND SIGNALS (XGBoost)
+          </div>
+          <div style="font-size:0.85rem; font-weight:800; color:#1C1917; margin-bottom:6px;">
+            Festive Surge: +45% to +68% Diwali Pre-orders
+          </div>
+          <div style="font-size:0.72rem; color:#57534E; line-height:1.45;">
+            • <strong>Top Buying Hubs:</strong> Delhi NCR (42%), Mumbai (33%), Bengaluru (25%)<br>
+            • <strong>Consumer Preference:</strong> High demand for unglazed, non-toxic eco-friendly puja diyas and natural water-cooling surahis.<br>
+            • <strong>Timing Window:</strong> Next 15 days before festival. Critical zero-stockout window.
+          </div>
+        </div>
+
+        <!-- 2. Craft Expertise Match -->
+        <div style="background:#F0F9FF; border:1px solid #BAE6FD; border-radius:10px; padding:12px; margin-bottom:12px;">
+          <div style="font-size:0.7rem; font-weight:800; color:#0369A1; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:4px;">
+            2. ARTISAN CRAFT EXPERTISE ALIGNMENT (Qwen2.5-VL)
+          </div>
+          <div style="font-size:0.85rem; font-weight:800; color:#1C1917; margin-bottom:6px;">
+            Ramdev Kumhar • Master Potter (35 Yrs Experience)
+          </div>
+          <div style="font-size:0.72rem; color:#57534E; line-height:1.45;">
+            • <strong>Specialized Technique:</strong> Foot-spun rapid wheel shaping &amp; fine stylus floral etching.<br>
+            • <strong>Indigenous Medium:</strong> Mineral-rich alluvial riverbed silt from Ganga/Rapti basin (GI #182 certified).<br>
+            • <strong>Daily Output Capacity:</strong> 35–40 diya sets or 6–8 full water surahis per wheel/day.
+          </div>
+        </div>
+
+        <!-- 3. Cost & Margin Analysis Breakdown -->
+        <div style="background:#FFFFFF; border:1px solid #ECE7E1; border-radius:10px; padding:12px; margin-bottom:14px;">
+          <div style="font-size:0.7rem; font-weight:800; color:#7A2813; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;">
+            3. XGBOOST MARGIN &amp; COST BREAKDOWN (PER SET)
+          </div>
+
+          <div style="display:flex; justify-content:space-between; font-size:0.74rem; padding:4px 0; border-bottom:1px solid #F5EAE1;">
+            <span style="color:#78716C;">Natural Riverbed Silt &amp; Raw Clay:</span>
+            <span style="font-weight:700; color:#1C1917;">₹60</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.74rem; padding:4px 0; border-bottom:1px solid #F5EAE1;">
+            <span style="color:#78716C;">Skilled Artisan Wheel Labor (2.5 hrs):</span>
+            <span style="font-weight:700; color:#1C1917;">₹180</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.74rem; padding:4px 0; border-bottom:1px solid #F5EAE1;">
+            <span style="color:#78716C;">Wood Kiln Firing &amp; Loss Reserve:</span>
+            <span style="font-weight:700; color:#1C1917;">₹40</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.74rem; padding:4px 0; border-bottom:1px solid #F5EAE1;">
+            <span style="color:#78716C;">Delivery Agent Zero-Plastic Packaging:</span>
+            <span style="font-weight:700; color:#1C1917;">₹20</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:0.82rem; font-weight:900; padding:8px 0 0; color:#7A2813;">
+            <span>Recommended Target Retail Price:</span>
+            <span>₹340 / set</span>
+          </div>
+          <div style="font-size:0.68rem; color:#16A34A; font-weight:700; margin-top:4px;">
+            ✓ +22% higher profit margin compared to off-peak middleman procurement
+          </div>
+        </div>
+
+        <!-- Action Button inside sheet -->
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn-primary" id="btn-start-batch-from-analysis" style="flex:1; padding:12px; font-size:0.82rem; font-weight:800; background:#7A2813;">
+            🔨 Produce Akhand Diya Batch in Studio →
+          </button>
+        </div>
+
       </div>
     </div>
   `;
 
   // Attach Handlers
   const modal = container.querySelector('#modal-trust-score');
-  
+
   container.querySelector('#btn-open-trust-modal').addEventListener('click', () => {
     modal.classList.add('active');
+  });
+
+  container.querySelector('#btn-play-trust-audio')?.addEventListener('click', () => {
     AudioAssistance.playTrustScore();
   });
 
   container.querySelector('#btn-close-trust-sheet').addEventListener('click', () => {
     modal.classList.remove('active');
+    AudioAssistance.stop();
   });
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       modal.classList.remove('active');
+      AudioAssistance.stop();
     }
   });
 
@@ -392,7 +512,115 @@ export function renderStudioScreen(container) {
 
   // 5) AI Suggestion: Hybrid Recommendation Engine (XGBoost Demand + Qwen2.5-VL Portfolio)
   let activeSuggestionAudio = 'दिवाली के लिए मांग 45 प्रतिशत बढ़ गई है। इस सप्ताह अपने चाक पर 40 और सुराही और दीये बनाएं।';
-  
+
+  const craftsContainer = container.querySelector('#ai-recommended-crafts-container');
+  const toggleBtn = container.querySelector('#btn-toggle-ai-suggestions');
+  const collapsible = container.querySelector('#ai-suggestions-collapsible');
+  const toggleLabel = container.querySelector('#ai-toggle-label');
+  const toggleArrow = container.querySelector('#ai-toggle-arrow');
+
+  // Toggle AI suggestions on button click ONLY
+  toggleBtn?.addEventListener('click', () => {
+    if (!collapsible) return;
+    const isHidden = collapsible.style.display === 'none';
+    if (isHidden) {
+      collapsible.style.display = 'block';
+      if (toggleLabel) toggleLabel.textContent = 'Hide Tips';
+      if (toggleArrow) toggleArrow.textContent = '▴';
+    } else {
+      collapsible.style.display = 'none';
+      if (toggleLabel) toggleLabel.textContent = 'View Tips';
+      if (toggleArrow) toggleArrow.textContent = '▾';
+    }
+  });
+
+  function renderRecommendedCraftsList(crafts) {
+    if (!craftsContainer || !crafts || !crafts.length) return;
+
+    craftsContainer.innerHTML = crafts.map(craft => `
+      <div class="ai-craft-recommendation-card" style="background:#FFFFFF; border:1px solid #F3E8D8; border-radius:10px; padding:10px 12px; box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <img src="${craft.image || '/assets/terracotta_pitcher.jpg'}" alt="${craft.title}" style="width:36px; height:36px; border-radius:8px; object-fit:cover; border:1px solid #ECE7E1;" onerror="this.src='/assets/terracotta_pitcher.jpg'">
+            <div>
+              <div style="font-size:0.84rem; font-weight:800; color:#1E150F; line-height:1.2;">${craft.title}</div>
+              <div style="font-size:0.65rem; color:#78716C; margin-top:2px;">
+                ${craft.category} • <span style="color:#B45309; font-weight:700;">${craft.badge || 'Recommended'}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simple, clean guidance for artisan -->
+        <div style="background:#FAF8F5; border-radius:8px; padding:6px 9px; margin-bottom:8px; font-size:0.69rem; line-height:1.35;">
+          <div style="display:flex; gap:6px; margin-bottom:3px; align-items:baseline;">
+            <span style="color:#B45309; font-weight:800; font-size:0.65rem; flex-shrink:0;">📈 Demand:</span>
+            <span style="color:#44403C;">${craft.market_demand?.reason || 'High customer demand'}</span>
+          </div>
+          <div style="display:flex; gap:6px; align-items:baseline;">
+            <span style="color:#0369A1; font-weight:800; font-size:0.65rem; flex-shrink:0;">🏺 Skill Fit:</span>
+            <span style="color:#44403C;">${craft.craft_expertise?.artisan_fit || 'Matches your pottery skills'}</span>
+          </div>
+        </div>
+
+        <!-- Target Price, Batch & Actions -->
+        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px dashed #ECE7E1; padding-top:8px;">
+          <div>
+            <span style="font-size:0.9rem; font-weight:900; color:#1E150F;">₹${craft.pricing?.target_price || 340}</span>
+            <span style="font-size:0.65rem; color:#78716C;">/ piece • Profit: <strong style="color:#15803D;">${craft.pricing?.est_profit || '₹10,000+'}</strong></span>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="btn-listen-single-craft" data-audio="${encodeURIComponent(craft.audio_hindi || activeSuggestionAudio)}" style="background:#FFF0E6; border:1px solid #FCD7C2; border-radius:6px; width:28px; height:28px; display:flex; align-items:center; justify-content:center; color:#7A2813; cursor:pointer;" title="Listen Audio">
+              🔊
+            </button>
+            <button type="button" class="btn-craft-this-now" data-craft-id="${craft.id}" style="background:#7A2813; color:#FFFFFF; border:none; border-radius:6px; padding:6px 12px; font-size:0.72rem; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:4px;">
+              <span>🔨 Make This</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Attach click listener to "Craft This" buttons
+    craftsContainer.querySelectorAll('.btn-craft-this-now').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cId = btn.dataset.craftId;
+        const selected = crafts.find(c => c.id === cId) || crafts[0];
+
+        State.craftListingDraft = {
+          title: selected.title,
+          subtitle: selected.badge || 'AI Recommended Craft',
+          category: selected.category || 'Terracotta Pottery',
+          cluster: 'Gorakhpur & Varanasi Clay Cluster (GI #182)',
+          targetPrice: selected.pricing?.target_price || 340,
+          price: selected.pricing?.target_price || 340,
+          listingPrice: selected.pricing?.target_price || 340,
+          rangeMin: (selected.pricing?.target_price || 340) - 30,
+          rangeMax: (selected.pricing?.target_price || 340) + 50,
+          rawMaterialCost: selected.pricing?.raw_material_cost || 60,
+          hoursCost: selected.pricing?.hours_cost || 180,
+          kilnCost: selected.pricing?.kiln_cost || 40,
+          englishTranslation: `Handcrafted ${selected.title} produced on the traditional wheel with natural riverbed clay. Tailored to high market demand.`,
+          storyHindi: selected.audio_hindi,
+          image: selected.image || '/assets/terracotta_pitcher.jpg'
+        };
+
+        window.showToast?.(`Loaded AI Blueprint for '${selected.title}'! Opening Craft Studio... 🔨`);
+        setTimeout(() => {
+          window.navigateToScreen('craft_studio');
+        }, 300);
+      });
+    });
+
+    // Attach click listener to single craft audio buttons
+    craftsContainer.querySelectorAll('.btn-listen-single-craft').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = decodeURIComponent(btn.dataset.audio);
+        AudioAssistance.speak(text, 'hi-IN');
+      });
+    });
+  }
+
   aiClient.getArtisanSuggestions('artisan-gorakhpur-01').then((res) => {
     if (res) {
       const titleEl = container.querySelector('#ai-suggestions-title');
@@ -400,11 +628,18 @@ export function renderStudioScreen(container) {
       if (titleEl && res.title) titleEl.textContent = res.title;
       if (bodyEl && res.recommendationHtml) bodyEl.innerHTML = res.recommendationHtml;
       if (res.spokenHindi) activeSuggestionAudio = res.spokenHindi;
+
+      if (res.recommendedCrafts && res.recommendedCrafts.length) {
+        renderRecommendedCraftsList(res.recommendedCrafts);
+      }
     }
   }).catch(() => {});
 
-  // Request Price Analysis via XGBoost Margin Optimizer
+  // Price & Demand Analysis Sheet Handlers
+  const analysisModal = container.querySelector('#modal-ai-price-analysis');
+
   container.querySelector('#btn-request-price-analysis')?.addEventListener('click', async () => {
+    analysisModal?.classList.add('active');
     try {
       const analysis = await aiClient.requestPriceAnalysis('Festive Diyas Set');
       window.showToast?.(analysis.toast_message || 'AI Price Analysis: Target price ₹320-₹350/set recommended for peak festive margins.');
@@ -413,8 +648,43 @@ export function renderStudioScreen(container) {
     }
   });
 
+  container.querySelector('#btn-close-analysis-sheet')?.addEventListener('click', () => {
+    analysisModal?.classList.remove('active');
+  });
+
+  analysisModal?.addEventListener('click', (e) => {
+    if (e.target === analysisModal) {
+      analysisModal.classList.remove('active');
+    }
+  });
+
+  container.querySelector('#btn-start-batch-from-analysis')?.addEventListener('click', () => {
+    analysisModal?.classList.remove('active');
+    State.craftListingDraft = {
+      title: 'Akhand Festive Clay Diya Set (Pack of 12)',
+      subtitle: 'Festive Peak Demand',
+      category: 'Terracotta Pottery',
+      cluster: 'Gorakhpur & Varanasi Clay Cluster (GI #182)',
+      targetPrice: 340,
+      price: 340,
+      listingPrice: 340,
+      rangeMin: 300,
+      rangeMax: 390,
+      rawMaterialCost: 60,
+      hoursCost: 180,
+      kilnCost: 40,
+      englishTranslation: 'Akhand Festive Clay Diya Set made on the traditional wheel with pure riverbed clay.',
+      storyHindi: 'अखंड मिट्टी दीया सेट: दिल्ली और मुंबई में दिवाली के लिए 68% अधिक मांग है।',
+      image: '/assets/raw_pottery_snap.jpg'
+    };
+    window.showToast?.("Loaded Akhand Diya Set blueprint! Opening Craft Studio... 🔨");
+    setTimeout(() => {
+      window.navigateToScreen('craft_studio');
+    }, 300);
+  });
+
   // Spoken Hindi/Bhojpuri recommendation audio
   container.querySelector('#btn-listen-ai-suggestions')?.addEventListener('click', () => {
-    AudioAssistance.speak(activeSuggestionAudio);
+    AudioAssistance.speak(activeSuggestionAudio, 'hi-IN');
   });
 }

@@ -9,26 +9,12 @@ import { AudioAssistance } from '../speech.js';
 export function renderReturnsPolicyScreen(container) {
   container.innerHTML = `
     <div class="returns-policy-screen animate-fade-in" style="padding-bottom:30px;">
-      
-      <!-- Audio Policy Explainer -->
-      <div style="background:#FFF9F5; border:1px solid var(--color-terracotta-border); border-radius:var(--radius-md); padding:10px 12px; display:flex; align-items:center; gap:10px; margin: 8px 0 14px;">
-        <div style="width:36px; height:36px; border-radius:10px; background:var(--color-terracotta); color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-        </div>
-        <div style="flex:1;">
-          <div style="font-size:0.68rem; font-weight:800; color:var(--color-terracotta); letter-spacing:0.04em;">AUDIO GUIDE • 1 MIN 20 SEC</div>
-          <div style="font-size:0.82rem; font-weight:800; color:var(--text-primary);">Listen to Policy Explanation</div>
-          <div style="font-size:0.7rem; color:var(--text-secondary);">Understand replacement and artisan security</div>
-        </div>
-        <button type="button" id="btn-play-returns-audio" style="width:32px; height:32px; border-radius:50%; background:#7A2E0E; color:#fff; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </button>
-      </div>
+
 
       <!-- What Qualifies vs What Doesn't -->
       <div class="policy-block-card">
         <div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;">
-          <span style="font-size:1.1rem;">📋</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/></svg>
           <span style="font-size:0.92rem; font-weight:800; color:var(--text-primary);">What Qualifies vs What Doesn't</span>
         </div>
         <p style="font-size:0.72rem; color:var(--text-secondary); margin-bottom:12px;">
@@ -108,7 +94,7 @@ export function renderReturnsPolicyScreen(container) {
       <!-- Simple 3-Step Return Flow -->
       <div class="policy-block-card">
         <div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;">
-          <span style="font-size:1.1rem;">🔄</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
           <span style="font-size:0.92rem; font-weight:800; color:var(--text-primary);">Simple 3-Step Return Flow</span>
         </div>
         <p style="font-size:0.72rem; color:var(--text-secondary); margin-bottom:12px;">
@@ -154,7 +140,7 @@ export function renderReturnsPolicyScreen(container) {
       <!-- Artisan Financial Security Guarantee Box (Pink) -->
       <div style="background:#FEECE5; border:1px solid var(--color-terracotta-border); border-radius:var(--radius-lg); padding:14px; margin-bottom:14px;">
         <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
-          <span style="font-size:1.1rem;">🛡️</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
           <span class="badge-amber" style="background:#7A2E0E; color:#FFFFFF; border:none; font-size:0.65rem;">
             ARTISAN PAYOUT GUARANTEE • 100% Fair Trade Shield
           </span>
@@ -170,7 +156,7 @@ export function renderReturnsPolicyScreen(container) {
       <!-- Government of India Registered Guild Tag -->
       <div style="background:#FAF7F2; border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:10px 12px; display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
         <div style="display:flex; align-items:center; gap:8px;">
-          <span style="font-size:1.2rem;">🏛️</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A2813" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
           <div style="font-size:0.75rem; font-weight:800; color:var(--text-primary);">
             GI Tag Certified Authentic Artisans
             <div style="font-size:0.65rem; color:var(--text-muted); font-weight:normal;">Government of India Registered Guild Protection</div>
@@ -180,23 +166,19 @@ export function renderReturnsPolicyScreen(container) {
       </div>
 
       <!-- Action Buttons -->
-      <button type="button" class="btn-primary" id="btn-file-return" style="margin-bottom:8px;">
-        📦 File New Return Request
+      <button type="button" class="btn-primary" id="btn-file-return" style="margin-bottom:8px; display:flex; align-items:center; justify-content:center; gap:6px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16.5 9.4 7.55 4.24 2.5 7.15 11.45 12.31 20.5 7.15"/><polyline points="3.29 7 12 12.01 20.71 7"/><line x1="12" x2="12" y1="22.01" y2="12"/><path d="M20.7 7v10a2 2 0 0 1-1.1 1.8l-6.6 3.8a2 2 0 0 1-2 0l-6.6-3.8A2 2 0 0 1 3.3 17V7"/></svg>
+        <span>File New Return Request</span>
       </button>
 
-      <button type="button" class="btn-secondary" style="background:#1C3550; color:#FFFFFF; border:none; padding:12px; font-weight:700;" onclick="window.showToast('Calling Artisan & Buyer Support: 1800-200-ARTS')">
-        🎧 Artisan &amp; Buyer Support Centre (1800-200-ARTS)
+      <button type="button" class="btn-secondary" style="background:#1C3550; color:#FFFFFF; border:none; padding:12px; font-weight:700; display:flex; align-items:center; justify-content:center; gap:6px;" onclick="window.showToast('Calling Artisan & Buyer Support: 1800-200-ARTS')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+        <span>Artisan &amp; Buyer Support Centre (1800-200-ARTS)</span>
       </button>
 
     </div>
   `;
 
-  container.querySelector('#btn-play-returns-audio').addEventListener('click', () => {
-    AudioAssistance.speak(
-      "हस्तशिल्प सुरक्षा नीति: पारगमन में नुकसान होने पर पूरा रिफंड मिलता है, और शिल्पकार का मेहनताना भी बीमा फंड से पूरी तरह सुरक्षित रहता है।",
-      "hi-IN"
-    );
-  });
 
   container.querySelector('#btn-file-return').addEventListener('click', () => {
     window.openReturnModal();

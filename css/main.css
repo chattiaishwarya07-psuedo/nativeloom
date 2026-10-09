@@ -145,6 +145,60 @@ body {
   background: rgba(135, 52, 19, 0.08);
 }
 
+/* Universal Voice Guide ON/OFF Toggle Button */
+.voice-guide-toggle-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  height: 28px !important;
+  padding: 3px 9px !important;
+  border-radius: var(--radius-pill, 9999px) !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  user-select: none !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.voice-guide-toggle-btn .vg-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.voice-guide-toggle-btn .vg-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.voice-guide-toggle-btn.vg-on {
+  background: #ECFDF5 !important;
+  color: #065F46 !important;
+  border: 1.5px solid #10B981 !important;
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.25) !important;
+}
+
+.voice-guide-toggle-btn.vg-on:hover {
+  background: #D1FAE5 !important;
+  border-color: #059669 !important;
+  transform: translateY(-1px);
+}
+
+.voice-guide-toggle-btn.vg-off {
+  background: #F3F4F6 !important;
+  color: #4B5563 !important;
+  border: 1.5px solid #9CA3AF !important;
+  box-shadow: none !important;
+}
+
+.voice-guide-toggle-btn.vg-off:hover {
+  background: #E5E7EB !important;
+  border-color: #6B7280 !important;
+  transform: translateY(-1px);
+}
+
 .header-title {
   font-size: 1.1rem;
   font-weight: 800;
@@ -578,5 +632,365 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   TERRACOTTA ICONS & HIGH CONTRAST SVG SYSTEM
+   Ensures stroke icons remain hollow line art (never filled solid),
+   terracotta themed on light surfaces, and crisp white on dark/colored buttons.
+   ========================================================================== */
+/* Outline SVGs must NEVER have solid fills - preserve hollow line art */
+svg[fill="none"],
+svg[fill="none"] * {
+  fill: none !important;
+}
+
+/* Light theme standalone icons on white/light surfaces: crisp terracotta outline stroke */
+svg:not([data-keep-color]):not(.keep-icon-color) {
+  stroke: #7A2813;
+  color: #7A2813;
+}
+
+svg:not([data-keep-color]):not(.keep-icon-color) path:not([stroke="none"]),
+svg:not([data-keep-color]):not(.keep-icon-color) circle:not([stroke="none"]),
+svg:not([data-keep-color]):not(.keep-icon-color) rect:not([stroke="none"]),
+svg:not([data-keep-color]):not(.keep-icon-color) line,
+svg:not([data-keep-color]):not(.keep-icon-color) polyline,
+svg:not([data-keep-color]):not(.keep-icon-color) polygon:not([stroke="none"]),
+svg:not([data-keep-color]):not(.keep-icon-color) g[stroke]:not([stroke="none"]) {
+  stroke: inherit;
+}
+
+/* Nav tabs & bottom navigation: terracotta stroke */
+.nav-tab svg,
+.nav-tab svg *,
+#bottom-navigation svg,
+#bottom-navigation svg * {
+  stroke: #7A2813 !important;
+  color: #7A2813 !important;
+  fill: none !important;
+}
+
+/* Solid glyph icons on light surfaces only (e.g. star rating, explicit solid icons) */
+svg.solid-icon[fill]:not([fill="none"]),
+svg[data-icon-type="solid"] [fill]:not([fill="none"]) {
+  fill: #7A2813 !important;
+}
+
+/* ==========================================================================
+   CRITICAL CONTRAST FIX: Any icon inside dark, terracotta, or colored boxes,
+   buttons, badges, and headers MUST BE CRISP BRILLIANT WHITE (#FFFFFF).
+   ========================================================================== */
+[style*="color:#FFFFFF"] svg,
+[style*="color: #FFFFFF"] svg,
+[style*="color:#ffffff"] svg,
+[style*="color: #ffffff"] svg,
+[style*="color:white"] svg,
+[style*="color: white"] svg,
+[style*="background:#7A2813"] svg,
+[style*="background: #7A2813"] svg,
+[style*="background:#6B1D0F"] svg,
+[style*="background: #6B1D0F"] svg,
+[style*="background:#873413"] svg,
+[style*="background: #873413"] svg,
+[style*="background:#A84318"] svg,
+[style*="background: #A84318"] svg,
+[style*="background:#5C2314"] svg,
+[style*="background: #5C2314"] svg,
+[style*="background:#1C3550"] svg,
+[style*="background: #1C3550"] svg,
+[style*="background:#0F172A"] svg,
+[style*="background: #0F172A"] svg,
+[style*="background:#1E293B"] svg,
+[style*="background: #1E293B"] svg,
+[style*="background:#1E6B47"] svg,
+[style*="background: #1E6B47"] svg,
+[style*="background:#1F4E3A"] svg,
+[style*="background: #1F4E3A"] svg,
+[style*="background:#D97706"] svg,
+[style*="background: #D97706"] svg,
+[style*="background:#B45309"] svg,
+[style*="background: #B45309"] svg,
+[style*="background:#9A3412"] svg,
+[style*="background: #9A3412"] svg,
+[style*="background:#C2410C"] svg,
+[style*="background: #C2410C"] svg,
+[style*="background:var(--color-terracotta)"] svg,
+[style*="background: var(--color-terracotta)"] svg,
+[style*="linear-gradient"] svg,
+.btn-primary svg,
+.btn-danger svg,
+.btn-craft-this-now svg,
+.badge-green svg,
+.badge-primary svg,
+#toast-container svg,
+[style*="color:#FFFFFF"] svg *,
+[style*="color: #FFFFFF"] svg *,
+[style*="background:#7A2813"] svg *,
+[style*="background: #7A2813"] svg *,
+[style*="background:#6B1D0F"] svg *,
+[style*="background: #6B1D0F"] svg *,
+[style*="background:#873413"] svg *,
+[style*="background: #873413"] svg *,
+[style*="background:#A84318"] svg *,
+[style*="background: #A84318"] svg *,
+[style*="background:#1C3550"] svg *,
+[style*="background: #1C3550"] svg *,
+[style*="background:#0F172A"] svg *,
+[style*="background: #0F172A"] svg *,
+[style*="background:#1E6B47"] svg *,
+[style*="background: #1E6B47"] svg *,
+[style*="background:#1F4E3A"] svg *,
+[style*="background: #1F4E3A"] svg *,
+[style*="background:#D97706"] svg *,
+[style*="background: #D97706"] svg *,
+[style*="linear-gradient"] svg *,
+.btn-primary svg *,
+.btn-danger svg *,
+.btn-craft-this-now svg *,
+.badge-green svg *,
+.badge-primary svg *,
+#toast-container svg * {
+  stroke: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+/* Stroke icons on dark backgrounds maintain hollow paths */
+[style*="color:#FFFFFF"] svg[fill="none"],
+[style*="color: #FFFFFF"] svg[fill="none"],
+[style*="color:#FFFFFF"] svg[fill="none"] *,
+[style*="color: #FFFFFF"] svg[fill="none"] *,
+[style*="background:#7A2813"] svg[fill="none"],
+[style*="background: #7A2813"] svg[fill="none"],
+[style*="background:#7A2813"] svg[fill="none"] *,
+[style*="background: #7A2813"] svg[fill="none"] *,
+[style*="background:#6B1D0F"] svg[fill="none"],
+[style*="background: #6B1D0F"] svg[fill="none"],
+[style*="background:#6B1D0F"] svg[fill="none"] *,
+[style*="background: #6B1D0F"] svg[fill="none"] *,
+[style*="background:#873413"] svg[fill="none"],
+[style*="background: #873413"] svg[fill="none"],
+[style*="background:#873413"] svg[fill="none"] *,
+[style*="background: #873413"] svg[fill="none"] *,
+[style*="background:#1C3550"] svg[fill="none"],
+[style*="background: #1C3550"] svg[fill="none"],
+[style*="background:#1C3550"] svg[fill="none"] *,
+[style*="background: #1C3550"] svg[fill="none"] *,
+[style*="linear-gradient"] svg[fill="none"],
+[style*="linear-gradient"] svg[fill="none"] * {
+  fill: none !important;
+}
+
+/* Filled icons & silhouettes on dark backgrounds (profile avatar, solid badges) */
+[style*="color:#FFFFFF"] svg[fill="currentColor"],
+[style*="color: #FFFFFF"] svg[fill="currentColor"],
+[style*="color:#FFFFFF"] svg [fill="currentColor"],
+[style*="color: #FFFFFF"] svg [fill="currentColor"],
+[style*="background:#7A2813"] svg[fill="currentColor"],
+[style*="background: #7A2813"] svg[fill="currentColor"],
+[style*="background:#6B1D0F"] svg[fill="currentColor"],
+[style*="background: #6B1D0F"] svg[fill="currentColor"],
+[style*="background:#873413"] svg[fill="currentColor"],
+[style*="background: #873413"] svg[fill="currentColor"],
+[style*="background:#A84318"] svg[fill="currentColor"],
+[style*="background: #A84318"] svg[fill="currentColor"],
+[style*="color:#FFFFFF"] svg path[fill="currentColor"],
+[style*="color: #FFFFFF"] svg path[fill="currentColor"],
+[style*="background:#7A2813"] svg path[fill="currentColor"],
+[style*="background: #7A2813"] svg path[fill="currentColor"],
+[style*="background:#6B1D0F"] svg path[fill="currentColor"],
+[style*="background: #6B1D0F"] svg path[fill="currentColor"],
+[style*="background:#873413"] svg path[fill="currentColor"],
+[style*="background: #873413"] svg path[fill="currentColor"],
+[style*="background:#A84318"] svg path[fill="currentColor"],
+[style*="background: #A84318"] svg path[fill="currentColor"],
+[style*="linear-gradient"] svg[fill="currentColor"],
+[style*="linear-gradient"] svg path[fill="currentColor"],
+svg[fill="#FFFFFF"],
+svg[fill="#FFFFFF"] *,
+svg path[fill="#FFFFFF"] {
+  fill: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+/* ==========================================================================
+   Dark Theme Design System
+   ========================================================================== */
+body.dark-theme,
+.dark-theme #app-viewport {
+  --bg-primary: #14110E;
+  --bg-card: #221A15;
+  --bg-card-subtle: #2A211B;
+  --bg-input: #1D1612;
+
+  --color-terracotta: #E27244;
+  --color-terracotta-hover: #F08558;
+  --color-terracotta-dark: #F79B73;
+  --color-terracotta-light: #341D14;
+  --color-terracotta-border: #5C2D1C;
+  --color-terracotta-gradient: linear-gradient(135deg, #B2461D 0%, #E27244 100%);
+
+  --color-forest: #235843;
+  --color-green: #34D399;
+  --color-green-light: #162E23;
+  --color-green-border: #20593E;
+
+  --color-amber: #FBBF24;
+  --color-amber-light: #2D2411;
+  --color-amber-border: #6B4E12;
+
+  --color-blue-soft: #1E293B;
+  --color-blue-text: #93C5FD;
+
+  --text-primary: #F8EFE6;
+  --text-secondary: #D4C1B0;
+  --text-muted: #9E8C7D;
+  --border-subtle: #3C2E24;
+  --border-card: #45352A;
+  --divider: #36281F;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.7);
+  --shadow-sheet: 0 -8px 30px rgba(0, 0, 0, 0.85);
+
+  background-color: #14110E;
+  color: #F8EFE6;
+}
+
+body.dark-theme {
+  background-color: #0C0A09 !important;
+}
+
+@media (min-width: 768px) {
+  body.dark-theme {
+    background: radial-gradient(circle at 50% 20%, #1A1410 0%, #0A0807 100%) !important;
+  }
+}
+
+body.dark-theme #app-viewport {
+  background-color: #14110E !important;
+  border-color: #382A21 !important;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.75) !important;
+}
+
+body.dark-theme .app-header {
+  background: #191410 !important;
+  border-bottom: 1px solid #362920 !important;
+}
+
+body.dark-theme .app-header .header-title span:first-child {
+  color: #E27244 !important;
+}
+
+body.dark-theme .bottom-navigation,
+body.dark-theme #bottom-navigation {
+  background: #191410 !important;
+  border-top: 1px solid #362920 !important;
+}
+
+body.dark-theme svg[fill="none"],
+body.dark-theme svg[fill="none"] *,
+body.dark-theme svg:not([fill]) * {
+  fill: none !important;
+}
+
+body.dark-theme svg:not([data-keep-color]):not(.keep-icon-color):not(.btn-primary svg):not(.btn-danger svg):not(#toast-container svg) {
+  stroke: #E27244 !important;
+  color: #E27244 !important;
+}
+
+body.dark-theme svg:not([data-keep-color]):not(.keep-icon-color):not(.btn-primary svg):not(.btn-danger svg):not(#toast-container svg) path:not([stroke="none"]),
+body.dark-theme svg:not([data-keep-color]):not(.keep-icon-color):not(.btn-primary svg):not(.btn-danger svg):not(#toast-container svg) circle:not([stroke="none"]),
+body.dark-theme svg:not([data-keep-color]):not(.keep-icon-color):not(.btn-primary svg):not(.btn-danger svg):not(#toast-container svg) rect:not([stroke="none"]),
+body.dark-theme svg:not([data-keep-color]):not(.keep-icon-color):not(.btn-primary svg):not(.btn-danger svg):not(#toast-container svg) line,
+body.dark-theme svg:not([data-keep-color]):not(.keep-icon-color):not(.btn-primary svg):not(.btn-danger svg):not(#toast-container svg) polyline,
+body.dark-theme svg:not([data-keep-color]):not(.keep-icon-color):not(.btn-primary svg):not(.btn-danger svg):not(#toast-container svg) polygon:not([stroke="none"]),
+body.dark-theme svg:not([data-keep-color]):not(.keep-icon-color):not(.btn-primary svg):not(.btn-danger svg):not(#toast-container svg) g[stroke]:not([stroke="none"]) {
+  stroke: inherit;
+}
+
+body.dark-theme svg.solid-icon[fill]:not([fill="none"]),
+body.dark-theme svg[data-icon-type="solid"] [fill]:not([fill="none"]) {
+  fill: #E27244 !important;
+}
+
+body.dark-theme .card,
+body.dark-theme .stat-card,
+body.dark-theme .step-card,
+body.dark-theme .product-card,
+body.dark-theme .order-card,
+body.dark-theme .artisan-card,
+body.dark-theme .cluster-card,
+body.dark-theme .rfq-card,
+body.dark-theme .quote-card,
+body.dark-theme .bottom-sheet,
+body.dark-theme .modal-container,
+body.dark-theme .role-card,
+body.dark-theme .lang-card,
+body.dark-theme .edit-modal-content,
+body.dark-theme .quick-lang-btn,
+body.dark-theme div[style*="background:#FFFFFF"],
+body.dark-theme div[style*="background: #FFFFFF"],
+body.dark-theme div[style*="background:#FFFDFB"],
+body.dark-theme div[style*="background:#FAF7F2"] {
+  background-color: #221A15 !important;
+  border-color: #3C2E24 !important;
+  color: #F8EFE6 !important;
+}
+
+body.dark-theme input,
+body.dark-theme textarea,
+body.dark-theme select {
+  background-color: #1A1410 !important;
+  border-color: #423226 !important;
+  color: #F8EFE6 !important;
+}
+
+body.dark-theme input::placeholder,
+body.dark-theme textarea::placeholder {
+  color: #8C7B6E !important;
+}
+
+body.dark-theme .btn-secondary {
+  background-color: #271E18 !important;
+  border-color: #423226 !important;
+  color: #F8EFE6 !important;
+}
+
+body.dark-theme .btn-secondary:hover {
+  background-color: #33261F !important;
+}
+
+body.dark-theme #btn-theme-toggle {
+  background: #341D14 !important;
+  border-color: #5C2D1C !important;
+  color: #F8EFE6 !important;
+}
+
+body.dark-theme #btn-language {
+  background: #341D14 !important;
+  border-color: #5C2D1C !important;
+  color: #E27244 !important;
+}
+
+body.dark-theme #btn-header-cart {
+  background: #251B15 !important;
+  border-color: #483428 !important;
+  color: #E27244 !important;
+}
+
+body.dark-theme #header-brand-logo {
+  background: #251B15 !important;
+  border-color: #483428 !important;
+}
+
+body.dark-theme .sheet-close-btn {
+  background: #341D14 !important;
+  color: #F8EFE6 !important;
+}
+
+body.dark-theme .stepper-container {
+  background: #191410 !important;
 }
 

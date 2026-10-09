@@ -12,7 +12,7 @@ export function renderCheckoutScreen(container) {
 
   container.innerHTML = `
     <div class="checkout-screen animate-fade-in" style="padding: 10px 14px 40px; background: #FAF7F2; min-height: 100vh;">
-      
+
       <!-- Top Step Badge -->
       <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
         <span style="width:20px; height:20px; border-radius:50%; background:#B45309; color:#FFFFFF; font-size:0.7rem; font-weight:900; display:flex; align-items:center; justify-content:center;">
@@ -119,28 +119,57 @@ export function renderCheckoutScreen(container) {
             </div>
           </div>
 
-          <button type="button" style="background:#EFECE6; border:1px solid #E5DCD3; border-radius:4px; padding:3px 10px; font-size:0.72rem; font-weight:700; color:#1C1917; cursor:pointer;" onclick="window.showToast?.('Edit delivery address modal')">
+          <button type="button" id="btn-toggle-edit-address" style="background:#EFECE6; border:1px solid #E5DCD3; border-radius:4px; padding:3px 10px; font-size:0.72rem; font-weight:700; color:#1C1917; cursor:pointer;">
             Edit
           </button>
         </div>
 
-        <!-- Address Box -->
-        <div style="background:#FAF7F2; border-radius:8px; padding:10px 12px; margin-bottom:10px;">
+        <!-- Address View Display -->
+        <div id="address-view-box" style="background:#FAF7F2; border-radius:8px; padding:10px 12px; margin-bottom:10px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <strong style="font-size:0.85rem; color:#1C1917;">Ananya Deshmukh</strong>
-            <span style="background:#E7F7ED; color:#15803D; font-size:0.58rem; font-weight:800; padding:2px 7px; border-radius:9999px;">
+            <strong id="display-ship-name" style="font-size:0.85rem; color:#1C1917;">Ananya Deshmukh</strong>
+            <span id="display-ship-pin-badge" style="background:#E7F7ED; color:#15803D; font-size:0.58rem; font-weight:800; padding:2px 7px; border-radius:9999px;">
               ✓ PIN 560038 Verified
             </span>
           </div>
 
-          <div style="font-size:0.72rem; color:#57534E; line-height:1.35; margin-bottom:4px;">
+          <div id="display-ship-address" style="font-size:0.72rem; color:#57534E; line-height:1.35; margin-bottom:4px;">
             Flat 402, Kaveri Heights, 12th Main<br>
             Indiranagar, Bengaluru, Karnataka
           </div>
 
           <div style="font-size:0.72rem; color:#7A2813; font-weight:700; display:flex; align-items:center; gap:4px;">
             <span>📞</span>
-            <span>+91 98450 12839</span>
+            <span id="display-ship-phone">+91 98450 12839</span>
+          </div>
+        </div>
+
+        <!-- Manual Address Edit Form (Initially Hidden) -->
+        <div id="address-edit-box" style="display:none; background:#FAF7F2; border:1.5px solid #7A2813; border-radius:8px; padding:12px; margin-bottom:10px;">
+          <div style="font-size:0.75rem; font-weight:800; color:#7A2813; margin-bottom:8px;">✍️ Edit Delivery Address</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div>
+              <label style="display:block; font-size:0.68rem; font-weight:700; color:var(--text-secondary); margin-bottom:2px;">RECIPIENT FULL NAME</label>
+              <input type="text" id="input-ship-name" value="Ananya Deshmukh" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #D6C7B2; font-size:0.8rem; font-weight:700; box-sizing:border-box;">
+            </div>
+            <div>
+              <label style="display:block; font-size:0.68rem; font-weight:700; color:var(--text-secondary); margin-bottom:2px;">STREET ADDRESS &amp; LOCALITY</label>
+              <input type="text" id="input-ship-address" value="Flat 402, Kaveri Heights, 12th Main, Indiranagar" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #D6C7B2; font-size:0.8rem; font-weight:700; box-sizing:border-box;">
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <div>
+                <label style="display:block; font-size:0.68rem; font-weight:700; color:var(--text-secondary); margin-bottom:2px;">PINCODE</label>
+                <input type="text" id="input-ship-pin" value="560038" maxlength="6" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #D6C7B2; font-size:0.8rem; font-weight:700; box-sizing:border-box;">
+              </div>
+              <div>
+                <label style="display:block; font-size:0.68rem; font-weight:700; color:var(--text-secondary); margin-bottom:2px;">PHONE NUMBER</label>
+                <input type="tel" id="input-ship-phone" value="+91 98450 12839" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #D6C7B2; font-size:0.8rem; font-weight:700; box-sizing:border-box;">
+              </div>
+            </div>
+            <div style="display:flex; gap:6px; margin-top:4px;">
+              <button type="button" id="btn-save-address" class="btn-primary" style="flex:1; padding:8px; font-size:0.75rem; background:#7A2813;">Save Address</button>
+              <button type="button" id="btn-cancel-address" class="btn-secondary" style="flex:1; padding:8px; font-size:0.75rem;">Cancel</button>
+            </div>
           </div>
         </div>
 
@@ -205,9 +234,9 @@ export function renderCheckoutScreen(container) {
 
         <!-- 4 Payment Options -->
         <div style="display:flex; flex-direction:column; gap:8px;">
-          
+
           <!-- Option 1: UPI Transfer (Active) -->
-          <div class="pay-option active" id="pay-upi" style="background:#FAF5F0; border:1px solid #EADBCE; border-radius:8px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+          <div class="pay-option active" id="pay-upi" style="background:#FAF5F0; border:1.5px solid #7A2813; border-radius:8px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
             <div style="display:flex; align-items:center; gap:10px;">
               <div style="width:18px; height:18px; border-radius:50%; border:2px solid #7A2813; display:flex; align-items:center; justify-content:center;">
                 <div style="width:8px; height:8px; border-radius:50%; background:#7A2813;"></div>
@@ -260,6 +289,22 @@ export function renderCheckoutScreen(container) {
           </div>
 
         </div>
+
+        <!-- Dynamic Manual Payment Input Fields -->
+        <div id="payment-input-details" style="margin-top:12px; background:#FAF7F2; border:1px solid #EADBCE; border-radius:8px; padding:10px 12px;">
+          <!-- Content dynamically rendered depending on selected payment method -->
+          <label style="display:block; font-size:0.72rem; font-weight:800; color:var(--text-primary); margin-bottom:4px;">
+            ENTER UPI VPA / ID
+          </label>
+          <div style="display:flex; align-items:center; background:#FFFFFF; border:1px solid #D6C7B2; border-radius:6px; padding:6px 10px; gap:8px;">
+            <span style="font-size:0.8rem; font-weight:800; color:#7A2813;">@</span>
+            <input type="text" id="input-upi-vpa" value="ananya@okhdfcbank" placeholder="e.g. mobile@upi or name@okaxis" style="flex:1; border:none; outline:none; font-size:0.85rem; font-weight:700; color:#1C1917;">
+          </div>
+          <div style="font-size:0.65rem; color:var(--text-secondary); margin-top:4px;">
+            Payment authorization request will be sent directly to your UPI app.
+          </div>
+        </div>
+
       </div>
 
       <!-- Action Button & Pledge -->
@@ -279,7 +324,132 @@ export function renderCheckoutScreen(container) {
     </div>
   `;
 
-  // Attach Event Handlers
+  // Attach Event Handlers: Address Edit & Save
+  const btnToggleEdit = container.querySelector('#btn-toggle-edit-address');
+  const addressViewBox = container.querySelector('#address-view-box');
+  const addressEditBox = container.querySelector('#address-edit-box');
+
+  btnToggleEdit?.addEventListener('click', () => {
+    const isEditing = addressEditBox.style.display !== 'none';
+    if (isEditing) {
+      addressEditBox.style.display = 'none';
+      addressViewBox.style.display = 'block';
+      btnToggleEdit.textContent = 'Edit';
+    } else {
+      addressEditBox.style.display = 'block';
+      addressViewBox.style.display = 'none';
+      btnToggleEdit.textContent = 'Close';
+    }
+  });
+
+  container.querySelector('#btn-cancel-address')?.addEventListener('click', () => {
+    addressEditBox.style.display = 'none';
+    addressViewBox.style.display = 'block';
+    btnToggleEdit.textContent = 'Edit';
+  });
+
+  container.querySelector('#btn-save-address')?.addEventListener('click', () => {
+    const newName = container.querySelector('#input-ship-name')?.value.trim() || 'Ananya Deshmukh';
+    const newAddr = container.querySelector('#input-ship-address')?.value.trim() || 'Indiranagar, Bengaluru';
+    const newPin = container.querySelector('#input-ship-pin')?.value.trim() || '560038';
+    const newPhone = container.querySelector('#input-ship-phone')?.value.trim() || '+91 98450 12839';
+
+    container.querySelector('#display-ship-name').textContent = newName;
+    container.querySelector('#display-ship-address').textContent = newAddr;
+    container.querySelector('#display-ship-pin-badge').textContent = `✓ PIN ${newPin} Verified`;
+    container.querySelector('#display-ship-phone').textContent = newPhone;
+
+    addressEditBox.style.display = 'none';
+    addressViewBox.style.display = 'block';
+    btnToggleEdit.textContent = 'Edit';
+    window.showToast?.("Delivery address saved successfully!");
+  });
+
+  // Payment Option selection with dynamic input fields
+  const payOptions = [
+    { id: 'pay-upi', key: 'upi' },
+    { id: 'pay-card', key: 'card' },
+    { id: 'pay-netbank', key: 'netbank' },
+    { id: 'pay-cod', key: 'cod' }
+  ];
+
+  const payInputContainer = container.querySelector('#payment-input-details');
+
+  function renderPaymentInputFields(method) {
+    if (!payInputContainer) return;
+    if (method === 'upi') {
+      payInputContainer.innerHTML = `
+        <label style="display:block; font-size:0.72rem; font-weight:800; color:var(--text-primary); margin-bottom:4px;">
+          ENTER UPI VPA / ID
+        </label>
+        <div style="display:flex; align-items:center; background:#FFFFFF; border:1px solid #D6C7B2; border-radius:6px; padding:6px 10px; gap:8px;">
+          <span style="font-size:0.8rem; font-weight:800; color:#7A2813;">@</span>
+          <input type="text" id="input-upi-vpa" value="ananya@okhdfcbank" placeholder="e.g. mobile@upi or name@okaxis" style="flex:1; border:none; outline:none; font-size:0.85rem; font-weight:700; color:#1C1917;">
+        </div>
+        <div style="font-size:0.65rem; color:var(--text-secondary); margin-top:4px;">
+          Payment authorization request will be sent directly to your UPI app.
+        </div>
+      `;
+    } else if (method === 'card') {
+      payInputContainer.innerHTML = `
+        <label style="display:block; font-size:0.72rem; font-weight:800; color:var(--text-primary); margin-bottom:4px;">
+          MANUAL CARD DETAILS
+        </label>
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <input type="text" id="input-card-number" placeholder="16-digit Card Number" value="4532 8910 2041 9102" maxlength="19" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid #D6C7B2; font-size:0.82rem; font-weight:700; box-sizing:border-box;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+            <input type="text" id="input-card-expiry" placeholder="MM / YY" value="08/29" maxlength="5" style="padding:6px 10px; border-radius:6px; border:1px solid #D6C7B2; font-size:0.8rem; font-weight:700; box-sizing:border-box;">
+            <input type="password" id="input-card-cvv" placeholder="CVV" value="842" maxlength="4" style="padding:6px 10px; border-radius:6px; border:1px solid #D6C7B2; font-size:0.8rem; font-weight:700; box-sizing:border-box;">
+          </div>
+        </div>
+      `;
+    } else if (method === 'netbank') {
+      payInputContainer.innerHTML = `
+        <label style="display:block; font-size:0.72rem; font-weight:800; color:var(--text-primary); margin-bottom:4px;">
+          SELECT COMMERCIAL BANK
+        </label>
+        <select id="select-netbank-bank" style="width:100%; padding:8px 10px; border-radius:6px; border:1px solid #D6C7B2; font-size:0.8rem; font-weight:700; background:#FFFFFF;">
+          <option>State Bank of India (SBI)</option>
+          <option>HDFC Bank</option>
+          <option>ICICI Bank</option>
+          <option>Axis Bank</option>
+          <option>Punjab National Bank</option>
+          <option>Bank of Baroda</option>
+        </select>
+      `;
+    } else if (method === 'cod') {
+      payInputContainer.innerHTML = `
+        <div style="font-size:0.72rem; color:#15803D; font-weight:700; display:flex; align-items:center; gap:6px;">
+          <span>✓</span> Pay ₹1,670 exact cash or via QR on delivery by Delivery Agent courier.
+        </div>
+      `;
+    }
+  }
+
+  payOptions.forEach(opt => {
+    const el = container.querySelector(`#${opt.id}`);
+    el?.addEventListener('click', () => {
+      selectedPayment = opt.key;
+      payOptions.forEach(o => {
+        const item = container.querySelector(`#${o.id}`);
+        if (!item) return;
+        if (o.key === selectedPayment) {
+          item.style.background = '#FAF5F0';
+          item.style.border = '1.5px solid #7A2813';
+          const circle = item.querySelector('div > div > div');
+          if (circle) circle.style.background = '#7A2813';
+        } else {
+          item.style.background = '#FAF7F2';
+          item.style.border = '1px solid #ECE7E1';
+          const circle = item.querySelector('div > div > div');
+          if (circle) circle.style.background = 'transparent';
+        }
+      });
+      renderPaymentInputFields(selectedPayment);
+    });
+  });
+
+  // Attach Event Handlers: Blessing Note
   const textarea = container.querySelector('#input-blessing-note');
   const counter = container.querySelector('#char-count');
   textarea?.addEventListener('input', (e) => {
@@ -310,8 +480,9 @@ export function renderCheckoutScreen(container) {
 
   // Pay button handler
   container.querySelector('#btn-final-pay')?.addEventListener('click', () => {
+    const shipName = container.querySelector('#display-ship-name')?.textContent || 'Ananya Deshmukh';
     AudioAssistance.speak("धन्यवाद! आपका ₹1,670 का सीधा भुगतान कारीगर रामदेव कुम्हार और सोमनाथ बघेल के खाते में सफलतापूर्वक जमा हो गया है।", "hi-IN");
-    window.showToast?.("Payment successful! Direct DBT payout dispatched to artisans.");
+    window.showToast?.(`Order placed for ${shipName}! Direct DBT payout dispatched.`);
     State.setScreen('buyer_orders');
   });
 }

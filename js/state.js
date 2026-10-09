@@ -4,7 +4,7 @@
  * 1. ARTISAN / SELLER account
  * 2. BUYER / PATRON account (individual consumer)
  * 3. CORPORATE / B2B BUYER account (institutional bulk buyer)
- * 
+ *
  * Powered by centralized single source of truth data layer (js/data.js).
  * Includes Route Guard validation and zero cross-role switching without full logout.
  */
@@ -40,7 +40,12 @@ export const State = {
   // Active Screen and Persona Mode
   currentScreen: 'splash',
   mode: 'seller', // 'seller' | 'buyer' | 'corporate'
-  language: 'hi', // 'hi' | 'en' | 'bn' | 'ta' | 'te' | 'mr' | 'gu' | 'kn' | 'bho' | 'mai'
+  language: typeof localStorage !== 'undefined' ? (localStorage.getItem('nl_language') || 'en') : 'en',
+  theme: typeof localStorage !== 'undefined' ? (localStorage.getItem('nl_theme') || 'light') : 'light',
+  selectedCraft: null,
+  producedCrafts: [],
+  activeChatArtisan: null,
+  craftListingDraft: null,
 
   // Centralized entity access
   data: {
@@ -61,6 +66,11 @@ export const State = {
   artisan: {
     pehchanId: 'UP-VAR-49281',
     artisanName: 'Ramdev Kumhar',
+    phone: '+91 98391 42910',
+    studioAddress: 'Sarai Mohalla, Varanasi, UP - 221001',
+    craftSkill: 'Terracotta Clay Pottery',
+    experience: '35 Years Experience',
+    language: 'Bhojpuri & Hindi',
     craftType: 'Gorakhpur & Varanasi Terracotta Pottery',
     cluster: 'Gorakhpur & Varanasi Terracotta Cluster',
     clusterId: 'cl-varanasi-terracotta',
@@ -68,6 +78,7 @@ export const State = {
     trustScore: 98,
     bankName: 'Bank of Baroda',
     bankAccountMasked: '•••• 4012',
+    bankAccount: '984012948201',
     ifsc: 'BARB0VARANA',
     dbtLinked: true,
     totalEarnings: 48500,
@@ -255,21 +266,22 @@ export const State = {
     // Consumer's Placed Purchases (Purchase-Tracking Only)
     myOrders: [
       {
-        orderId: 'ORD-HS-90214',
-        date: '25 Sep 2026',
-        craftTitle: 'Hand-Carved Terracotta Water Surahi Pitcher',
+        orderId: 'KRG-98421',
+        date: '22 Oct 2026',
+        craftTitle: 'Hand-Etched Terracotta Pitcher',
         artisan: 'Ramdev Kumhar',
-        cluster: 'Gorakhpur & Varanasi Terracotta Cluster (GI #182)',
-        amount: 1450,
+        cluster: 'Terracotta Guild of Alwar (GI #182)',
+        amount: 750,
         itemsCount: 1,
-        trackingNumber: 'CP928410294IN',
+        trackingNumber: 'SP-UP298412IN',
         carrier: 'Delivery Agent',
-        status: 'Speed Post Pickup Scheduled Today',
-        estimatedDelivery: '28 Sep 2026',
-        image: '/assets/raw_pottery_snap.jpg',
+        status: 'In Transit • Arriving Thursday',
+        estimatedDelivery: 'Thursday, 24 Oct',
+        image: '/assets/terracotta_pitcher.jpg',
         hasInsurance: true,
         canReturn: true,
-        blessingNote: 'Dear Ramdev Ji, thank you for keeping this sacred earthen pottery tradition alive. We are excited to place your surahi in our home altar.'
+        isInTransit: true,
+        blessingNote: 'Honoring your traditional skill and dedication. May your potter wheel keep turning with prosperity.'
       },
       {
         orderId: 'ORD-HS-88401',
@@ -286,7 +298,26 @@ export const State = {
         image: '/assets/dhokra_brass.jpg',
         hasInsurance: true,
         canReturn: false,
+        isInTransit: false,
         blessingNote: 'Honoured to receive this authentic Bastar bell directly from your workshop.'
+      },
+      {
+        orderId: 'ORD-HS-84192',
+        date: '12 Aug 2026',
+        craftTitle: 'Handspun Phulia Jamdani Dupatta',
+        artisan: 'Birendra Das',
+        cluster: 'Santipur & Phulia Handloom Guild (GI #220)',
+        amount: 2100,
+        itemsCount: 1,
+        trackingNumber: 'SP182049182IN',
+        carrier: 'Delivery Agent',
+        status: 'Delivered Safely',
+        estimatedDelivery: '16 Aug 2026',
+        image: '/assets/phulia_saree.jpg',
+        hasInsurance: true,
+        canReturn: false,
+        isInTransit: false,
+        blessingNote: 'Pure handspun comfort. Thank you for preserving heritage handloom weaving.'
       }
     ],
 
@@ -307,7 +338,8 @@ export const State = {
       kybStatus: 'KYB Verified & Institutional Cleared',
       procurementOfficer: 'Siddharth Sen',
       workEmail: 'procurement@vistarahotels.in',
-      phone: '+91 98112 04921'
+      phone: '+91 98112 04921',
+      registeredHq: 'Vistara Tower, Cyber City, Gurugram, HR'
     },
 
     // Cluster Bulk Sourcing Directories
@@ -319,6 +351,8 @@ export const State = {
         id: 'corp-item-1',
         title: 'Gorakhpur Fluted Terracotta Hospitality Planters',
         cluster: 'Gorakhpur & Varanasi Terracotta Cluster',
+        category: 'terracotta',
+        material: '100% Natural River Clay',
         giTagNumber: 'GI #182',
         moq: 50,
         samplePrice: 450,
@@ -334,6 +368,8 @@ export const State = {
         id: 'corp-item-2',
         title: 'Bastar Lost-Wax Brass Tribal Desk Figurine',
         cluster: 'Bastar Dhokra Brass Castings Guild',
+        category: 'brass',
+        material: 'Lost-Wax Bell Metal & Brass',
         giTagNumber: 'GI #84',
         moq: 25,
         samplePrice: 950,
@@ -349,6 +385,8 @@ export const State = {
         id: 'corp-item-3',
         title: 'Jaipur Hand-Painted Glazed Ceramic Coaster Set',
         cluster: 'Jaipur Traditional Blue Pottery Guild',
+        category: 'ceramics',
+        material: 'Powdered Quartz & Mineral Glaze',
         giTagNumber: 'GI #28',
         moq: 100,
         samplePrice: 380,
@@ -359,6 +397,57 @@ export const State = {
         ],
         leadTime: '14-18 Days',
         image: '/assets/blue_pottery.jpg'
+      },
+      {
+        id: 'corp-item-4',
+        title: 'Saharanpur Jaali Carved Sheesham Keepsake Box',
+        cluster: 'Saharanpur Wood Carvers Cooperative',
+        category: 'woodcraft',
+        material: 'Seasoned Sheesham Wood & Brass Inlay',
+        giTagNumber: 'GI #124',
+        moq: 30,
+        samplePrice: 620,
+        tiers: [
+          { min: 30, price: 480, discount: '22% Off' },
+          { min: 150, price: 420, discount: '32% Off' },
+          { min: 500, price: 360, discount: '42% Off' }
+        ],
+        leadTime: '18-22 Days',
+        image: '/assets/woodcraft_bowl.jpg'
+      },
+      {
+        id: 'corp-item-5',
+        title: 'Kabir Chaura Varanasi Pure Katan Silk Corporate Stoles',
+        cluster: 'Kabir Chaura Handloom Silk Guild',
+        category: 'handloom',
+        material: 'Pure Mulberry Katan Silk & Zari',
+        giTagNumber: 'GI #28',
+        moq: 20,
+        samplePrice: 3400,
+        tiers: [
+          { min: 20, price: 2800, discount: '18% Off' },
+          { min: 100, price: 2450, discount: '28% Off' },
+          { min: 300, price: 2100, discount: '38% Off' }
+        ],
+        leadTime: '20-25 Days',
+        image: '/assets/ikat_saree.jpg'
+      },
+      {
+        id: 'corp-item-6',
+        title: 'Nizamabad Silvery-Inlaid Black Clay Lustre Tea Set',
+        cluster: 'Nizamabad Black Clay Pottery Guild',
+        category: 'blackclay',
+        material: 'Smoke-Reduction Earthenware & Silver Inlay',
+        giTagNumber: 'GI #182',
+        moq: 40,
+        samplePrice: 750,
+        tiers: [
+          { min: 40, price: 580, discount: '23% Off' },
+          { min: 200, price: 490, discount: '35% Off' },
+          { min: 800, price: 420, discount: '44% Off' }
+        ],
+        leadTime: '16-20 Days',
+        image: '/assets/bidriware_vase.jpg'
       }
     ],
 
@@ -408,6 +497,52 @@ export const State = {
     this.listeners.forEach(fn => {
       try { fn(this); } catch (e) { console.error('State subscriber error:', e); }
     });
+  },
+
+  updateArtisanProfile(details) {
+    if (details.artisanName) this.artisan.artisanName = details.artisanName;
+    if (details.phone) this.artisan.phone = details.phone;
+    if (details.studioAddress) this.artisan.studioAddress = details.studioAddress;
+    if (details.craftSkill) this.artisan.craftSkill = details.craftSkill;
+    if (details.experience) this.artisan.experience = details.experience;
+    if (details.language) this.artisan.language = details.language;
+    if (details.bankName) this.artisan.bankName = details.bankName;
+    if (details.bankAccount) {
+      this.artisan.bankAccount = details.bankAccount;
+      const last4 = details.bankAccount.slice(-4);
+      this.artisan.bankAccountMasked = `•••• ${last4}`;
+    }
+    if (details.ifsc) this.artisan.ifsc = details.ifsc.toUpperCase();
+    this.notify();
+  },
+
+  updateBuyerProfile(details) {
+    if (details.name) this.buyer.profile.name = details.name;
+    if (details.phone) this.buyer.profile.phone = details.phone;
+    if (details.email) this.buyer.profile.email = details.email;
+    if (details.city) this.buyer.profile.city = details.city;
+    if (details.state) this.buyer.profile.state = details.state;
+    if (details.pincode) this.buyer.profile.pincode = details.pincode;
+    if (this.buyer.profile.savedAddresses?.[0]) {
+      if (details.addressLine) this.buyer.profile.savedAddresses[0].line = details.addressLine;
+      if (details.city) this.buyer.profile.savedAddresses[0].city = details.city;
+      if (details.state) this.buyer.profile.savedAddresses[0].state = details.state;
+      if (details.pincode) this.buyer.profile.savedAddresses[0].pincode = details.pincode;
+    }
+    this.notify();
+  },
+
+  updateCorporateProfile(details) {
+    if (details.name) this.corporate.company.name = details.name;
+    if (details.tradeName) this.corporate.company.tradeName = details.tradeName;
+    if (details.businessType) this.corporate.company.businessType = details.businessType;
+    if (details.gstin) this.corporate.company.gstin = details.gstin.toUpperCase();
+    if (details.pan) this.corporate.company.pan = details.pan.toUpperCase();
+    if (details.procurementOfficer) this.corporate.company.procurementOfficer = details.procurementOfficer;
+    if (details.workEmail) this.corporate.company.workEmail = details.workEmail;
+    if (details.phone) this.corporate.company.phone = details.phone;
+    if (details.registeredHq) this.corporate.company.registeredHq = details.registeredHq;
+    this.notify();
   },
 
   // Legacy compatibility getters & setters
@@ -490,6 +625,7 @@ export const State = {
     this.session.isLoggedIn = false;
     this.session.authToken = null;
     this.session.user = null;
+    this.mode = 'guest';
     this.setScreen('account_select');
   },
 
@@ -497,20 +633,72 @@ export const State = {
    * Set screen with automatic role synchronization and alias mapping.
    */
   setScreen(screenName) {
-    // Map screen aliases
-    if (screenName === 'studio') screenName = 'artisan_studio';
-    if (screenName === 'orders') {
-      screenName = this.mode === 'seller' ? 'artisan_orders' : 'buyer_orders';
+    const isCorp = (
+      this.mode === 'corporate' ||
+      this.session?.accountType === AccountType.CORPORATE ||
+      CorporateStackScreens.includes(this.currentScreen) ||
+      CorporateStackScreens.includes(screenName) ||
+      screenName === 'wholesale' ||
+      screenName === 'catalog'
+    );
+    const isSeller = (!isCorp && (this.mode === 'seller' || this.session?.accountType === AccountType.ARTISAN || ArtisanStackScreens.includes(this.currentScreen)));
+
+    // If currently in Corporate B2B mode, strictly guard all buyer/seller screen calls
+    if (isCorp) {
+      if (screenName === 'search' || screenName === 'buyer_search' || screenName === 'discover' || screenName === 'artisan_discover') {
+        screenName = 'corporate_catalog';
+      } else if (screenName === 'orders' || screenName === 'buyer_orders' || screenName === 'artisan_orders') {
+        screenName = 'corporate_quotes';
+      } else if (screenName === 'home' || screenName === 'explore' || screenName === 'buyer_explore' || screenName === 'studio' || screenName === 'artisan_studio') {
+        screenName = 'corporate_clusters';
+      } else if (screenName === 'profile' || screenName === 'buyer_profile' || screenName === 'artisan_profile') {
+        screenName = 'corporate_profile';
+      } else if (screenName === 'cart' || screenName === 'cart_review' || screenName === 'checkout') {
+        screenName = 'corporate_rfq';
+      } else if (screenName === 'wholesale') {
+        screenName = 'corporate_clusters';
+      } else if (screenName === 'catalog') {
+        screenName = 'corporate_catalog';
+      }
+      this.session.accountType = AccountType.CORPORATE;
+      this.session.isLoggedIn = true;
+      this.mode = 'corporate';
+    } else {
+      // Map screen aliases for Seller & Buyer modes
+      if (screenName === 'studio') {
+        screenName = isSeller ? 'artisan_studio' : 'buyer_explore';
+      }
+      if (screenName === 'home' || screenName === 'explore') {
+        screenName = isSeller ? 'artisan_studio' : 'buyer_explore';
+      }
+      if (screenName === 'orders') {
+        screenName = isSeller ? 'artisan_orders' : 'buyer_orders';
+      }
+      if (screenName === 'profile') {
+        screenName = isSeller ? 'artisan_profile' : 'buyer_profile';
+      }
+      if (screenName === 'search' || screenName === 'discover') {
+        screenName = isSeller ? 'artisan_discover' : 'buyer_search';
+      }
+      if (screenName === 'wholesale') {
+        screenName = 'corporate_clusters';
+      }
+      if (screenName === 'catalog') {
+        screenName = 'corporate_catalog';
+      }
     }
-    if (screenName === 'explore') screenName = 'buyer_explore';
+
     if (screenName === 'welcome') screenName = 'welcome_identity';
     if (screenName === 'bank') screenName = 'artisan_bank';
     if (screenName === 'pehchan') screenName = 'artisan_pehchan';
-    if (screenName === 'wholesale') screenName = 'corporate_clusters';
     if (screenName === 'languages') screenName = 'language_select';
 
     // Auto-align session role so all live reference screens render smoothly
-    if (ArtisanStackScreens.includes(screenName)) {
+    if (isCorp || CorporateStackScreens.includes(screenName)) {
+      this.session.accountType = AccountType.CORPORATE;
+      this.session.isLoggedIn = true;
+      this.mode = 'corporate';
+    } else if (ArtisanStackScreens.includes(screenName)) {
       this.session.accountType = AccountType.ARTISAN;
       this.session.isLoggedIn = true;
       this.mode = 'seller';
@@ -518,10 +706,6 @@ export const State = {
       this.session.accountType = AccountType.BUYER;
       this.session.isLoggedIn = true;
       this.mode = 'buyer';
-    } else if (CorporateStackScreens.includes(screenName)) {
-      this.session.accountType = AccountType.CORPORATE;
-      this.session.isLoggedIn = true;
-      this.mode = 'corporate';
     }
 
     if (screenName !== this.currentScreen) {
@@ -569,7 +753,9 @@ export const State = {
 
   addToCart(craft) {
     if (this.session.accountType !== AccountType.BUYER) {
-      throw new Error("Action restricted to Buyer account only");
+      this.session.accountType = AccountType.BUYER;
+      this.session.isLoggedIn = true;
+      this.mode = 'buyer';
     }
     const existing = this.buyer.cart.find(i => i.id === craft.id || i.title === craft.title);
     if (existing) {
@@ -578,32 +764,72 @@ export const State = {
       this.buyer.cart.push({
         id: craft.id || `b-cart-${Date.now()}`,
         title: craft.title,
-        artisan: craft.artisan || 'Ramdev Kumhar',
+        artisan: craft.artisan || craft.artisanName || 'Ramdev Kumhar',
+        pehchanId: craft.pehchanId || 'UP-VAR-492',
         cluster: craft.origin || craft.cluster || 'Gorakhpur & Varanasi Terracotta Cluster',
-        giTagNumber: craft.giTagNumber || 'GI #182',
-        price: craft.price || 1450,
-        typicalGalleryPrice: craft.typicalGalleryPrice || 3200,
+        hub: craft.hub || 'Varanasi Hub',
+        specification: craft.specification || 'Pure Handcrafted Masterpiece',
+        price: craft.price || 750,
+        artisanShare: craft.artisanShare || craft.price || 750,
+        typicalGalleryPrice: craft.typicalGalleryPrice || Math.round((craft.price || 750) * 2.2),
         quantity: craft.quantity || 1,
-        image: craft.image || craft.images?.[0] || '/assets/raw_pottery_snap.jpg',
-        insuranceFee: 25
+        image: craft.image || craft.images?.[0] || '/assets/terracotta_pitcher.jpg',
+        dispatch: craft.dispatch || 'Dispatches within 2 days',
+        insuranceFee: 0
       });
     }
     this.notify();
   },
 
   updateCartQuantity(id, delta) {
-    const item = this.buyer.cart.find(i => i.id === id);
+    const item = this.buyer.cart.find(i => i.id === id || i.title === id);
     if (!item) return;
-    item.quantity += delta;
+    item.quantity = Math.max(0, (item.quantity || 1) + delta);
     if (item.quantity <= 0) {
-      this.removeFromCart(id);
+      this.removeFromCart(item.id);
     } else {
       this.notify();
     }
   },
 
+  resetBuyerCart() {
+    this.buyer.cart = [
+      {
+        id: 'craft-terracotta-pitcher',
+        title: 'Hand-Etched Terracotta Pitcher',
+        artisan: 'Ramdev Kumhar',
+        pehchanId: 'UP-VAR-492',
+        cluster: 'Gorakhpur & Varanasi Terracotta Cluster',
+        hub: 'Varanasi Hub',
+        specification: 'Capacity: 1.8 Liters • Clay Fired',
+        price: 750,
+        artisanShare: 750,
+        quantity: 1,
+        dispatch: 'Dispatches within 2 days',
+        image: '/assets/terracotta_pitcher.jpg',
+        insuranceFee: 0
+      },
+      {
+        id: 'craft-dhokra-nandi',
+        title: 'Dhokra Brass Tribal Nandi',
+        artisan: 'Somnath Baghel',
+        pehchanId: 'CG-BST-118',
+        cluster: 'Bastar Dhokra Guild, Chhattisgarh',
+        hub: 'Bastar Guild',
+        specification: 'Solid Brass • Lost-Wax Casting',
+        price: 920,
+        artisanShare: 920,
+        quantity: 1,
+        dispatch: 'Dispatches in 48 hrs',
+        image: '/assets/dhokra_brass.jpg',
+        insuranceFee: 0
+      }
+    ];
+    this.notify();
+  },
+
   removeFromCart(id) {
-    this.buyer.cart = this.buyer.cart.filter(i => i.id !== id);
+    this.buyer.cart = this.buyer.cart.filter(i => i.id !== id && i.title !== id);
     this.notify();
   },
 
@@ -677,6 +903,257 @@ export const State = {
     this.corporate.quotes.unshift(newRfq);
     this.notify();
     return newRfq;
+  },
+
+  // ==========================================
+  // ARTISAN CRAFT PRODUCTION & MARKETPLACE PUBLISHING
+  // ==========================================
+  publishCraft(craftData) {
+    const newCraftId = craftData.id || `craft-prod-${Date.now()}`;
+    const producedCraft = {
+      id: newCraftId,
+      title: craftData.title || 'Handcrafted Gorakhpur Terracotta Pitcher',
+      subtitle: craftData.subtitle || 'Handcrafted Terracotta Surahi',
+      category: craftData.category || 'Terracotta Pottery',
+      cluster: craftData.cluster || 'Gorakhpur Clay Cluster (GI #182)',
+      clusterId: craftData.clusterId || 'cl-varanasi-terracotta',
+      giTagNumber: craftData.giTagNumber || 'GI #182',
+      artisanId: craftData.artisanId || 'artisan-ramdev',
+      artisanName: craftData.artisanName || 'Ramdev Kumhar',
+      price: Number(craftData.price) || 750,
+      typicalGalleryPrice: Math.round((Number(craftData.price) || 750) * 2.2),
+      stock: Number(craftData.stock) || 12,
+      soldCount: 0,
+      status: 'Ready',
+      badge: `• Ready (${craftData.stock || 12})`,
+      image: craftData.image || '/assets/terracotta_pitcher.jpg',
+      images: [craftData.image || '/assets/terracotta_pitcher.jpg', '/assets/raw_pottery_snap.jpg'],
+      rawMaterialCost: Number(craftData.rawMaterialCost) || 140,
+      hoursCost: Number(craftData.hoursCost) || 420,
+      kilnCost: Number(craftData.kilnCost) || 110,
+      storyHindi: craftData.storyHindi || 'ई माटी राप्ती नदी के किनारे से निकल गइल बा, 2 दिन चाक पर गढ़ल आ नीम के छांव में सुखवल गइल बा।',
+      englishTranslation: craftData.englishTranslation || 'Pure alluvial clay surahi shaped on the foot-spun wheel and hand-carved with traditional Gorakhpur sun-flora. Naturally cools drinking water without electricity.',
+      attributes: ['GI Tag Certified', '100% River Clay', 'Master Potter Guild Seal', 'AI Certified Quality', 'Naturally Evaporative'],
+      isProduced: true,
+      producedAt: new Date().toISOString()
+    };
+
+    // Prepend to artisan active crafts
+    this.artisan.activeCrafts = [producedCraft, ...this.artisan.activeCrafts.filter(c => c.id !== newCraftId)];
+
+    // Prepend to marketplace produced crafts
+    if (!this.producedCrafts) this.producedCrafts = [];
+    this.producedCrafts = [producedCraft, ...this.producedCrafts.filter(c => c.id !== newCraftId)];
+
+    this.saveCraftsToStorage();
+
+    // Set as active product for immediate inspection
+    this.selectedCraft = producedCraft;
+
+    this.notify();
+    return producedCraft;
+  },
+
+  deleteCraft(craftId) {
+    if (!craftId) return false;
+    this.artisan.activeCrafts = (this.artisan.activeCrafts || []).filter(c => c.id !== craftId);
+    if (this.producedCrafts) {
+      this.producedCrafts = this.producedCrafts.filter(c => c.id !== craftId);
+    }
+    this.saveCraftsToStorage();
+    this.notify();
+    return true;
+  },
+
+  updateCraft(craftId, updatedData) {
+    if (!craftId || !updatedData) return null;
+    let target = null;
+    if (this.artisan.activeCrafts) {
+      const idx = this.artisan.activeCrafts.findIndex(c => c.id === craftId);
+      if (idx !== -1) {
+        const stockNum = parseInt(updatedData.stock !== undefined ? updatedData.stock : this.artisan.activeCrafts[idx].stock, 10) || 0;
+        const statusVal = updatedData.status || (stockNum > 5 ? 'Ready' : (stockNum > 0 ? 'Low Stock' : 'Out of Stock'));
+        this.artisan.activeCrafts[idx] = {
+          ...this.artisan.activeCrafts[idx],
+          ...updatedData,
+          price: parseInt(updatedData.price !== undefined ? updatedData.price : this.artisan.activeCrafts[idx].price, 10) || this.artisan.activeCrafts[idx].price,
+          stock: stockNum,
+          status: statusVal,
+          badge: `• ${statusVal} (${stockNum})`
+        };
+        target = this.artisan.activeCrafts[idx];
+      }
+    }
+    if (this.producedCrafts) {
+      const pIdx = this.producedCrafts.findIndex(c => c.id === craftId);
+      if (pIdx !== -1) {
+        const stockNum = parseInt(updatedData.stock !== undefined ? updatedData.stock : this.producedCrafts[pIdx].stock, 10) || 0;
+        const statusVal = updatedData.status || (stockNum > 5 ? 'Ready' : (stockNum > 0 ? 'Low Stock' : 'Out of Stock'));
+        this.producedCrafts[pIdx] = {
+          ...this.producedCrafts[pIdx],
+          ...updatedData,
+          price: parseInt(updatedData.price !== undefined ? updatedData.price : this.producedCrafts[pIdx].price, 10) || this.producedCrafts[pIdx].price,
+          stock: stockNum,
+          status: statusVal,
+          badge: `• ${statusVal} (${stockNum})`
+        };
+      }
+    }
+    this.saveCraftsToStorage();
+    this.notify();
+    return target;
+  },
+
+  addCraft(craftData) {
+    return this.publishCraft(craftData);
+  },
+
+  saveCraftsToStorage() {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('native_loom_produced_crafts', JSON.stringify(this.producedCrafts || []));
+        localStorage.setItem('native_loom_artisan_crafts', JSON.stringify(this.artisan.activeCrafts || []));
+      }
+    } catch (e) {
+      console.warn('Could not persist crafts:', e);
+    }
+  },
+
+  getProducedCrafts() {
+    if (!this.producedCrafts || this.producedCrafts.length === 0) {
+      this.loadProducedCrafts();
+    }
+    return this.producedCrafts || [];
+  },
+
+  loadProducedCrafts() {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        // Load custom active crafts if previously saved
+        const savedArtisanCrafts = localStorage.getItem('native_loom_artisan_crafts');
+        if (savedArtisanCrafts) {
+          const parsed = JSON.parse(savedArtisanCrafts);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            this.artisan.activeCrafts = parsed;
+          }
+        }
+
+        const savedProduced = localStorage.getItem('native_loom_produced_crafts');
+        if (savedProduced) {
+          const list = JSON.parse(savedProduced);
+          if (Array.isArray(list)) {
+            this.producedCrafts = list;
+            list.forEach(pc => {
+              if (!this.artisan.activeCrafts.some(ac => ac.id === pc.id)) {
+                this.artisan.activeCrafts.unshift(pc);
+              }
+            });
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Error loading produced crafts:', e);
+    }
+  },
+
+  markIncomingOrderPacked(orderId) {
+    if (!this.artisan || !this.artisan.incomingOrders) return null;
+    const idx = this.artisan.incomingOrders.findIndex(o => o.id === orderId);
+    if (idx !== -1) {
+      const removed = this.artisan.incomingOrders.splice(idx, 1)[0];
+      if (this.artisan.urgentOrder && this.artisan.urgentOrder.id === orderId) {
+        this.artisan.urgentOrder.accepted = true;
+        this.artisan.urgentOrder.dispatched = true;
+      }
+      this.saveOrdersToStorage();
+      this.notify();
+      return removed;
+    }
+    return null;
+  },
+
+  resetIncomingOrders() {
+    this.artisan.incomingOrders = [
+      {
+        id: 'ORD-HS-90214',
+        craftId: 'craft-terracotta-pitcher',
+        title: 'Hand-Carved Terracotta Water Surahi Pitcher',
+        units: 2,
+        amount: 1450,
+        buyer: 'Dr. Aditi Varma',
+        destination: 'Bengaluru, Karnataka',
+        service: 'Delivery Agent',
+        barcode: 'CP928410294IN',
+        status: 'Pickup Scheduled Today 3:00 PM',
+        pickupTime: 'Today 3:00 PM',
+        blessingNote: 'Dear Ramdev Ji, thank you for keeping this sacred earthen pottery tradition alive. We are excited to place your surahi in our home altar.'
+      },
+      {
+        id: 'ORD-HS-87299',
+        craftId: 'craft-terracotta-diyas',
+        title: 'Handcrafted Festive Terracotta Diyas (Set of 12)',
+        units: 4,
+        amount: 1280,
+        buyer: 'Rohan Mehra',
+        destination: 'New Delhi, NCR',
+        service: 'Delivery Agent',
+        barcode: 'IP948088012IN',
+        status: 'Packed & Barcoded',
+        pickupTime: 'Today 3:00 PM',
+        blessingNote: 'Looking forward to lighting your handmade diyas this Diwali season!'
+      },
+      {
+        id: 'ORD-HS-86510',
+        craftId: 'craft-clay-wall-plate',
+        title: 'Decorative Terracotta Sun Medallion Plaque',
+        units: 1,
+        amount: 850,
+        buyer: 'Kavita Patel',
+        destination: 'Ahmedabad, Gujarat',
+        service: 'Delivery Agent Parcel',
+        barcode: 'IP947931084IN',
+        status: 'In Transit',
+        pickupTime: 'Dispatched Yesterday',
+        blessingNote: 'May the sun plaque bring auspicious blessings to our new home.'
+      }
+    ];
+    if (this.artisan.urgentOrder) {
+      this.artisan.urgentOrder.accepted = false;
+      this.artisan.urgentOrder.dispatched = false;
+    }
+    this.saveOrdersToStorage();
+    this.notify();
+    return this.artisan.incomingOrders;
+  },
+
+  saveOrdersToStorage() {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('native_loom_artisan_incoming_orders', JSON.stringify(this.artisan.incomingOrders || []));
+      }
+    } catch (e) {
+      console.warn('Could not persist orders:', e);
+    }
+  },
+
+  loadOrdersFromStorage() {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const saved = localStorage.getItem('native_loom_artisan_incoming_orders');
+        if (saved !== null) {
+          const list = JSON.parse(saved);
+          if (Array.isArray(list)) {
+            this.artisan.incomingOrders = list;
+            if (this.artisan.urgentOrder && !list.some(o => o.id === this.artisan.urgentOrder.id)) {
+              this.artisan.urgentOrder.accepted = true;
+              this.artisan.urgentOrder.dispatched = true;
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Could not load orders from storage:', e);
+    }
   }
 };
 
@@ -700,6 +1177,9 @@ export const PreAuthScreens = [
 export const ArtisanStackScreens = [
   'artisan_studio',
   'craft_studio',
+  'manage_crafts',
+  'artisan_inventory',
+  'artisan_discover',
   'artisan_orders',
   'artisan_bank',
   'artisan_pehchan',
@@ -717,7 +1197,9 @@ export const BuyerStackScreens = [
   'buyer_returns',
   'returns_policy',
   'buyer_profile',
-  'artisans'
+  'artisans',
+  'chat',
+  'artisan_chat'
 ];
 
 export const CorporateStackScreens = [
@@ -750,10 +1232,14 @@ export const BackendApi = {
       if (order) order.status = 'Ready for Pickup';
       return { success: true, message: `Order ${orderId} accepted for Delivery Agent pickup.` };
     },
+    markOrderPacked(orderId) {
+      BackendApi.verifyTokenRole(AccountType.ARTISAN);
+      const removed = State.markIncomingOrderPacked(orderId);
+      return { success: !!removed, removedOrder: removed };
+    },
     publishCraft(craftData) {
       BackendApi.verifyTokenRole(AccountType.ARTISAN);
-      State.artisan.activeCrafts.unshift(craftData);
-      return { success: true, message: "Craft published to artisan portfolio." };
+      return State.publishCraft(craftData);
     },
     viewPayouts() {
       BackendApi.verifyTokenRole(AccountType.ARTISAN);
@@ -789,3 +1275,22 @@ export const BackendApi = {
     }
   }
 };
+
+// Auto-load any produced crafts and persistent orders from storage
+try {
+  State.loadProducedCrafts();
+  State.loadOrdersFromStorage();
+} catch (e) {
+  console.warn('Initial storage load error:', e);
+}
+
+// Global export of State so it is accessible immediately across all imported modules
+if (typeof window !== 'undefined') {
+  window.State = State;
+  // Clean up any stale legacy 'hi' default from early prototypes
+  try {
+    if (!localStorage.getItem('nl_language') && localStorage.getItem('klv_language') === 'hi') {
+      localStorage.removeItem('klv_language');
+    }
+  } catch (e) {}
+}

@@ -9,7 +9,7 @@ import { State, AccountType } from '../state.js';
 export function renderCorporateAuthScreen(container) {
   container.innerHTML = `
     <div class="corporate-auth-screen animate-fade-in" style="padding: 16px 14px 32px; background: #FAF7F2; min-height: 100vh;">
-      
+
       <!-- Top Step Meta Row -->
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
         <button type="button" class="header-btn" onclick="window.navigateToScreen('account_select')" style="display:flex; align-items:center; gap:4px; font-size:0.75rem; font-weight:700; color:var(--text-secondary); background:none; border:none; cursor:pointer;">
@@ -33,7 +33,7 @@ export function renderCorporateAuthScreen(container) {
 
       <!-- KYB Form Card -->
       <div style="background:#FFFFFF; border:1px solid var(--border-subtle); border-radius:var(--radius-xl); padding:18px 16px; box-shadow:var(--shadow-sm); margin-bottom:16px;">
-        
+
         <!-- Company / Legal Entity Name -->
         <label style="display:block; font-size:0.74rem; font-weight:800; color:var(--text-primary); margin-bottom:6px;">
           LEGAL COMPANY / INSTITUTION NAME
@@ -101,10 +101,17 @@ export function renderCorporateAuthScreen(container) {
 
   // Submit Handler
   container.querySelector('#btn-submit-corp-auth').addEventListener('click', () => {
-    window.showToast?.("KYB Cleared: Vistara Hospitality B2B wholesale portal unlocked.");
+    const compName = container.querySelector('#input-corp-name')?.value.trim() || 'Vistara Hospitality & Resorts Ltd.';
+    const gstin = container.querySelector('#input-corp-gst')?.value.trim().toUpperCase() || '09AAACV4920K1ZX';
+    const phone = container.querySelector('#input-corp-phone')?.value.trim() || '+91 98112 04921';
+    const category = container.querySelector('#select-corp-category')?.value || 'Hospitality';
+
+    window.showToast?.(`KYB Cleared: ${compName} B2B portal unlocked.`);
     State.loginAs(AccountType.CORPORATE, {
-      companyName: 'Vistara Hospitality & Resorts Ltd.',
-      gstin: '09AAACV4920K1ZX',
+      companyName: compName,
+      gstin: gstin,
+      phone: phone,
+      category: category,
       officer: 'Siddharth Sen'
     });
   });
